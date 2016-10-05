@@ -13,10 +13,6 @@ This is the introduction
 
 Contents:
 
-* :ref:`getting-started`
-* :ref:`Labs`
-
-.. _getting-started
 
 .. toctree::
    :maxdepth: 2
@@ -26,7 +22,6 @@ Contents:
    getting-started/intro
    getting-started/getting-started
 
-.. _Labs
 
 .. toctree::
    :maxdepth: 2
