@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Setting up the agents &mdash; 101 Lab Mesos Marathon 0.1 documentation</title>
+  <title>Setup Marathon &mdash; 101 Lab Mesos Marathon 0.1 documentation</title>
   
 
   
@@ -33,8 +33,7 @@
         <link rel="index" title="Index"
               href="../genindex.html"/>
         <link rel="search" title="Search" href="../search.html"/>
-    <link rel="top" title="101 Lab Mesos Marathon 0.1 documentation" href="../index.html"/>
-        <link rel="prev" title="Masters setup" href="Master_Setup.html"/> 
+    <link rel="top" title="101 Lab Mesos Marathon 0.1 documentation" href="../index.html"/> 
 
   
   <script src="../_static/js/modernizr.min.js"></script>
@@ -91,11 +90,17 @@
 <li class="toctree-l1"><a class="reference internal" href="../getting-started/intro.html">Introduction</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../getting-started/getting-started.html">Getting started</a></li>
 </ul>
-<p class="caption"><span class="caption-text">Install Mesos</span></p>
-<ul class="current">
-<li class="toctree-l1"><a class="reference internal" href="access-udf.html">Connecting to UDF</a></li>
-<li class="toctree-l1"><a class="reference internal" href="Master_Setup.html">Masters setup</a></li>
-<li class="toctree-l1 current"><a class="current reference internal" href="#">Setting up the agents</a></li>
+<p class="caption"><span class="caption-text">Your lab</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../your-lab/lab-setup.html">Lab Setup</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../your-lab/access-udf.html">Connecting to UDF</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Setup the masters</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="install-mesos-marathon.html">Install Mesos and Marathon</a></li>
+<li class="toctree-l1"><a class="reference internal" href="setup-zookeeper-master.html">Setup Zookeeper</a></li>
+<li class="toctree-l1"><a class="reference internal" href="setup-mesos-master.html">Mesos Setup</a></li>
+<li class="toctree-l1"><a class="reference internal" href="setup-start-services-master.html">Start your services</a></li>
 </ul>
 
             
@@ -126,11 +131,11 @@
   <ul class="wy-breadcrumbs">
     <li><a href="../index.html">Docs</a> &raquo;</li>
       
-    <li>Setting up the agents</li>
+    <li>Setup Marathon</li>
       <li class="wy-breadcrumbs-aside">
         
           
-            <a href="../_sources/labs/Agent_Setup.txt" rel="nofollow"> View page source</a>
+            <a href="../_sources/setup-masters/setup-marathon.txt" rel="nofollow"> View page source</a>
           
         
       </li>
@@ -140,42 +145,29 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
             
-  <div class="section" id="setting-up-the-agents">
-<h1>Setting up the agents<a class="headerlink" href="#setting-up-the-agents" title="Permalink to this headline">¶</a></h1>
-<p>We will setup the following 2 agents</p>
-<table border="1" class="docutils">
-<colgroup>
-<col width="60%" />
-<col width="40%" />
-</colgroup>
-<thead valign="bottom">
-<tr class="row-odd"><th class="head">Agent</th>
-<th class="head">IP</th>
-</tr>
-</thead>
-<tbody valign="top">
-<tr class="row-even"><td>Master 1</td>
-<td>10.1.10.51</td>
-</tr>
-<tr class="row-odd"><td>Master 2</td>
-<td>10.1.10.52</td>
-</tr>
-</tbody>
-</table>
-<p>Access your windows 10 jumpbox</p>
+  <div class="section" id="setup-marathon">
+<h1>Setup Marathon<a class="headerlink" href="#setup-marathon" title="Permalink to this headline">¶</a></h1>
+<p>We need to create the marathon directory structure on <strong>each master</strong></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">sudo</span> <span class="n">mkdir</span> <span class="o">-</span><span class="n">p</span> <span class="o">/</span><span class="n">etc</span><span class="o">/</span><span class="n">marathon</span><span class="o">/</span><span class="n">conf</span>
+
+<span class="n">sudo</span> <span class="n">cp</span> <span class="o">/</span><span class="n">etc</span><span class="o">/</span><span class="n">mesos</span><span class="o">-</span><span class="n">master</span><span class="o">/</span><span class="n">hostname</span> <span class="o">/</span><span class="n">etc</span><span class="o">/</span><span class="n">marathon</span><span class="o">/</span><span class="n">conf</span>
+</pre></div>
+</div>
+<p>We need to specify the zookeeper masters that marathon will connect to (for information and things like scheduling). We can copy the previous file we setup for mesos</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">sudo</span> <span class="n">cp</span> <span class="o">/</span><span class="n">etc</span><span class="o">/</span><span class="n">mesos</span><span class="o">/</span><span class="n">zk</span> <span class="o">/</span><span class="n">etc</span><span class="o">/</span><span class="n">marathon</span><span class="o">/</span><span class="n">conf</span><span class="o">/</span><span class="n">master</span>
+</pre></div>
+</div>
+<p>We also need to have marathon store its own state in zookeper (since it runs on all three masters).</p>
+<p>Create a file /etc/marathon/conf/zk and put the following into it:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">echo</span> <span class="s2">&quot;zk://10.1.10.1:2181,10.1.10.2:2181,10.1.10.3:2181/marathon&quot;</span> <span class="o">|</span> <span class="n">sudo</span> <span class="n">tee</span> <span class="o">/</span><span class="n">etc</span><span class="o">/</span><span class="n">marathon</span><span class="o">/</span><span class="n">conf</span><span class="o">/</span><span class="n">zk</span>
+</pre></div>
+</div>
 </div>
 
 
            </div>
           </div>
           <footer>
-  
-    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
-      
-      
-        <a href="Master_Setup.html" class="btn btn-neutral" title="Masters setup" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
-      
-    </div>
   
 
   <hr/>
