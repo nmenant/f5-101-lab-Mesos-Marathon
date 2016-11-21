@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Lab 1 - XXX &mdash; 101 Lab Mesos Marathon 0.1 documentation</title>
+  <title>Setting up the agents &mdash; 101 Lab Mesos Marathon 0.1 documentation</title>
   
 
   
@@ -34,8 +34,7 @@
               href="../genindex.html"/>
         <link rel="search" title="Search" href="../search.html"/>
     <link rel="top" title="101 Lab Mesos Marathon 0.1 documentation" href="../index.html"/>
-        <link rel="next" title="Lab 2 - YYY" href="lab2.html"/>
-        <link rel="prev" title="Getting started" href="../getting-started/getting-started.html"/> 
+        <link rel="prev" title="Masters setup" href="Master_Setup.html"/> 
 
   
   <script src="../_static/js/modernizr.min.js"></script>
@@ -56,6 +55,9 @@
             <a href="../index.html" class="icon icon-home"> 101 Lab Mesos Marathon
           
 
+          
+            
+            <img src="../_static/f5-logo.svg" class="logo" />
           
           </a>
 
@@ -89,10 +91,11 @@
 <li class="toctree-l1"><a class="reference internal" href="../getting-started/intro.html">Introduction</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../getting-started/getting-started.html">Getting started</a></li>
 </ul>
-<p class="caption"><span class="caption-text">Labs</span></p>
+<p class="caption"><span class="caption-text">Install Mesos</span></p>
 <ul class="current">
-<li class="toctree-l1 current"><a class="current reference internal" href="#">Lab 1 - XXX</a></li>
-<li class="toctree-l1"><a class="reference internal" href="lab2.html">Lab 2 - YYY</a></li>
+<li class="toctree-l1"><a class="reference internal" href="access-udf.html">Connecting to UDF</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Master_Setup.html">Masters setup</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Setting up the agents</a></li>
 </ul>
 
             
@@ -123,11 +126,11 @@
   <ul class="wy-breadcrumbs">
     <li><a href="../index.html">Docs</a> &raquo;</li>
       
-    <li>Lab 1 - XXX</li>
+    <li>Setting up the agents</li>
       <li class="wy-breadcrumbs-aside">
         
           
-            <a href="../_sources/labs/lab1.txt" rel="nofollow"> View page source</a>
+            <a href="../_sources/labs/Agent_Setup.txt" rel="nofollow"> View page source</a>
           
         
       </li>
@@ -137,8 +140,29 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
             
-  <div class="section" id="lab-1-xxx">
-<h1>Lab 1 - XXX<a class="headerlink" href="#lab-1-xxx" title="Permalink to this headline">¶</a></h1>
+  <div class="section" id="setting-up-the-agents">
+<h1>Setting up the agents<a class="headerlink" href="#setting-up-the-agents" title="Permalink to this headline">¶</a></h1>
+<p>We will setup the following 2 agents</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="60%" />
+<col width="40%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Agent</th>
+<th class="head">IP</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>Master 1</td>
+<td>10.1.10.51</td>
+</tr>
+<tr class="row-odd"><td>Master 2</td>
+<td>10.1.10.52</td>
+</tr>
+</tbody>
+</table>
+<p>Access your windows 10 jumpbox</p>
 </div>
 
 
@@ -148,10 +172,8 @@
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="lab2.html" class="btn btn-neutral float-right" title="Lab 2 - YYY" accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
       
-      
-        <a href="../getting-started/getting-started.html" class="btn btn-neutral" title="Getting started" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+        <a href="Master_Setup.html" class="btn btn-neutral" title="Masters setup" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
       
     </div>
   

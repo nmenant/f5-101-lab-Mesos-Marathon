@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Introduction &mdash; 101 Lab Mesos Marathon 0.1 documentation</title>
+  <title>Masters setup &mdash; 101 Lab Mesos Marathon 0.1 documentation</title>
   
 
   
@@ -34,8 +34,8 @@
               href="../genindex.html"/>
         <link rel="search" title="Search" href="../search.html"/>
     <link rel="top" title="101 Lab Mesos Marathon 0.1 documentation" href="../index.html"/>
-        <link rel="next" title="Getting started" href="getting-started.html"/>
-        <link rel="prev" title="Welcome to 101 Lab Mesos Marathon’s documentation!" href="../index.html"/> 
+        <link rel="next" title="Setting up the agents" href="Agent_Setup.html"/>
+        <link rel="prev" title="Connecting to UDF" href="access-udf.html"/> 
 
   
   <script src="../_static/js/modernizr.min.js"></script>
@@ -88,15 +88,15 @@
             
             
                 <p class="caption"><span class="caption-text">Getting Started</span></p>
-<ul class="current">
-<li class="toctree-l1 current"><a class="current reference internal" href="#">Introduction</a></li>
-<li class="toctree-l1"><a class="reference internal" href="getting-started.html">Getting started</a></li>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../getting-started/intro.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../getting-started/getting-started.html">Getting started</a></li>
 </ul>
 <p class="caption"><span class="caption-text">Install Mesos</span></p>
-<ul>
-<li class="toctree-l1"><a class="reference internal" href="../labs/access-udf.html">Connecting to UDF</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../labs/Master_Setup.html">Masters setup</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../labs/Agent_Setup.html">Setting up the agents</a></li>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="access-udf.html">Connecting to UDF</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Masters setup</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Agent_Setup.html">Setting up the agents</a></li>
 </ul>
 
             
@@ -127,11 +127,11 @@
   <ul class="wy-breadcrumbs">
     <li><a href="../index.html">Docs</a> &raquo;</li>
       
-    <li>Introduction</li>
+    <li>Masters setup</li>
       <li class="wy-breadcrumbs-aside">
         
           
-            <a href="../_sources/getting-started/intro.txt" rel="nofollow"> View page source</a>
+            <a href="../_sources/labs/Master_Setup.txt" rel="nofollow"> View page source</a>
           
         
       </li>
@@ -141,14 +141,32 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
             
-  <div class="section" id="introduction">
-<h1>Introduction<a class="headerlink" href="#introduction" title="Permalink to this headline">¶</a></h1>
-<p>The purpose of this lab is to give you more visibility on</p>
-<ul class="simple">
-<li>Overview of Mesos and Marathon and their key components</li>
-<li>Install Mesos and Marathon with 3 masters and 2 agents</li>
-</ul>
-<p>We consider that you have a valid UDF access to do this lab.</p>
+  <div class="section" id="masters-setup">
+<h1>Masters setup<a class="headerlink" href="#masters-setup" title="Permalink to this headline">¶</a></h1>
+<p>We will setup the following 3 masters:</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="60%" />
+<col width="40%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Master</th>
+<th class="head">IP</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>Master 1</td>
+<td>10.1.10.1</td>
+</tr>
+<tr class="row-odd"><td>Master 2</td>
+<td>10.1.10.2</td>
+</tr>
+<tr class="row-even"><td>Master 3</td>
+<td>10.1.10.3</td>
+</tr>
+</tbody>
+</table>
+<p>Access your windows 10 jumpbox</p>
 </div>
 
 
@@ -158,10 +176,10 @@
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="getting-started.html" class="btn btn-neutral float-right" title="Getting started" accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
+        <a href="Agent_Setup.html" class="btn btn-neutral float-right" title="Setting up the agents" accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
-        <a href="../index.html" class="btn btn-neutral" title="Welcome to 101 Lab Mesos Marathon’s documentation!" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+        <a href="access-udf.html" class="btn btn-neutral" title="Connecting to UDF" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
       
     </div>
   
