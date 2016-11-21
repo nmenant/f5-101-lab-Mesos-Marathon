@@ -33,9 +33,7 @@
         <link rel="index" title="Index"
               href="../genindex.html"/>
         <link rel="search" title="Search" href="../search.html"/>
-    <link rel="top" title="101 Lab Mesos Marathon 0.1 documentation" href="../index.html"/>
-        <link rel="next" title="Lab 1 - XXX" href="../labs/lab1.html"/>
-        <link rel="prev" title="Introduction" href="intro.html"/> 
+    <link rel="top" title="101 Lab Mesos Marathon 0.1 documentation" href="../index.html"/> 
 
   
   <script src="../_static/js/modernizr.min.js"></script>
@@ -56,6 +54,9 @@
             <a href="../index.html" class="icon icon-home"> 101 Lab Mesos Marathon
           
 
+          
+            
+            <img src="../_static/f5-logo.svg" class="logo" />
           
           </a>
 
@@ -84,15 +85,10 @@
           
             
             
-                <p class="caption"><span class="caption-text">Getting Started</span></p>
-<ul class="current">
-<li class="toctree-l1"><a class="reference internal" href="intro.html">Introduction</a></li>
-<li class="toctree-l1 current"><a class="current reference internal" href="#">Getting started</a></li>
-</ul>
-<p class="caption"><span class="caption-text">Labs</span></p>
+                <p class="caption"><span class="caption-text">Your lab</span></p>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="../labs/lab1.html">Lab 1 - XXX</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../labs/lab2.html">Lab 2 - YYY</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../your-lab/lab-setup.html">Lab Setup</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../your-lab/access-udf.html">Connecting to UDF</a></li>
 </ul>
 
             
@@ -139,22 +135,83 @@
             
   <div class="section" id="getting-started">
 <h1>Getting started<a class="headerlink" href="#getting-started" title="Permalink to this headline">¶</a></h1>
-<p>This will the the introduction / getting started</p>
+<p>Before working on the installation itself, you need to understand the different components involved in this setup:</p>
+<ul class="simple">
+<li>Master / Agent functions</li>
+<li>The different components involved in the Master / Agent architecture</li>
+<li>How High availability is achieved</li>
+<li>Marathon overview</li>
+</ul>
+<div class="section" id="mesos-architecture">
+<h2>Mesos Architecture<a class="headerlink" href="#mesos-architecture" title="Permalink to this headline">¶</a></h2>
+<p>This is an extract from <a class="reference external" href="http://mesos.apache.org/documentation/latest/architecture/">Mesos Architecture</a></p>
+<img alt="../_images/Mesos_Architecture.png" src="../_images/Mesos_Architecture.png" />
+<p>Some of the involved components:</p>
+<ul class="simple">
+<li>Master: aggregates resource offers from all agent nodes and provides them to registered frameworks.</li>
+<li>Agent: runs a discrete Mesos task on behalf of a framework. It is an agent instance registered with the Mesos master. The synonym of agent node is worker or slave node. You can have private or public agent nodes. Agent daemon can run on the same component than the master daemon. This is useful when you need a small environment for testing</li>
+<li>Framework: &#8220;Applications&#8221; running on Mesos. It is composed of a scheduler, which registers with the master to receive resource offers, and one or more executors, which launches tasks on slaves. Examples of Mesos frameworks include Marathon, Chronos and Hadoop</li>
+<li>Offer: a list of a agent&#8217;s available CPU and memory resources. All agents send offers to the master, and the master provides offers to registered frameworks</li>
+<li>Executors: launched on agent nodes to run tasks for a service.</li>
+<li>Task: a unit of work that is scheduled by a framework, and is executed on an agent node. A task can be anything from a bash command or script, to an SQL query, to a Hadoop job, a docker image</li>
+<li>Apache ZooKeeper: software that is used to coordinate the master nodes and achieve High availability</li>
+<li>Service discovery: When your app is up and running, you need a way to send traffic to it, from other applications on the same cluster, and from external clients.</li>
+</ul>
+</div>
+<div class="section" id="example-of-resource-offer">
+<h2>Example of resource offer<a class="headerlink" href="#example-of-resource-offer" title="Permalink to this headline">¶</a></h2>
+<p>This is an extract from Apache Mesos website <a href="#id2"><span class="problematic" id="id3">`</span></a>Mesos Architecture &lt;<a class="reference external" href="http://mesos.apache.org/documentation/latest/architecture/">http://mesos.apache.org/documentation/latest/architecture/</a>&gt;_</p>
+<img alt="../_images/mesos-framework-example.jpg" src="../_images/mesos-framework-example.jpg" />
+<p>Let’s walk through the events in the figure.</p>
+<ol class="arabic simple">
+<li>Agent 1 reports to the master that it has 4 CPUs and 4 GB of memory free. The master then invokes the allocation policy module, which tells it that framework 1 should be offered all available resources.</li>
+<li>The master sends a resource offer describing what is available on agent 1 to framework 1.</li>
+<li>The framework’s scheduler replies to the master with information about two tasks to run on the agent, using &lt;2 CPUs, 1 GB RAM&gt; for the first task, and &lt;1 CPUs, 2 GB RAM&gt; for the second task.</li>
+<li>Finally, the master sends the tasks to the agent, which allocates appropriate resources to the framework’s executor, which in turn launches the two tasks (depicted with dotted-line borders in the figure). Because 1 CPU and 1 GB of RAM are still unallocated, the allocation module may now offer them to framework 2.</li>
+</ol>
+<p>In addition, this resource offer process repeats when tasks finish and new resources become free.</p>
+</div>
+<div class="section" id="service-discovery">
+<h2>Service Discovery<a class="headerlink" href="#service-discovery" title="Permalink to this headline">¶</a></h2>
+<p>One way to enable service discovery is to leverage Mesos DNS. Mesos DNS provides service discovery through domain name system (DNS).</p>
+<p>Mesos-DNS periodically queries the Mesos master(s), retrieves the state of all running tasks from all running frameworks, and generates DNS records for these tasks (A and SRV records). As tasks start, finish, fail, or restart on the Mesos cluster, Mesos-DNS updates the DNS records to reflect the latest state.</p>
+<p>Running tasks can be discovered by looking up A and, optionally, SRV records within the Mesos domain.</p>
+<ul class="simple">
+<li>An A record associates a hostname to an IP address</li>
+<li>An SRV record associates a service name to a hostname and an IP port</li>
+</ul>
+</div>
+<div class="section" id="high-availability">
+<h2>High Availability<a class="headerlink" href="#high-availability" title="Permalink to this headline">¶</a></h2>
+<p>Marathon supports high availability be leveraging Zookeeper. High availability allows applications to keep running if an instance becomes unavailable. This is accomplished by running several Marathon instances that point to the same ZooKeeper quorum. ZooKeeper is used to perform leader election in the event that the currently leading Marathon instance fails.</p>
+<p>If you want to learn more about Zookeeper, refer to their website <a class="reference external" href="http://zookeeper.apache.org/">Zookeeper</a></p>
+<p>With Zookeeper, it is recommended to have an odd number of servers.</p>
+</div>
+<div class="section" id="marathon">
+<h2>Marathon<a class="headerlink" href="#marathon" title="Permalink to this headline">¶</a></h2>
+<p>Marathon is a production-proven Apache Mesos framework for container orchestration. the github project can be found here: <a class="reference external" href="https://github.com/mesosphere/marathon">Github Marathon</a> , documentation is <a class="reference external" href="http://mesosphere.github.io/marathon/">here</a></p>
+<p>Marathon is a framework for Mesos that is designed to launch long-running applications, and, in Mesosphere, serves as a replacement for a traditional <em>init</em> system. It has many features that simplify running applications in a clustered environment, such as high-availability, application health checks, ... It adds its scaling and self-healing capabilities to the Mesosphere feature set.</p>
+<p>Marathon can be used to start other Mesos frameworks, and it can also launch any process that can be started in the regular shell. As it is designed for long-running applications, it will ensure that applications it has launched will continue running, even if the slave node(s) they are running on fails.</p>
+<p>Main features</p>
+<ol class="arabic simple">
+<li>High Availability. Marathon runs as an active/passive cluster with leader election for 100% uptime.</li>
+<li>Multiple container runtimes. Marathon has first-class support for both Mesos containers (using cgroups) and Docker.</li>
+<li>Stateful apps. Marathon can bind persistent storage volumes to your application. You can run databases like MySQL and Postgres, and have storage accounted for by Mesos.</li>
+<li>UI.</li>
+<li>Constraints. e.g. Only one instance of an application per rack, node, etc.</li>
+<li>Service Discovery &amp; Load Balancing. Several methods available.</li>
+<li>Health Checks. Evaluate your application&#8217;s health using HTTP or TCP checks.</li>
+<li>Event Subscription. Supply an HTTP endpoint to receive notifications - for example to integrate with an external load balancer.</li>
+<li>Metrics. Query them at /metrics in JSON format or push them to systems like graphite, statsd and Datadog.</li>
+<li>Complete REST API for easy integration and scriptability.</li>
+</ol>
+</div>
 </div>
 
 
            </div>
           </div>
           <footer>
-  
-    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
-      
-        <a href="../labs/lab1.html" class="btn btn-neutral float-right" title="Lab 1 - XXX" accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
-      
-      
-        <a href="intro.html" class="btn btn-neutral" title="Introduction" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
-      
-    </div>
   
 
   <hr/>

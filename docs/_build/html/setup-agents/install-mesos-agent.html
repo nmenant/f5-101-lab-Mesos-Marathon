@@ -1,0 +1,273 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Install Mesos &mdash; 101 Lab Mesos Marathon 0.1 documentation</title>
+  
+
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  
+
+  
+
+  
+        <link rel="index" title="Index"
+              href="../genindex.html"/>
+        <link rel="search" title="Search" href="../search.html"/>
+    <link rel="top" title="101 Lab Mesos Marathon 0.1 documentation" href="../index.html"/>
+        <link rel="next" title="Setup Zookeeper" href="setup-zookeeper-agent.html"/>
+        <link rel="prev" title="Start your services" href="../setup-masters/setup-start-services-master.html"/> 
+
+  
+  <script src="../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> 101 Lab Mesos Marathon
+          
+
+          
+            
+            <img src="../_static/f5-logo.svg" class="logo" />
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                0.1
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+                <p class="caption"><span class="caption-text">Getting Started</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../getting-started/intro.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../getting-started/getting-started.html">Getting started</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Your lab</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../your-lab/lab-setup.html">Lab Setup</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../your-lab/access-udf.html">Connecting to UDF</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Setup the masters</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../setup-masters/install-mesos-marathon.html">Install Mesos and Marathon</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../setup-masters/setup-zookeeper-master.html">Setup Zookeeper</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../setup-masters/setup-mesos-master.html">Mesos Setup</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../setup-masters/setup-start-services-master.html">Start your services</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Setup the agents</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Install Mesos</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#update-the-system">Update the system</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id1">Install Mesos</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="setup-zookeeper-agent.html">Setup Zookeeper</a></li>
+<li class="toctree-l1"><a class="reference internal" href="setup-mesos-agent.html">Setup Mesos</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="../index.html">101 Lab Mesos Marathon</a>
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+ 
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../index.html">Docs</a> &raquo;</li>
+      
+    <li>Install Mesos</li>
+      <li class="wy-breadcrumbs-aside">
+        
+          
+            <a href="../_sources/setup-agents/install-mesos-agent.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="install-mesos">
+<h1>Install Mesos<a class="headerlink" href="#install-mesos" title="Permalink to this headline">¶</a></h1>
+<p>All the steps mentioned below are to be done on <strong>ALL THE AGENTS</strong></p>
+<ul class="simple">
+<li>Slave1</li>
+<li>Slave2</li>
+</ul>
+<div class="section" id="update-the-system">
+<h2>Update the system<a class="headerlink" href="#update-the-system" title="Permalink to this headline">¶</a></h2>
+<p>Before doing anything related to this exercise, we need to make sure that the system is up to date.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">sudo</span> <span class="n">apt</span><span class="o">-</span><span class="n">get</span> <span class="o">-</span><span class="n">y</span> <span class="n">update</span>
+</pre></div>
+</div>
+<p>Once this is done, we need to install the required packages to execute the mesos and marathon processes.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">sudo</span> <span class="n">apt</span><span class="o">-</span><span class="n">get</span> <span class="n">install</span> <span class="o">-</span><span class="n">y</span> <span class="n">openjdk</span><span class="o">-</span><span class="mi">8</span><span class="o">-</span><span class="n">jdk</span>
+
+<span class="n">sudo</span> <span class="n">apt</span><span class="o">-</span><span class="n">get</span> <span class="n">install</span> <span class="o">-</span><span class="n">y</span> <span class="n">build</span><span class="o">-</span><span class="n">essential</span> <span class="n">python</span><span class="o">-</span><span class="n">dev</span> <span class="n">libcurl4</span><span class="o">-</span><span class="n">nss</span><span class="o">-</span><span class="n">dev</span> <span class="n">libsasl2</span><span class="o">-</span><span class="n">dev</span> <span class="n">libsasl2</span><span class="o">-</span><span class="n">modules</span> <span class="n">maven</span> <span class="n">libapr1</span><span class="o">-</span><span class="n">dev</span> <span class="n">libsvn</span><span class="o">-</span><span class="n">dev</span> <span class="n">unzip</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="id1">
+<h2>Install Mesos<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h2>
+<p>Now we need to let apt-get have access to the relevant repo (based on our distro name : ubuntu and our version: xenial)</p>
+<p>Do the following commands:</p>
+<dl class="docutils">
+<dt>::</dt>
+<dd><p class="first">#retrieve the key
+sudo apt-key adv &#8211;keyserver keyserver.ubuntu.com &#8211;recv E56151BF</p>
+<p>#this command identify the distro: ie ubuntu (a line starting with # is a comment, don&#8217;t execute)
+DISTRO=$(lsb_release -is | tr &#8216;[:upper:]&#8217; &#8216;[:lower:]&#8217;)</p>
+<p>#this command will identify the version for the distro. For example #xenial  ubuntu version)
+CODENAME=$(lsb_release -cs)</p>
+<p>#create a new repo to have access to mesosphere packages related to this distro/release
+echo &#8220;deb <a class="reference external" href="http://repos.mesosphere.io">http://repos.mesosphere.io</a>/${DISTRO} ${CODENAME} main&#8221; | sudo tee /etc/apt/sources.list.d/mesosphere.list</p>
+<p class="last">#Update our local package cache to have access to mesosphere packages
+sudo apt-get -y update</p>
+</dd>
+</dl>
+<p>Finally we can install mesos and marathon on our masters</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">sudo</span> <span class="n">apt</span><span class="o">-</span><span class="n">get</span> <span class="n">install</span> <span class="o">-</span><span class="n">y</span> <span class="n">mesos</span>
+</pre></div>
+</div>
+</div>
+</div>
+
+
+           </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="setup-zookeeper-agent.html" class="btn btn-neutral float-right" title="Setup Zookeeper" accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="../setup-masters/setup-start-services-master.html" class="btn btn-neutral" title="Start your services" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2016, Nicolas Menant.
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../',
+            VERSION:'0.1',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true
+        };
+    </script>
+      <script type="text/javascript" src="../_static/jquery.js"></script>
+      <script type="text/javascript" src="../_static/underscore.js"></script>
+      <script type="text/javascript" src="../_static/doctools.js"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>
