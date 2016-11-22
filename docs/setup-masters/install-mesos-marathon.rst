@@ -44,7 +44,7 @@ Do the following commands:
 	CODENAME=$(lsb_release -cs)
 
 	#create a new repo to have access to mesosphere packages related to this distro/release
-	echo "deb http://repos.mesosphere.io/${DISTRO} ${CODENAME} main" | sudo tee /etc/apt/sources.list.d/mesosphere.list
+	printf "deb http://repos.mesosphere.io/${DISTRO} ${CODENAME} main" | sudo tee /etc/apt/sources.list.d/mesosphere.list
 
 	#Update our local package cache to have access to mesosphere packages
 	sudo apt-get -y update

@@ -11,12 +11,12 @@ On each agent:
 ::
 
 	#On slave1: 
-	echo "10.1.10.51" | sudo tee /etc/mesos-slave/ip
-	echo "slave1.my-lab" | sudo tee /etc/mesos-slave/hostname
+	printf "10.1.10.51" | sudo tee /etc/mesos-slave/ip
+	printf "slave1.my-lab" | sudo tee /etc/mesos-slave/hostname
 
 	#On slave2:
-	echo "10.1.10.52" | sudo tee /etc/mesos-slave/ip
-	echo "slave2.my-lab" | sudo tee /etc/mesos-slave/hostname
+	printf "10.1.10.52" | sudo tee /etc/mesos-slave/ip
+	printf "slave2.my-lab" | sudo tee /etc/mesos-slave/hostname
 
 Install and setup docker
 ------------------------
@@ -28,7 +28,7 @@ on *each agent*, do the following:
 
 	sudo apt-key adv --keyserver hkp://ha.pool.sks-keyservers.net:80 --recv-keys 58118E89F3A912897C070ADBF76221572C52609D
 
-	echo "deb https://apt.dockerproject.org/repo ubuntu-xenial main" | sudo tee /etc/apt/sources.list.d/docker.list
+	printf "deb https://apt.dockerproject.org/repo ubuntu-xenial main" | sudo tee /etc/apt/sources.list.d/docker.list
 
 	sudo apt-get update
 
@@ -54,7 +54,7 @@ We need to allow mesos and docker containers in mesos:
 
 ::
 
-	echo 'docker,mesos' | sudo tee /etc/mesos-slave/containerizers
+	printf 'docker,mesos' | sudo tee /etc/mesos-slave/containerizers
 
 	#Increase the timeout to 10 min so that we have enough time to download any needed docker image
-	echo '10mins' | sudo tee /etc/mesos-slave/executor_registration_timeout
+	printf '10mins' | sudo tee /etc/mesos-slave/executor_registration_timeout
