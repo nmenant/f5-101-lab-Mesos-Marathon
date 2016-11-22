@@ -37,7 +37,8 @@ Create a file in /etc/mesos-dns/ called config.json
         "SOARefresh": 60,
         "SOARetry": 600,
         "SOAExpire": 86400,
-        "SOAMinttl": 60
+        "SOAMinttl": 60,
+        "IPSources": ["netinfo", "mesos", "host"]
 	}
 
 
@@ -49,8 +50,8 @@ launch the mesos-dns image in marathon. Connect to marathon, click on *Create an
 		"args": [	
 		"/mesos-dns",
 		"-config=/config.json"
-    	],
-    	"container": {
+		],
+		"container": {
 		  "docker": {
 		            "image": "mesosphere/mesos-dns",
 		            "network": "HOST"
