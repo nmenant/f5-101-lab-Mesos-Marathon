@@ -6,23 +6,23 @@ Configure Mesos
 
 We need to provide IP / hostname information to the mesos slave system (as we did for mesos master)
 
-On each agent:
+On **each agent**, run the following commands:
 
 ::
 
 	#On slave1: 
-	printf "10.1.10.51" | sudo tee /etc/mesos-slave/ip
+	printf "10.1.20.51" | sudo tee /etc/mesos-slave/ip
 	printf "slave1.my-lab" | sudo tee /etc/mesos-slave/hostname
 
 	#On slave2:
-	printf "10.1.10.52" | sudo tee /etc/mesos-slave/ip
+	printf "10.1.20.52" | sudo tee /etc/mesos-slave/ip
 	printf "slave2.my-lab" | sudo tee /etc/mesos-slave/hostname
 
 Install and setup docker
 ------------------------
 We have to install docker-engine on the agents to be able to run docker containers
 
-on *each agent*, do the following:
+on *each agent**, do the following:
 
 ::
 
@@ -42,15 +42,18 @@ on *each agent*, do the following:
 
 Once this is done, docker should be up and running already. 
 
-To test that it was launched successfully, you may use the command
+To test that it was launched successfully, you may use the command **on one or all the agents**
 
 ::
 	
-	sudo docker run hello-world
+	sudo docker run --rm hello-world
 
-This will download a test image automatically and launch it. You should have things appearing on your terminal. Once it is done, the container will stop automatically (you can validate this with the command sudo docker ps –a)
+This will download a test image automatically and launch it. You should have things appearing on your terminal. Once it is done, the container will stop automatically and be deleted (done by the --rm parameter)
 
-We need to allow mesos and docker containers in mesos: 
+.. image:: ../images/setup-slave-test-docker.png
+	:align: center
+
+We need to allow mesos and docker containers in mesos. Execute the following commands on **all agents** 
 
 ::
 

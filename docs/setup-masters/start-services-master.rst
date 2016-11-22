@@ -57,6 +57,9 @@ you should see something like this:
 
 Check the *about* section in marathon to have the information about the service. 
 
+.. image:: ../images/setup-master-about-marathon.png
+	:align: center
+
 You can do the following to test the high availability of marathon:
 	• Find on which mesos is running the framework marathon (here based on our screenshot above, it is available on master1)
 	• Restart this master and you should see the framework was restarted automatically on another host

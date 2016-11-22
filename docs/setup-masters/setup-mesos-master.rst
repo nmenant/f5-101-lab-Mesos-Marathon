@@ -1,4 +1,4 @@
-Mesos Setup
+Setup Mesos
 ===========
 
 On **each master** we need to setup the following files with the relevant information: 
