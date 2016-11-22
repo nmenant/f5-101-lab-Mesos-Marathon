@@ -17,22 +17,22 @@ Connect to Marathon through one of the master (:8080) and launch an application
   Command: echo Test; sleep 10
 3.  Click on *Create Application*
     
-.. image:: ../images/setup-slave-create-application-command-def.png
+.. image:: ../images/setup-slave-test-create-application-command-def.png
   :align: center
 
 Once it runs, if you connect to the mesos framework, you should see more and more completed tasks. Name of the task should be "Test" (our ID). 
 
-.. image:: ../images/setup-slave-create-application-command-exec1.png 
+.. image:: ../images/setup-slave-test-create-application-command-exec1.png 
   :align: center
 
 If you let it run for a while, you'll see more and more "Completed Tasks". You can see that the Host being selected to run those tasks is not always the same.
 
-.. image:: ../images/setup-slave-create-application-command-exec2.png
+.. image:: ../images/setup-slave-test-create-application-command-exec2.png
   :align: center
 
 Go Back to Marathon, click on our application *test* and click on the setting button and select *destroy* to remove it. 
 
-.. image:: ../images/setup-slave-create-application-command-delete.png
+.. image:: ../images/setup-slave-test-create-application-command-delete.png
   :align: center
 
 Launch a container
@@ -40,9 +40,9 @@ Launch a container
 
 To test our containers from marathon, click on create an application, switch to JSON mode and use the following to start an apache in a container (this may takes some time since we will have to retrieve first the image)
 
-::
+.. code-block:: none
 
-{
+  {
     "id": "my-website",
     "cpus": 0.5,
     "mem": 32.0,
@@ -56,7 +56,7 @@ To test our containers from marathon, click on create an application, switch to 
             ]
         }
     }
-}
+  }
 
 .. image:: ../images/setup-slave-test-create-container-def.png
   :align: center
