@@ -5,7 +5,7 @@ to test our Mesos DNS setup, we will start a new application and check if it aut
 
 Start a new app in marathon: 
 
-::
+.. code-block:: none
 
 {
   "id": "test",

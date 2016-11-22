@@ -16,31 +16,33 @@ Create a file in /etc/mesos-dns/ called config.json
 ::
 
 	sudo cat /etc/mesos-dns/config.json
+
+.. code-block:: none
 {
-"zk": "zk://10.1.10.1:2181,10.1.10.2:2181,10.1.10.3:2181/mesos",
-"masters": ["10.1.10.1:5050", "10.1.10.2:5050", "10.1.10.3:5050"],
-"refreshSeconds": 60,
-"ttl": 60,
-"domain": "mesos",
-"port": 53,
-"resolvers": ["8.8.8.8"],
-"timeout": 5,
-"httpon": true,
-"dnson": true,
-"httpport": 8123,
-"externalon": true,
-"SOAMname": "ns1.mesos",
-"SOARname": "root.ns1.mesos",
-"SOARefresh": 60,
-"SOARetry": 600,
-"SOAExpire": 86400,
-"SOAMinttl": 60
+        "zk": "zk://10.1.10.1:2181,10.1.10.2:2181,10.1.10.3:2181/mesos",
+        "masters": ["10.1.10.1:5050", "10.1.10.2:5050", "10.1.10.3:5050"],
+        "refreshSeconds": 60,
+        "ttl": 60,
+        "domain": "mesos",
+        "port": 53,
+        "resolvers": ["8.8.8.8"],
+        "timeout": 5,
+        "httpon": true,
+        "dnson": true,
+        "httpport": 8123,
+        "externalon": true,
+        "SOAMname": "ns1.mesos",
+        "SOARname": "root.ns1.mesos",
+        "SOARefresh": 60,
+        "SOARetry": 600,
+        "SOAExpire": 86400,
+        "SOAMinttl": 60
 }
 
 
 launch the mesos-dns image in marathon. Connect to marathon, click on *Create an application* and enable *json mode* 
 
-::
+.. code-block:: none
 
 {
 	"args": [	
@@ -71,4 +73,4 @@ Last thing is to update /etc/resolv.conf on **all slaves*: we add our mesos dns 
 
 ::
 
-	sudo sed -i '1s/^/nameserver 10.1.10.51\n/' /etc/resolv.conf
+	sudo sed -i '1s/^/nameserver 10.1.20.51\n/' /etc/resolv.conf
