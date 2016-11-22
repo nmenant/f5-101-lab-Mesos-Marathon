@@ -37,6 +37,7 @@ Contents:
    setup-masters/install-mesos-marathon.rst
    setup-masters/setup-zookeeper-master.rst
    setup-masters/setup-mesos-master.rst
+   setup-masters/setup-marathon.rst
    setup-masters/start-services-master.rst
 
 .. toctree::

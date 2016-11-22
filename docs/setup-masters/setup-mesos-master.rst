@@ -16,11 +16,11 @@ On **each master** we need to setup the following files with the relevant inform
 
 	# On master2
 	printf "10.1.10.2" | sudo tee /etc/mesos-master/ip
-	printf "master1.my-lab" | sudo tee /etc/mesos-master/hostname
+	printf "master2.my-lab" | sudo tee /etc/mesos-master/hostname
 	printf "zk://10.1.10.1:2181,10.1.10.2:2181,10.1.10.3:2181/mesos" | sudo tee /etc/mesos/zk
 
 	# On master3
 	printf "10.1.10.3" | sudo tee /etc/mesos-master/ip
-	printf "master1.my-lab" | sudo tee /etc/mesos-master/hostname
+	printf "master3.my-lab" | sudo tee /etc/mesos-master/hostname
 	printf "zk://10.1.10.1:2181,10.1.10.2:2181,10.1.10.3:2181/mesos" | sudo tee /etc/mesos/zk
 
