@@ -6,10 +6,10 @@ We need to make sure that zookeeper and mesos-master don't run on those slaves:
 ::
 
 	sudo  systemctl stop zookeeper
-	echo manual | sudo tee /etc/init/zookeeper.override
+	printf manual | sudo tee /etc/init/zookeeper.override
 
 	sudo systemctl stop mesos-master
-	echo manual | sudo too /etc/init/mesos.master.override
+	printf manual | sudo too /etc/init/mesos.master.override
 
 We enable/start the agent process called mesos-slave
 
