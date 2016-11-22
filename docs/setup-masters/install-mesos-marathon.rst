@@ -32,7 +32,8 @@ Now we need to let apt-get have access to the relevant repo (based on our distro
 
 Do the following commands: 
 
-:: 
+::
+
 	#retrieve the key
 	sudo apt-key adv --keyserver keyserver.ubuntu.com --recv E56151BF
 

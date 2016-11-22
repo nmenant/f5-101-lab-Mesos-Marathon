@@ -3,7 +3,7 @@ Start your services
 
 When you install mesos, the master and slave services are enabled (called mesos-master and mesos-slave). Here, we want our master to focus on this tasks so we need to disable the slave service. 
 
-Do this on all the masters: 
+Do this on *all the master* nodes: 
 
 ::
 
@@ -11,7 +11,7 @@ Do this on all the masters:
 	echo manual | sudo tee /etc/init/mesos-slave.override
 
 
-We need to restart our zookeeper process and start mesos-master and marathon:
+We need to restart our zookeeper process and start mesos-master and marathon on *all master* nodes:
 
 ::
 
