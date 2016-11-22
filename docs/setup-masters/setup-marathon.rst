@@ -22,4 +22,4 @@ Create a file /etc/marathon/conf/zk and put the following into it:
 
 ::
 	
-	echo "zk://10.1.10.1:2181,10.1.10.2:2181,10.1.10.3:2181/marathon" | sudo tee /etc/marathon/conf/zk
+	printf "zk://10.1.10.1:2181,10.1.10.2:2181,10.1.10.3:2181/marathon" | sudo tee /etc/marathon/conf/zk
