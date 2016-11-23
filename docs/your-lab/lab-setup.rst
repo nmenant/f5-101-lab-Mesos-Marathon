@@ -39,7 +39,7 @@ Here are the different things to take into accounts during this installation gui
 	10.1.10.51      slave1  slave1.my-lab
 	10.1.10.52      slave2  slave2.my-lab
 
-	#agentshost file
+	#agents host file
 	user@master1:~$ cat /etc/hosts
 	127.0.0.1       localhost
 	10.1.10.1       master1 master1.my-lab
