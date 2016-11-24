@@ -19,9 +19,6 @@
 # Set zookeeper instance ID on each master
   - name: Create zookeeper myid file
     template: src=zoo_id.j2 dest=/etc/zookeeper/conf/myid
-    notify:
-      - Restart zookeeper
-      - Start mesos-master
 
 # Set zookeeper config file
   - name: Create zookeeper config file

@@ -1,10 +1,17 @@
---- #main ansible yml file
 
-#Reject everything but cluster for install_mode since only implemented solution for now
-  tasks: 
-    - name: reject all install_mode but cluster
-      fail: msg="Only install_mode=cluster is supported at the moment"
-      when: install_mode != "cluster"
+#main ansible yml file
+
+#Test whether the extra-vars is set properly
+- name: check install_mode value
+  hosts: local
+  connection: local
+  vars: 
+    install_mode: "{{ install_mode|default('cluster') }}"
+  tasks:
+   - name: reject all install_mode but cluster
+     fail: msg="Only install_mode=cluster is supported at the moment"
+     when: install_mode != "cluster"
+
 #playbook for master(s) setup
 - include: setup-masters.yml
 

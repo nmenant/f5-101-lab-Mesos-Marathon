@@ -5,17 +5,6 @@
   become_method: sudo
   connection: ssh
   gather_facts: yes
-  vars: 
-    install_mode: "{{ install_mode|default('cluster') }}"
 
-  tasks:
-    - name: Fail if not running on Debian
-      fail: msg="These tasks should only be run on Debian servers"
-      when: ansible_os_family != "Debian"
-
-#Only cluster mode is implemented for now so rejecting everything else
-    - name: reject all install_mode but cluster
-      fail: msg="Only install_mode=cluster is supported at the moment"
-      when: install_mode != "cluster"
   roles: 
     - common
