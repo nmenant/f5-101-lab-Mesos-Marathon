@@ -27,7 +27,6 @@
     content: "deb https://apt.dockerproject.org/repo {{release_distributor.stdout}} {{release_codename.stdout}} main"
     dest: /etc/apt/sources.list.d/docker.list
     mode: 0644
-    update_cache: yes
 
 - name: Determine kernel version for docker install
   shell: uname -r
@@ -44,6 +43,7 @@
   apt: 
     name: docker-engine
     state: latest
+    update_cache: yes
 
 - name: setup mesos with the available containers 
   template: src=containerizers.j2 dest=/etc/mesos-slave/containerizers

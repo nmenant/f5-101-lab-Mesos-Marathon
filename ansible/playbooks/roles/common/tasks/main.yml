@@ -38,7 +38,4 @@
     
   - name: Add key for Mesosphere repository
     apt_key: url=http://keyserver.ubuntu.com/pks/lookup?op=get&fingerprint=on&search=0xE56151BF state=present
-    update_cache: yes
 
-
-  
