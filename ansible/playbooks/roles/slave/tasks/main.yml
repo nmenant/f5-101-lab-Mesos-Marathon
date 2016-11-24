@@ -60,7 +60,7 @@
 
 #Setup zookeeper
 # Zookeeper URL for leader election regarding mesos service
-- name: Set ZooKeeper URL
+- name: Set ZooKeeper URL on agents /etc/mesos/zk
   copy:
     content: "{{ zookeeper_url }}/mesos"
     dest: /etc/mesos/zk
