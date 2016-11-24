@@ -22,11 +22,16 @@
   command: lsb_release -cs
   register: release_codename
    
-- name: Add Docker repository to sources list
-  copy:
-    content: "deb https://apt.dockerproject.org/repo {{release_distributor.stdout}} {{release_codename.stdout}} main"
-    dest: /etc/apt/sources.list.d/docker.list
-    mode: 0644
+- name: add docker apt repository
+  apt_repository:
+    repo: deb https://apt.dockerproject.org/repo ubuntu-trusty main
+    update_cache: yes
+
+#- name: Add Docker repository to sources list
+#  copy:
+#    content: "deb https://apt.dockerproject.org/repo {{release_distributor.stdout}} {{release_codename.stdout}} main"
+#    dest: /etc/apt/sources.list.d/docker.list
+#    mode: 0644
 
 - name: Determine kernel version for docker install
   shell: uname -r
@@ -43,8 +48,7 @@
   apt: 
     name: docker-engine
     state: latest
-    update_cache: yes
-
+    
 - name: setup mesos with the available containers 
   template: src=containerizers.j2 dest=/etc/mesos-slave/containerizers
 
