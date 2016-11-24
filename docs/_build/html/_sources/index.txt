@@ -63,7 +63,8 @@ Contents:
    :maxdepth: 3
    :caption: Use Ansible
 
-   ansible/install-setup-ansible.rst
+   ansible/ansible-install-setup.rst
+   ansible/ansible-install-playbooks.rst
  
 Indices and tables
 ==================

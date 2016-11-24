@@ -58,6 +58,14 @@
 - name: set the executor registration timeout
   template: src=executor_registration_timeout.j2 dest=/etc/mesos-slave/executor_registration_timeout
 
+#Setup zookeeper
+# Zookeeper URL for leader election regarding mesos service
+- name: Set ZooKeeper URL
+  copy:
+    content: "{{ zookeeper_url }}/mesos"
+    dest: /etc/mesos/zk
+    mode: 0644
+
 #setup mesos IP and hostname
 # Set mesos slave hostname
 - name: Set Mesos slave hostname

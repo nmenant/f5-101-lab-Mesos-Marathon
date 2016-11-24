@@ -27,7 +27,7 @@ clone the github repo:
 
 	git clone https://github.com/nmenant/101-lab-Mesos-Marathon
 
-	cd 101-lab-Mesos-Marathon/ansible/playbooks
+	cd ansible/playbooks
 
 to run the ansible playbooks and setup the environment as explained in the step by step guide:
 
