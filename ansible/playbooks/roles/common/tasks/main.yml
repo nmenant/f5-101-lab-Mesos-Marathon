@@ -1,17 +1,10 @@
---- #install mesos and marathon on masters
-- hosts: masters
-  remote_user: user
-  become: yes
-  become_method: sudo
-  connection: ssh
-  gather_facts: yes
-  vars:
-    var1: value
-  tasks:
+---
+# Common tasks to do on all agents and masters: install the required packages and dependencies
+
   - name: Fail if not running on Debian
     fail: msg="These tasks should only be run on Debian servers"
     when: ansible_os_family != "Debian"
-  - debug: msg="Installing openjdk-8-jdk build-essential python-dev libcurl4-nss-dev libsasl2-dev libsasl2-modules maven libapr1-dev libsvn-dev unzip. This may take some time... Coffee ? "
+  - debug: msg="Installing openjdk-8-jdk build-essential python-dev libcurl4-nss-dev libsasl2-dev libsasl2-modules maven libapr1-dev libsvn-dev unzip. This may take some time... Coffee?"
     when: ansible_hostname == "master1"
   - name: Install list of packages
     apt: name={{item}} state=installed update_cache=yes
@@ -41,10 +34,3 @@
       dest: /etc/apt/sources.list.d/mesosphere.list
       mode: 0644
     sudo: yes
-  - debug: msg="Installing Mesos and Marathon on masters"
-    when: ansible_hostname == "master1"
-  - name: install mesos and marathon
-    apt: name={{item}} state=installed update_cache=yes
-    with_items:
-      - mesos
-      - marathon

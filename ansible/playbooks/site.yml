@@ -1,0 +1,10 @@
+--- #main ansible yml file
+
+#playbook for master(s) setup
+- include: setup-masters.yml
+
+#playbook for slave(s) setup
+#- include: setup-slaves.yml
+
+#playbook for marathon setup
+#- include: setup-marathon.yml

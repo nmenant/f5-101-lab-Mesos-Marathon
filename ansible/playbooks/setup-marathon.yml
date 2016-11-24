@@ -1,0 +1,13 @@
+---
+#marathon install playbook
+
+- hosts: marathon
+  remote_user: user
+  become: yes
+  become_method: sudo
+  connection: ssh
+  gather_facts: yes
+
+  roles: 
+    - common
+    - marathon

@@ -1,0 +1,8 @@
+---
+#installing marathon on masters
+
+  - debug: msg="Installing Marathon ..."
+  - name: install marathon
+    apt: 
+      name: mesos
+  

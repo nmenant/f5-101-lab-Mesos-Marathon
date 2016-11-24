@@ -1,0 +1,10 @@
+--- #setup mesos on masters
+- hosts: masters
+  remote_user: user
+  become: yes
+  become_method: sudo
+  connection: ssh
+  gather_facts: yes
+
+  roles: 
+    - common

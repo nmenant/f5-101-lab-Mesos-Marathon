@@ -1,0 +1,9 @@
+---
+#installing mesos and marathon on masters
+
+  - debug: msg="Installing Mesos and Marathon on masters"when: ansible_hostname == "master1"
+  - name: install mesos and marathon
+    apt: 
+      name: mesos
+  
+  
