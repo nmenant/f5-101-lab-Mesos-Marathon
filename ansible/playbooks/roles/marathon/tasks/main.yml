@@ -4,5 +4,9 @@
   - debug: msg="Installing Marathon ..."
   - name: install marathon
     apt: 
-      name: mesos
+      name: marathon
+      state: latest
   
+# Create the /etc/marathon and /etc/marathon/conf directories
+  - name: Creates conf directories for marathon
+    file: path=/src/www state=directory mode=0755 recurse=yes

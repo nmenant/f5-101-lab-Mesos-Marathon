@@ -5,6 +5,7 @@
   become_method: sudo
   connection: ssh
   gather_facts: yes
-
+  vars: 
+    install_mode: "{{ install_mode|default('cluster') }}"
   roles: 
     - common

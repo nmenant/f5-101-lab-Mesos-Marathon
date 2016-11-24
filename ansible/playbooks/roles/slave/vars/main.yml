@@ -1,0 +1,5 @@
+---
+# variables for the masters setup
+
+#specify the IP address that will be used and assigned as the control plane IP for the masters. Update this to your relevant interface
+mesos_local_address: "{{ansible_ens7.ipv4.address}}"

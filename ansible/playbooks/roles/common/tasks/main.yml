@@ -7,7 +7,7 @@
   - debug: msg="Installing openjdk-8-jdk build-essential python-dev libcurl4-nss-dev libsasl2-dev libsasl2-modules maven libapr1-dev libsvn-dev unzip. This may take some time... Coffee?"
     when: ansible_hostname == "master1"
   - name: Install list of packages
-    apt: name={{item}} state=installed update_cache=yes
+    apt: name={{item}} state=latest update_cache=yes
     with_items:
       - openjdk-8-jdk
       - build-essential

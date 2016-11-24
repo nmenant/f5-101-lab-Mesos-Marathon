@@ -1,9 +1,67 @@
 ---
-#installing mesos and marathon on masters
+#installing and setup mesos / zookeeper on masters
 
-  - debug: msg="Installing Mesos and Marathon on masters"when: ansible_hostname == "master1"
-  - name: install mesos and marathon
+# Install the mesos package
+  - debug: msg="Installing Mesos on masters"
+  - name: install mesos on masters
     apt: 
       name: mesos
+      state: latest
   
-  
+##
+## Zookeeper setup
+##
+
+  - debug: msg="##"
+  - debug: msg="## Zookeeper setup"
+  - debug: msg="##"
+
+# Set zookeeper instance ID on each master
+  - name: Create zookeeper myid file
+    template: src=zoo_id.j2 dest=/etc/zookeeper/conf/myid
+    notify:
+      - Restart zookeeper
+      - Start mesos-master
+
+# Set zookeeper config file
+  - name: Create zookeeper config file
+    template: src=zoo.cfg.j2 dest=/etc/zookeeper/conf/zoo.cfg
+
+##
+## Mesos setup (master)
+##
+
+  - debug: msg="##"
+  - debug: msg="## Mesos (master) setup"
+  - debug: msg="##"
+
+# Zookeeper URL for leader election regarding mesos
+  - name: Set ZooKeeper URL
+    copy:
+     content: "{{ zookeeper_url }}/mesos"
+     dest: /etc/mesos/zk
+     mode: 0644
+
+# Set mesos master hostname
+  - name: Set Mesos Master hostname
+    copy:
+     content: ansible_hostname
+     dest: /etc/mesos-master/hostname
+     mode: 0644
+
+# Set mesos master ip
+  - name: Set Mesos Master ip
+    copy:
+      content: "{{ mesos_controlplane_address }}"
+      dest: /etc/mesos-master/ip
+      mode: 0644
+
+# The Mesos quorum value is based on the number of Mesos Masters. divide the number of master you have by 2 and round it by the next number. This is done in the quorum.j2 file. 
+  - name: Set Mesos Master quorum count
+    template: src=quorum.j2 dest=/etc/mesos-master/quorum mode=0644
+
+
+
+
+
+ 
