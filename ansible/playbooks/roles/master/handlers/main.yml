@@ -2,18 +2,18 @@
 
 #Handlers for the masters
 - name: restart zookeeper
-	service:
-		name: zookeeper
-		state: restarted
+  service:
+    name: zookeeper
+    state: restarted
 
 - name: stop mesos-slave
-	service:
-		name: mesos-slave
-		enabled: no
-		state: stopped
+  service:
+    name: mesos-slave
+    enabled: no
+    state: stopped
 
 - name: start mesos-master
-	service:
-		name: mesos-master
-		enabled: yes
-		state: started
+  service:
+    name: mesos-master
+    enabled: yes
+    state: startedvi 

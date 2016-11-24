@@ -22,7 +22,7 @@ Install and setup docker
 ------------------------
 We have to install docker-engine on the agents to be able to run docker containers
 
-on *each agent**, do the following:
+on **each agent**, do the following:
 
 ::
 

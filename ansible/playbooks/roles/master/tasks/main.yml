@@ -2,7 +2,6 @@
 #installing and setup mesos / zookeeper on masters
 
 # Install the mesos package
-  - debug: msg="Installing Mesos on masters"
   - name: install mesos on masters
     apt: 
       name: mesos
@@ -24,7 +23,7 @@
 ## Mesos setup (master)
 ##
 
-# Zookeeper URL for leader election regarding mesos
+# Zookeeper URL for leader election regarding mesos service
   - name: Set ZooKeeper URL
     copy:
      content: "{{ zookeeper_url }}/mesos"
@@ -53,14 +52,14 @@
       -restart zookeeper
 
 #Disable mesos-slave service and start mesos-master
-- name: Disable the mesos-slave service and enable Mesos-master service
-  copy:
-    content: "manual"
-    dest: /etc/init/mesos-slave.override
-    mode: 0644
+  - name: Disable the mesos-slave service and enable Mesos-master service
+    copy:
+     content: "manual"
+     dest: /etc/init/mesos-slave.override
+     mode: 0644
     notify:
-      - stop mesos-slave
-      - start mesos-master
+     - stop mesos-slave
+     - start mesos-master
 
 
 
