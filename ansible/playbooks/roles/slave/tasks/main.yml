@@ -6,7 +6,7 @@
   apt: 
     name: mesos
     state: latest
-    cache_valid_time: 3600
+    update_cache: yes
 
 # Setup docker repository
 - name: add docker apt key

@@ -5,15 +5,18 @@
   service:
     name: zookeeper
     state: restarted
+    enabled: yes
 
 - name: stop mesos-slave
   service:
     name: mesos-slave
-    enabled: no
     state: stopped
+    enabled: no
+    
 
 - name: start mesos-master
   service:
     name: mesos-master
+    state: started 
     enabled: yes
-    state: startedvi 
+    

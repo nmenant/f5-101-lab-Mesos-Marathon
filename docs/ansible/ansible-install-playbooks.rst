@@ -27,6 +27,14 @@ clone the github repo:
 
 	git clone https://github.com/nmenant/101-lab-Mesos-Marathon
 
+	cd ansible/playbooks
+
+to run the ansible playbooks and setup the environment as explained in the step by step guide:
+
+::
+
+	ansible-playbook site.yml --extra-vars "install_mode=cluster"
 
 
 
+Right now, only cluster is supported. Work in progress to have a deployment on a single node. 

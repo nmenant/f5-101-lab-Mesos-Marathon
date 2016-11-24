@@ -5,10 +5,7 @@
     fail: msg="These tasks should only be run on Debian servers"
     when: ansible_os_family != "Debian"
   
-  - debug: msg="Installing openjdk-8-jdk build-essential python-dev libcurl4-nss-dev libsasl2-dev libsasl2-modules maven libapr1-dev libsvn-dev unzip. This may take some time... Coffee?"
-    when: ansible_hostname == "master1"
-  
-  - name: Install list of packages
+  - name: Install list of  required packages for Mesos
     apt: name={{item}} state=latest cache_valid_time=3600
     with_items:
       - openjdk-8-jdk

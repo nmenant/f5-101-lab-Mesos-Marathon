@@ -50,7 +50,7 @@
   - name: Set Mesos Master quorum count
     template: src=quorum.j2 dest=/etc/mesos-master/quorum mode=0644
     notify: 
-      -restart zookeeper
+      - restart zookeeper
 
 #Disable mesos-slave service and start mesos-master
   - name: Disable the mesos-slave service and enable Mesos-master service
