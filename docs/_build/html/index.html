@@ -100,7 +100,8 @@
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="setup-masters/install-mesos-marathon.html">Install Mesos and Marathon</a></li>
 <li class="toctree-l1"><a class="reference internal" href="setup-masters/setup-zookeeper-master.html">Setup Zookeeper</a></li>
-<li class="toctree-l1"><a class="reference internal" href="setup-masters/setup-mesos-master.html">Mesos Setup</a></li>
+<li class="toctree-l1"><a class="reference internal" href="setup-masters/setup-mesos-master.html">Setup Mesos</a></li>
+<li class="toctree-l1"><a class="reference internal" href="setup-masters/setup-marathon.html">Setup Marathon</a></li>
 <li class="toctree-l1"><a class="reference internal" href="setup-masters/start-services-master.html">Start your services</a></li>
 </ul>
 <p class="caption"><span class="caption-text">Setup the agents</span></p>
@@ -115,6 +116,10 @@
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="setup-mesos-dns/setup-mesos-dns.html">Setup Mesos-DNS</a></li>
 <li class="toctree-l1"><a class="reference internal" href="setup-mesos-dns/test-mesos-dns.html">Test Mesos DNS</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Use Ansible</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="ansible/install-setup-ansible.html">Install and Setup Ansible</a></li>
 </ul>
 
             
@@ -164,7 +169,15 @@
 </div>
 <div class="section" id="introduction">
 <h1>Introduction<a class="headerlink" href="#introduction" title="Permalink to this headline">¶</a></h1>
-<p>This is the introduction</p>
+<p>The purpose of this lab is to give you more visibility on</p>
+<ul class="simple">
+<li>Overview of Mesos and Marathon and their key components</li>
+<li>Install Mesos and Marathon with 3 masters and 2 agents</li>
+<li>How to launch application from Marathon</li>
+<li>How to install Mesos-DNS for service discovery</li>
+</ul>
+<p>If you need just to have a Mesos/Marathon env, you can use the ansible playbooks to do the job.</p>
+<p>We consider that you have a valid UDF access to do this lab. If not, you may review the pre-requisites about our lab setup .</p>
 <p>Contents:</p>
 <div class="toctree-wrapper compound" id="getting-started">
 <p class="caption"><span class="caption-text">Getting Started</span><a class="headerlink" href="#getting-started" title="Permalink to this toctree">¶</a></p>
@@ -200,7 +213,8 @@
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="setup-masters/setup-zookeeper-master.html">Setup Zookeeper</a></li>
-<li class="toctree-l1"><a class="reference internal" href="setup-masters/setup-mesos-master.html">Mesos Setup</a></li>
+<li class="toctree-l1"><a class="reference internal" href="setup-masters/setup-mesos-master.html">Setup Mesos</a></li>
+<li class="toctree-l1"><a class="reference internal" href="setup-masters/setup-marathon.html">Setup Marathon</a></li>
 <li class="toctree-l1"><a class="reference internal" href="setup-masters/start-services-master.html">Start your services</a></li>
 </ul>
 </div>
@@ -231,6 +245,17 @@
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="setup-mesos-dns/setup-mesos-dns.html">Setup Mesos-DNS</a></li>
 <li class="toctree-l1"><a class="reference internal" href="setup-mesos-dns/test-mesos-dns.html">Test Mesos DNS</a></li>
+</ul>
+</div>
+<div class="toctree-wrapper compound" id="use-ansible">
+<p class="caption"><span class="caption-text">Use Ansible</span><a class="headerlink" href="#use-ansible" title="Permalink to this toctree">¶</a></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="ansible/install-setup-ansible.html">Install and Setup Ansible</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="ansible/install-setup-ansible.html#install-ansible">Install Ansible</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ansible/install-setup-ansible.html#setup-ansible">Setup Ansible</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ansible/install-setup-ansible.html#test-ansible">Test Ansible</a></li>
+</ul>
+</li>
 </ul>
 </div>
 </div>

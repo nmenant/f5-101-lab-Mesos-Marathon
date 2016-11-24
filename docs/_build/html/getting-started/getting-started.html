@@ -33,7 +33,9 @@
         <link rel="index" title="Index"
               href="../genindex.html"/>
         <link rel="search" title="Search" href="../search.html"/>
-    <link rel="top" title="101 Lab Mesos Marathon 0.1 documentation" href="../index.html"/> 
+    <link rel="top" title="101 Lab Mesos Marathon 0.1 documentation" href="../index.html"/>
+        <link rel="next" title="Lab Setup" href="../your-lab/lab-setup.html"/>
+        <link rel="prev" title="Introduction" href="intro.html"/> 
 
   
   <script src="../_static/js/modernizr.min.js"></script>
@@ -85,10 +87,47 @@
           
             
             
-                <p class="caption"><span class="caption-text">Your lab</span></p>
+                <p class="caption"><span class="caption-text">Getting Started</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="intro.html">Introduction</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Getting started</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#mesos-architecture">Mesos Architecture</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#example-of-resource-offer">Example of resource offer</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#service-discovery">Service Discovery</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#high-availability">High Availability</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#marathon">Marathon</a></li>
+</ul>
+</li>
+</ul>
+<p class="caption"><span class="caption-text">Your lab</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../your-lab/lab-setup.html">Lab Setup</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../your-lab/access-udf.html">Connecting to UDF</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Setup the masters</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../setup-masters/install-mesos-marathon.html">Install Mesos and Marathon</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../setup-masters/setup-zookeeper-master.html">Setup Zookeeper</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../setup-masters/setup-mesos-master.html">Setup Mesos</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../setup-masters/setup-marathon.html">Setup Marathon</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../setup-masters/start-services-master.html">Start your services</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Setup the agents</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../setup-agents/install-mesos-agent.html">Install Mesos</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../setup-agents/setup-zookeeper-agent.html">Setup Zookeeper</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../setup-agents/setup-mesos-agent.html">Setup Mesos</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../setup-agents/start-services-agent.html">Start your services</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../setup-agents/test-setup.html">Test your setup</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Setup Mesos DNS</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../setup-mesos-dns/setup-mesos-dns.html">Setup Mesos-DNS</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../setup-mesos-dns/test-mesos-dns.html">Test Mesos DNS</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Use Ansible</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../ansible/install-setup-ansible.html">Install and Setup Ansible</a></li>
 </ul>
 
             
@@ -160,7 +199,7 @@
 </div>
 <div class="section" id="example-of-resource-offer">
 <h2>Example of resource offer<a class="headerlink" href="#example-of-resource-offer" title="Permalink to this headline">¶</a></h2>
-<p>This is an extract from Apache Mesos website <a href="#id2"><span class="problematic" id="id3">`</span></a>Mesos Architecture &lt;<a class="reference external" href="http://mesos.apache.org/documentation/latest/architecture/">http://mesos.apache.org/documentation/latest/architecture/</a>&gt;_</p>
+<p>This is an extract from Apache Mesos website <a class="reference external" href="http://mesos.apache.org/documentation/latest/architecture/">Mesos Architecture</a></p>
 <img alt="../_images/mesos-framework-example.jpg" src="../_images/mesos-framework-example.jpg" />
 <p>Let’s walk through the events in the figure.</p>
 <ol class="arabic simple">
@@ -212,6 +251,15 @@
            </div>
           </div>
           <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="../your-lab/lab-setup.html" class="btn btn-neutral float-right" title="Lab Setup" accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="intro.html" class="btn btn-neutral" title="Introduction" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
   
 
   <hr/>

@@ -19,22 +19,22 @@ to do so we need to do the following:
 ::
 
 	# On master1 
-	echo 1 | sudo tee /etc/zookeeper/conf/myid   
+	printf 1 | sudo tee /etc/zookeeper/conf/myid   
 	
-	echo –e  "tickTime=2000\ndataDir=/var/lib/zookeeper\nclientPort=2181\ninitLimit=10\nsyncLimit=5\nserver.1=10.1.10.1:2888:3888\nserver.2=10.1.10.2:2888:3888\nserver.3=10.1.10.3:2888:388" | sudo tee /etc/zookeeper/conf/zoo.cfg
+	printf "tickTime=2000\ndataDir=/var/lib/zookeeper\nclientPort=2181\ninitLimit=10\nsyncLimit=5\nserver.1=10.1.10.1:2888:3888\nserver.2=10.1.10.2:2888:3888\nserver.3=10.1.10.3:2888:388" | sudo tee /etc/zookeeper/conf/zoo.cfg
 	
-	echo 2 | sudo tee /etc/mesos-master/quorum
+	printf 2 | sudo tee /etc/mesos-master/quorum
 
 	# On master2
-	echo 2 | sudo tee /etc/zookeeper/conf/myid   
+	printf 2 | sudo tee /etc/zookeeper/conf/myid   
 	
-	echo –e  "tickTime=2000\ndataDir=/var/lib/zookeeper\nclientPort=2181\ninitLimit=10\nsyncLimit=5\nserver.1=10.1.10.1:2888:3888\nserver.2=10.1.10.2:2888:3888\nserver.3=10.1.10.3:2888:388" | sudo tee /etc/zookeeper/conf/zoo.cfg
+	printf "tickTime=2000\ndataDir=/var/lib/zookeeper\nclientPort=2181\ninitLimit=10\nsyncLimit=5\nserver.1=10.1.10.1:2888:3888\nserver.2=10.1.10.2:2888:3888\nserver.3=10.1.10.3:2888:388" | sudo tee /etc/zookeeper/conf/zoo.cfg
 	
-	echo 2 | sudo tee /etc/mesos-master/quorum
+	printf 2 | sudo tee /etc/mesos-master/quorum
 
 	# On master3
-	echo 3 | sudo tee /etc/zookeeper/conf/myid   
+	printf 3 | sudo tee /etc/zookeeper/conf/myid   
 	
-	echo –e  "tickTime=2000\ndataDir=/var/lib/zookeeper\nclientPort=2181\ninitLimit=10\nsyncLimit=5\nserver.1=10.1.10.1:2888:3888\nserver.2=10.1.10.2:2888:3888\nserver.3=10.1.10.3:2888:388" | sudo tee /etc/zookeeper/conf/zoo.cfg
+	printf "tickTime=2000\ndataDir=/var/lib/zookeeper\nclientPort=2181\ninitLimit=10\nsyncLimit=5\nserver.1=10.1.10.1:2888:3888\nserver.2=10.1.10.2:2888:3888\nserver.3=10.1.10.3:2888:388" | sudo tee /etc/zookeeper/conf/zoo.cfg
 	
 	echo 2 | sudo tee /etc/mesos-master/quorum

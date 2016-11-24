@@ -37,7 +37,7 @@ Some of the involved components:
 Example of resource offer
 -------------------------
 
-This is an extract from Apache Mesos website `Mesos Architecture <http://mesos.apache.org/documentation/latest/architecture/>_
+This is an extract from Apache Mesos website `Mesos Architecture <http://mesos.apache.org/documentation/latest/architecture/>`_
 
 .. image:: ../images/mesos-framework-example.jpg
 

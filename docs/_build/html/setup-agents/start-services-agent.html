@@ -101,7 +101,8 @@
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../setup-masters/install-mesos-marathon.html">Install Mesos and Marathon</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../setup-masters/setup-zookeeper-master.html">Setup Zookeeper</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../setup-masters/setup-mesos-master.html">Mesos Setup</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../setup-masters/setup-mesos-master.html">Setup Mesos</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../setup-masters/setup-marathon.html">Setup Marathon</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../setup-masters/start-services-master.html">Start your services</a></li>
 </ul>
 <p class="caption"><span class="caption-text">Setup the agents</span></p>
@@ -116,6 +117,10 @@
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../setup-mesos-dns/setup-mesos-dns.html">Setup Mesos-DNS</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../setup-mesos-dns/test-mesos-dns.html">Test Mesos DNS</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Use Ansible</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../ansible/install-setup-ansible.html">Install and Setup Ansible</a></li>
 </ul>
 
             
@@ -162,12 +167,12 @@
             
   <div class="section" id="start-your-services">
 <h1>Start your services<a class="headerlink" href="#start-your-services" title="Permalink to this headline">¶</a></h1>
-<p>We need to make sure that zookeeper and mesos-master don&#8217;t run on those slaves:</p>
+<p>We need to make sure that zookeeper and mesos-master don&#8217;t run on those agents. Do this on <strong>all agents</strong>:</p>
 <div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">sudo</span>  <span class="n">systemctl</span> <span class="n">stop</span> <span class="n">zookeeper</span>
-<span class="n">echo</span> <span class="n">manual</span> <span class="o">|</span> <span class="n">sudo</span> <span class="n">tee</span> <span class="o">/</span><span class="n">etc</span><span class="o">/</span><span class="n">init</span><span class="o">/</span><span class="n">zookeeper</span><span class="o">.</span><span class="n">override</span>
+<span class="n">printf</span> <span class="n">manual</span> <span class="o">|</span> <span class="n">sudo</span> <span class="n">tee</span> <span class="o">/</span><span class="n">etc</span><span class="o">/</span><span class="n">init</span><span class="o">/</span><span class="n">zookeeper</span><span class="o">.</span><span class="n">override</span>
 
 <span class="n">sudo</span> <span class="n">systemctl</span> <span class="n">stop</span> <span class="n">mesos</span><span class="o">-</span><span class="n">master</span>
-<span class="n">echo</span> <span class="n">manual</span> <span class="o">|</span> <span class="n">sudo</span> <span class="n">too</span> <span class="o">/</span><span class="n">etc</span><span class="o">/</span><span class="n">init</span><span class="o">/</span><span class="n">mesos</span><span class="o">.</span><span class="n">master</span><span class="o">.</span><span class="n">override</span>
+<span class="n">printf</span> <span class="n">manual</span> <span class="o">|</span> <span class="n">sudo</span> <span class="n">tee</span> <span class="o">/</span><span class="n">etc</span><span class="o">/</span><span class="n">init</span><span class="o">/</span><span class="n">mesos</span><span class="o">.</span><span class="n">master</span><span class="o">.</span><span class="n">override</span>
 </pre></div>
 </div>
 <p>We enable/start the agent process called mesos-slave</p>
@@ -176,6 +181,7 @@
 </pre></div>
 </div>
 <p>Check on one of your master with mesos interface (port 5050) if your agents registered successfully. You should see both slave1 and slave2 in the agent page</p>
+<img alt="../_images/setup-slave-check-agent-registration.png" class="align-center" src="../_images/setup-slave-check-agent-registration.png" />
 </div>
 
 

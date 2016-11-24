@@ -35,7 +35,7 @@
         <link rel="search" title="Search" href="../search.html"/>
     <link rel="top" title="101 Lab Mesos Marathon 0.1 documentation" href="../index.html"/>
         <link rel="next" title="Connecting to UDF" href="access-udf.html"/>
-        <link rel="prev" title="Welcome to 101 Lab Mesos Marathon’s documentation!" href="../index.html"/> 
+        <link rel="prev" title="Getting started" href="../getting-started/getting-started.html"/> 
 
   
   <script src="../_static/js/modernizr.min.js"></script>
@@ -87,10 +87,40 @@
           
             
             
-                <p class="caption"><span class="caption-text">Your lab</span></p>
+                <p class="caption"><span class="caption-text">Getting Started</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../getting-started/intro.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../getting-started/getting-started.html">Getting started</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Your lab</span></p>
 <ul class="current">
 <li class="toctree-l1 current"><a class="current reference internal" href="#">Lab Setup</a></li>
 <li class="toctree-l1"><a class="reference internal" href="access-udf.html">Connecting to UDF</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Setup the masters</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../setup-masters/install-mesos-marathon.html">Install Mesos and Marathon</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../setup-masters/setup-zookeeper-master.html">Setup Zookeeper</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../setup-masters/setup-mesos-master.html">Setup Mesos</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../setup-masters/setup-marathon.html">Setup Marathon</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../setup-masters/start-services-master.html">Start your services</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Setup the agents</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../setup-agents/install-mesos-agent.html">Install Mesos</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../setup-agents/setup-zookeeper-agent.html">Setup Zookeeper</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../setup-agents/setup-mesos-agent.html">Setup Mesos</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../setup-agents/start-services-agent.html">Start your services</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../setup-agents/test-setup.html">Test your setup</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Setup Mesos DNS</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../setup-mesos-dns/setup-mesos-dns.html">Setup Mesos-DNS</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../setup-mesos-dns/test-mesos-dns.html">Test Mesos DNS</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Use Ansible</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../ansible/install-setup-ansible.html">Install and Setup Ansible</a></li>
 </ul>
 
             
@@ -177,26 +207,38 @@
 </tr>
 </tbody>
 </table>
-<p>default user (for jumpbox, masters and agents):
-* login: user
-* password: user</p>
+<p>default user (for jumpbox, masters and agents):</p>
+<ul class="simple">
+<li>login: user</li>
+<li>password: user</li>
+</ul>
 <p>In case you don&#8217;t use UDF, here are a few things to know that could be useful (if you want to reproduce this in another environment)</p>
 <p>Here are the different things to take into accounts during this installation guide:</p>
 <ul class="simple">
 <li>We use Ubuntu xenial in this UDF blueprint</li>
 <li>We updated on all the nodes the /etc/hosts file so that each node is reachable via its name</li>
 </ul>
-<div class="highlight-default"><div class="highlight"><pre><span></span>user@master1:~$ cat /etc/hosts
+<div class="highlight-default"><div class="highlight"><pre><span></span>#masters host file
+user@master1:~$ cat /etc/hosts
 127.0.0.1       localhost
 10.1.10.1       master1 master1.my-lab
 10.1.10.2       master2 master2.my-lab
 10.1.10.3       master3 master3.my-lab
 10.1.10.51      slave1  slave1.my-lab
 10.1.10.52      slave2  slave2.my-lab
+
+#agents host file
+user@master1:~$ cat /etc/hosts
+127.0.0.1       localhost
+10.1.10.1       master1 master1.my-lab
+10.1.10.2       master2 master2.my-lab
+10.1.10.3       master3 master3.my-lab
+10.1.20.51      slave1  slave1.my-lab
+10.1.20.52      slave2  slave2.my-lab
 </pre></div>
 </div>
 <ul class="simple">
-<li>On master 1, we create some ssh keys for user that we copied on all the nodes. This way you can use master1 to connect to all nodes without authentication</li>
+<li>On master1, we created some ssh keys for user that we copied on all the nodes. This way you can use master1 to connect to all nodes without authentication</li>
 <li>we enabled user to do sudo commands without authentication (needed to use ansible with this user). This was done via the visudo command adding the following entry below the user root.</li>
 </ul>
 <div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">user</span> <span class="n">ALL</span><span class="o">=</span><span class="p">(</span><span class="n">ALL</span><span class="p">)</span> <span class="n">NOPASSWD</span><span class="p">:</span> <span class="n">ALL</span>
@@ -214,7 +256,7 @@
         <a href="access-udf.html" class="btn btn-neutral float-right" title="Connecting to UDF" accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
-        <a href="../index.html" class="btn btn-neutral" title="Welcome to 101 Lab Mesos Marathon’s documentation!" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+        <a href="../getting-started/getting-started.html" class="btn btn-neutral" title="Getting started" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
       
     </div>
   

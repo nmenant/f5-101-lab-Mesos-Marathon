@@ -34,6 +34,7 @@
               href="../genindex.html"/>
         <link rel="search" title="Search" href="../search.html"/>
     <link rel="top" title="101 Lab Mesos Marathon 0.1 documentation" href="../index.html"/>
+        <link rel="next" title="Start your services" href="start-services-agent.html"/>
         <link rel="prev" title="Setup Zookeeper" href="setup-zookeeper-agent.html"/> 
 
   
@@ -100,8 +101,9 @@
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../setup-masters/install-mesos-marathon.html">Install Mesos and Marathon</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../setup-masters/setup-zookeeper-master.html">Setup Zookeeper</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../setup-masters/setup-mesos-master.html">Mesos Setup</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../setup-masters/setup-start-services-master.html">Start your services</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../setup-masters/setup-mesos-master.html">Setup Mesos</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../setup-masters/setup-marathon.html">Setup Marathon</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../setup-masters/start-services-master.html">Start your services</a></li>
 </ul>
 <p class="caption"><span class="caption-text">Setup the agents</span></p>
 <ul class="current">
@@ -112,6 +114,17 @@
 <li class="toctree-l2"><a class="reference internal" href="#install-and-setup-docker">Install and setup docker</a></li>
 </ul>
 </li>
+<li class="toctree-l1"><a class="reference internal" href="start-services-agent.html">Start your services</a></li>
+<li class="toctree-l1"><a class="reference internal" href="test-setup.html">Test your setup</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Setup Mesos DNS</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../setup-mesos-dns/setup-mesos-dns.html">Setup Mesos-DNS</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../setup-mesos-dns/test-mesos-dns.html">Test Mesos DNS</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Use Ansible</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../ansible/install-setup-ansible.html">Install and Setup Ansible</a></li>
 </ul>
 
             
@@ -161,24 +174,24 @@
 <div class="section" id="configure-mesos">
 <h2>Configure Mesos<a class="headerlink" href="#configure-mesos" title="Permalink to this headline">¶</a></h2>
 <p>We need to provide IP / hostname information to the mesos slave system (as we did for mesos master)</p>
-<p>On each agent:</p>
+<p>On <strong>each agent</strong>, run the following commands:</p>
 <div class="highlight-default"><div class="highlight"><pre><span></span><span class="c1">#On slave1:</span>
-<span class="n">echo</span> <span class="s2">&quot;10.1.10.51&quot;</span> <span class="o">|</span> <span class="n">sudo</span> <span class="n">tee</span> <span class="o">/</span><span class="n">etc</span><span class="o">/</span><span class="n">mesos</span><span class="o">-</span><span class="n">slave</span><span class="o">/</span><span class="n">ip</span>
-<span class="n">echo</span> <span class="s2">&quot;slave1.my-lab&quot;</span> <span class="o">|</span> <span class="n">sudo</span> <span class="n">tee</span> <span class="o">/</span><span class="n">etc</span><span class="o">/</span><span class="n">mesos</span><span class="o">-</span><span class="n">slave</span><span class="o">/</span><span class="n">hostname</span>
+<span class="n">printf</span> <span class="s2">&quot;10.1.20.51&quot;</span> <span class="o">|</span> <span class="n">sudo</span> <span class="n">tee</span> <span class="o">/</span><span class="n">etc</span><span class="o">/</span><span class="n">mesos</span><span class="o">-</span><span class="n">slave</span><span class="o">/</span><span class="n">ip</span>
+<span class="n">printf</span> <span class="s2">&quot;slave1.my-lab&quot;</span> <span class="o">|</span> <span class="n">sudo</span> <span class="n">tee</span> <span class="o">/</span><span class="n">etc</span><span class="o">/</span><span class="n">mesos</span><span class="o">-</span><span class="n">slave</span><span class="o">/</span><span class="n">hostname</span>
 
 <span class="c1">#On slave2:</span>
-<span class="n">echo</span> <span class="s2">&quot;10.1.10.52&quot;</span> <span class="o">|</span> <span class="n">sudo</span> <span class="n">tee</span> <span class="o">/</span><span class="n">etc</span><span class="o">/</span><span class="n">mesos</span><span class="o">-</span><span class="n">slave</span><span class="o">/</span><span class="n">ip</span>
-<span class="n">echo</span> <span class="s2">&quot;slave2.my-lab&quot;</span> <span class="o">|</span> <span class="n">sudo</span> <span class="n">tee</span> <span class="o">/</span><span class="n">etc</span><span class="o">/</span><span class="n">mesos</span><span class="o">-</span><span class="n">slave</span><span class="o">/</span><span class="n">hostname</span>
+<span class="n">printf</span> <span class="s2">&quot;10.1.20.52&quot;</span> <span class="o">|</span> <span class="n">sudo</span> <span class="n">tee</span> <span class="o">/</span><span class="n">etc</span><span class="o">/</span><span class="n">mesos</span><span class="o">-</span><span class="n">slave</span><span class="o">/</span><span class="n">ip</span>
+<span class="n">printf</span> <span class="s2">&quot;slave2.my-lab&quot;</span> <span class="o">|</span> <span class="n">sudo</span> <span class="n">tee</span> <span class="o">/</span><span class="n">etc</span><span class="o">/</span><span class="n">mesos</span><span class="o">-</span><span class="n">slave</span><span class="o">/</span><span class="n">hostname</span>
 </pre></div>
 </div>
 </div>
 <div class="section" id="install-and-setup-docker">
 <h2>Install and setup docker<a class="headerlink" href="#install-and-setup-docker" title="Permalink to this headline">¶</a></h2>
 <p>We have to install docker-engine on the agents to be able to run docker containers</p>
-<p>on <em>each agent</em>, do the following:</p>
+<p>on <strong>each agent</strong>, do the following:</p>
 <div class="highlight-default"><div class="highlight"><pre><span></span>sudo apt-key adv --keyserver hkp://ha.pool.sks-keyservers.net:80 --recv-keys 58118E89F3A912897C070ADBF76221572C52609D
 
-echo &quot;deb https://apt.dockerproject.org/repo ubuntu-xenial main&quot; | sudo tee /etc/apt/sources.list.d/docker.list
+printf &quot;deb https://apt.dockerproject.org/repo ubuntu-xenial main&quot; | sudo tee /etc/apt/sources.list.d/docker.list
 
 sudo apt-get update
 
@@ -191,16 +204,17 @@ sudo apt-get install -y docker-engine
 </pre></div>
 </div>
 <p>Once this is done, docker should be up and running already.</p>
-<p>To test that it was launched successfully, you may use the command</p>
-<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">sudo</span> <span class="n">docker</span> <span class="n">run</span> <span class="n">hello</span><span class="o">-</span><span class="n">world</span>
+<p>To test that it was launched successfully, you may use the command <strong>on one or all the agents</strong></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">sudo</span> <span class="n">docker</span> <span class="n">run</span> <span class="o">--</span><span class="n">rm</span> <span class="n">hello</span><span class="o">-</span><span class="n">world</span>
 </pre></div>
 </div>
-<p>This will download a test image automatically and launch it. You should have things appearing on your terminal. Once it is done, the container will stop automatically (you can validate this with the command sudo docker ps –a)</p>
-<p>We need to allow mesos and docker containers in mesos:</p>
-<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">echo</span> <span class="s1">&#39;docker,mesos&#39;</span> <span class="o">|</span> <span class="n">sudo</span> <span class="n">tee</span> <span class="o">/</span><span class="n">etc</span><span class="o">/</span><span class="n">mesos</span><span class="o">-</span><span class="n">slave</span><span class="o">/</span><span class="n">containerizers</span>
+<p>This will download a test image automatically and launch it. You should have things appearing on your terminal. Once it is done, the container will stop automatically and be deleted (done by the &#8211;rm parameter)</p>
+<img alt="../_images/setup-slave-test-docker.png" class="align-center" src="../_images/setup-slave-test-docker.png" />
+<p>We need to allow mesos and docker containers in mesos. Execute the following commands on <strong>all agents</strong></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">printf</span> <span class="s1">&#39;docker,mesos&#39;</span> <span class="o">|</span> <span class="n">sudo</span> <span class="n">tee</span> <span class="o">/</span><span class="n">etc</span><span class="o">/</span><span class="n">mesos</span><span class="o">-</span><span class="n">slave</span><span class="o">/</span><span class="n">containerizers</span>
 
 <span class="c1">#Increase the timeout to 10 min so that we have enough time to download any needed docker image</span>
-<span class="n">echo</span> <span class="s1">&#39;10mins&#39;</span> <span class="o">|</span> <span class="n">sudo</span> <span class="n">tee</span> <span class="o">/</span><span class="n">etc</span><span class="o">/</span><span class="n">mesos</span><span class="o">-</span><span class="n">slave</span><span class="o">/</span><span class="n">executor_registration_timeout</span>
+<span class="n">printf</span> <span class="s1">&#39;10mins&#39;</span> <span class="o">|</span> <span class="n">sudo</span> <span class="n">tee</span> <span class="o">/</span><span class="n">etc</span><span class="o">/</span><span class="n">mesos</span><span class="o">-</span><span class="n">slave</span><span class="o">/</span><span class="n">executor_registration_timeout</span>
 </pre></div>
 </div>
 </div>
@@ -212,6 +226,8 @@ sudo apt-get install -y docker-engine
           <footer>
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="start-services-agent.html" class="btn btn-neutral float-right" title="Start your services" accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
         <a href="setup-zookeeper-agent.html" class="btn btn-neutral" title="Setup Zookeeper" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>

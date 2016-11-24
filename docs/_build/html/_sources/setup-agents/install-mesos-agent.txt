@@ -31,7 +31,8 @@ Now we need to let apt-get have access to the relevant repo (based on our distro
 
 Do the following commands: 
 
-:: 
+::
+
 	#retrieve the key
 	sudo apt-key adv --keyserver keyserver.ubuntu.com --recv E56151BF
 
@@ -42,12 +43,13 @@ Do the following commands:
 	CODENAME=$(lsb_release -cs)
 
 	#create a new repo to have access to mesosphere packages related to this distro/release
-	echo "deb http://repos.mesosphere.io/${DISTRO} ${CODENAME} main" | sudo tee /etc/apt/sources.list.d/mesosphere.list
+	printf "deb http://repos.mesosphere.io/${DISTRO} ${CODENAME} main" | sudo tee /etc/apt/sources.list.d/mesosphere.list
 
 	#Update our local package cache to have access to mesosphere packages
 	sudo apt-get -y update
 
-Finally we can install mesos and marathon on our masters
+
+Finally we can install mesos on our agents
 
 ::
 

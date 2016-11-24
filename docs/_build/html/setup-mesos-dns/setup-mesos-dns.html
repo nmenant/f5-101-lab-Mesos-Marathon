@@ -33,7 +33,9 @@
         <link rel="index" title="Index"
               href="../genindex.html"/>
         <link rel="search" title="Search" href="../search.html"/>
-    <link rel="top" title="101 Lab Mesos Marathon 0.1 documentation" href="../index.html"/> 
+    <link rel="top" title="101 Lab Mesos Marathon 0.1 documentation" href="../index.html"/>
+        <link rel="next" title="Test Mesos DNS" href="test-mesos-dns.html"/>
+        <link rel="prev" title="Test your setup" href="../setup-agents/test-setup.html"/> 
 
   
   <script src="../_static/js/modernizr.min.js"></script>
@@ -99,15 +101,26 @@
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../setup-masters/install-mesos-marathon.html">Install Mesos and Marathon</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../setup-masters/setup-zookeeper-master.html">Setup Zookeeper</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../setup-masters/setup-mesos-master.html">Mesos Setup</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../setup-masters/setup-start-services-master.html">Start your services</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../setup-masters/setup-mesos-master.html">Setup Mesos</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../setup-masters/setup-marathon.html">Setup Marathon</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../setup-masters/start-services-master.html">Start your services</a></li>
 </ul>
 <p class="caption"><span class="caption-text">Setup the agents</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../setup-agents/install-mesos-agent.html">Install Mesos</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../setup-agents/setup-zookeeper-agent.html">Setup Zookeeper</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../setup-agents/setup-mesos-agent.html">Setup Mesos</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../setup-agents/start-services-agent.html">Start your services</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../setup-agents/test-setup.html">Test your setup</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Setup Mesos DNS</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Setup Mesos-DNS</a></li>
+<li class="toctree-l1"><a class="reference internal" href="test-mesos-dns.html">Test Mesos DNS</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Use Ansible</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../ansible/install-setup-ansible.html">Install and Setup Ansible</a></li>
 </ul>
 
             
@@ -164,76 +177,58 @@
 <div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">sudo</span> <span class="n">cat</span> <span class="o">/</span><span class="n">etc</span><span class="o">/</span><span class="n">mesos</span><span class="o">-</span><span class="n">dns</span><span class="o">/</span><span class="n">config</span><span class="o">.</span><span class="n">json</span>
 </pre></div>
 </div>
-<p>{
-&#8220;zk&#8221;: &#8220;zk://10.1.10.1:2181,10.1.10.2:2181,10.1.10.3:2181/mesos&#8221;,
-&#8220;masters&#8221;: [&#8220;10.1.10.1:5050&#8221;, &#8220;10.1.10.2:5050&#8221;, &#8220;10.1.10.3:5050&#8221;],
-&#8220;refreshSeconds&#8221;: 60,
-&#8220;ttl&#8221;: 60,
-&#8220;domain&#8221;: &#8220;mesos&#8221;,
-&#8220;port&#8221;: 53,
-&#8220;resolvers&#8221;: [&#8220;8.8.8.8&#8221;],
-&#8220;timeout&#8221;: 5,
-&#8220;httpon&#8221;: true,
-&#8220;dnson&#8221;: true,
-&#8220;httpport&#8221;: 8123,
-&#8220;externalon&#8221;: true,
-&#8220;SOAMname&#8221;: &#8220;ns1.mesos&#8221;,
-&#8220;SOARname&#8221;: &#8220;root.ns1.mesos&#8221;,
-&#8220;SOARefresh&#8221;: 60,
-&#8220;SOARetry&#8221;: 600,
-&#8220;SOAExpire&#8221;: 86400,
-&#8220;SOAMinttl&#8221;: 60
-}</p>
-<p>launch the mesos-dns image in marathon. Connect to marathon, click on <em>Create an application</em> and enable <em>json mode</em></p>
-<div class="highlight-default"><div class="highlight"><pre><span></span><span class="p">{</span>
+<div class="highlight-none"><div class="highlight"><pre><span></span>{
+&quot;zk&quot;: &quot;zk://10.1.10.1:2181,10.1.10.2:2181,10.1.10.3:2181/mesos&quot;,
+&quot;masters&quot;: [&quot;10.1.10.1:5050&quot;, &quot;10.1.10.2:5050&quot;, &quot;10.1.10.3:5050&quot;],
+&quot;refreshSeconds&quot;: 60,
+&quot;ttl&quot;: 60,
+&quot;domain&quot;: &quot;mesos&quot;,
+&quot;port&quot;: 53,
+&quot;resolvers&quot;: [&quot;8.8.8.8&quot;],
+&quot;timeout&quot;: 5,
+&quot;httpon&quot;: true,
+&quot;dnson&quot;: true,
+&quot;httpport&quot;: 8123,
+&quot;externalon&quot;: true,
+&quot;SOAMname&quot;: &quot;ns1.mesos&quot;,
+&quot;SOARname&quot;: &quot;root.ns1.mesos&quot;,
+&quot;SOARefresh&quot;: 60,
+&quot;SOARetry&quot;: 600,
+&quot;SOAExpire&quot;: 86400,
+&quot;SOAMinttl&quot;: 60,
+&quot;IPSources&quot;: [&quot;netinfo&quot;, &quot;mesos&quot;, &quot;host&quot;]
+}
 </pre></div>
 </div>
-<blockquote>
-<div><blockquote>
-<div>&#8220;args&#8221;: [
-&#8220;/mesos-dns&#8221;,
-&#8220;-config=/config.json&#8221;</div></blockquote>
-<p>],
-&#8220;container&#8221;: {</p>
-<blockquote>
-<div><blockquote>
-<div><dl class="docutils">
-<dt>&#8220;docker&#8221;: {</dt>
-<dd><blockquote class="first">
-<div>&#8220;image&#8221;: &#8220;mesosphere/mesos-dns&#8221;,
-&#8220;network&#8221;: &#8220;HOST&#8221;</div></blockquote>
-<p>},
-&#8220;type&#8221;: &#8220;DOCKER&#8221;,
-&#8220;volumes&#8221;: [</p>
-<blockquote>
-<div><dl class="docutils">
-<dt>{</dt>
-<dd>&#8220;containerPath&#8221;: &#8220;/config.json&#8221;,</dd>
-</dl>
-</div></blockquote>
-<dl class="last docutils">
-<dt>&#8220;hostPath&#8221;: &#8220;/etc/mesos-dns/config.json&#8221;,</dt>
-<dd><blockquote class="first">
-<div><blockquote>
-<div>&#8220;mode&#8221;: &#8220;RO&#8221;</div></blockquote>
-<p>}</p>
-</div></blockquote>
-<p class="last">]</p>
-</dd>
-</dl>
-</dd>
-</dl>
-</div></blockquote>
-<p>},
-&#8220;cpus&#8221;: 0.2,
-&#8220;id&#8221;: &#8220;mesos-dns-docker&#8221;,
-&#8220;instances&#8221;: 1,
-&#8220;constraints&#8221;: [[&#8220;hostname&#8221;, &#8220;CLUSTER&#8221;, &#8220;slave1.my-lab&#8221;]]</p>
-</div></blockquote>
-</div></blockquote>
-<p>}</p>
+<p>launch the mesos-dns image in marathon. Connect to marathon, click on <em>Create an application</em> and enable <em>json mode</em></p>
+<div class="highlight-none"><div class="highlight"><pre><span></span>{
+        &quot;args&quot;: [
+        &quot;/mesos-dns&quot;,
+        &quot;-config=/config.json&quot;
+        ],
+        &quot;container&quot;: {
+          &quot;docker&quot;: {
+                    &quot;image&quot;: &quot;mesosphere/mesos-dns&quot;,
+                    &quot;network&quot;: &quot;HOST&quot;
+            },
+            &quot;type&quot;: &quot;DOCKER&quot;,
+            &quot;volumes&quot;: [
+                {
+                        &quot;containerPath&quot;: &quot;/config.json&quot;,
+        &quot;hostPath&quot;: &quot;/etc/mesos-dns/config.json&quot;,
+                        &quot;mode&quot;: &quot;RO&quot;
+                 }
+               ]
+        },
+        &quot;cpus&quot;: 0.2,
+        &quot;id&quot;: &quot;mesos-dns-docker&quot;,
+        &quot;instances&quot;: 1,
+        &quot;constraints&quot;: [[&quot;hostname&quot;, &quot;CLUSTER&quot;, &quot;slave1.my-lab&quot;]]
+}
+</pre></div>
+</div>
 <p>Last thing is to update /etc/resolv.conf on <a href="#id1"><span class="problematic" id="id2">**</span></a>all slaves*: we add our mesos dns into our resolve.conf file</p>
-<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">sudo</span> <span class="n">sed</span> <span class="o">-</span><span class="n">i</span> <span class="s1">&#39;1s/^/nameserver 10.1.10.51</span><span class="se">\n</span><span class="s1">/&#39;</span> <span class="o">/</span><span class="n">etc</span><span class="o">/</span><span class="n">resolv</span><span class="o">.</span><span class="n">conf</span>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">sudo</span> <span class="n">sed</span> <span class="o">-</span><span class="n">i</span> <span class="s1">&#39;1s/^/nameserver 10.1.20.51</span><span class="se">\n</span><span class="s1">/&#39;</span> <span class="o">/</span><span class="n">etc</span><span class="o">/</span><span class="n">resolv</span><span class="o">.</span><span class="n">conf</span>
 </pre></div>
 </div>
 </div>
@@ -242,6 +237,15 @@
            </div>
           </div>
           <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="test-mesos-dns.html" class="btn btn-neutral float-right" title="Test Mesos DNS" accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="../setup-agents/test-setup.html" class="btn btn-neutral" title="Test your setup" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
   
 
   <hr/>

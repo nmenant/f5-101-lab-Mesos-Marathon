@@ -34,7 +34,7 @@
               href="../genindex.html"/>
         <link rel="search" title="Search" href="../search.html"/>
     <link rel="top" title="101 Lab Mesos Marathon 0.1 documentation" href="../index.html"/>
-        <link rel="next" title="Mesos Setup" href="setup-mesos-master.html"/>
+        <link rel="next" title="Setup Mesos" href="setup-mesos-master.html"/>
         <link rel="prev" title="Install Mesos and Marathon" href="install-mesos-marathon.html"/> 
 
   
@@ -101,8 +101,26 @@
 <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="install-mesos-marathon.html">Install Mesos and Marathon</a></li>
 <li class="toctree-l1 current"><a class="current reference internal" href="#">Setup Zookeeper</a></li>
-<li class="toctree-l1"><a class="reference internal" href="setup-mesos-master.html">Mesos Setup</a></li>
-<li class="toctree-l1"><a class="reference internal" href="setup-start-services-master.html">Start your services</a></li>
+<li class="toctree-l1"><a class="reference internal" href="setup-mesos-master.html">Setup Mesos</a></li>
+<li class="toctree-l1"><a class="reference internal" href="setup-marathon.html">Setup Marathon</a></li>
+<li class="toctree-l1"><a class="reference internal" href="start-services-master.html">Start your services</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Setup the agents</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../setup-agents/install-mesos-agent.html">Install Mesos</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../setup-agents/setup-zookeeper-agent.html">Setup Zookeeper</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../setup-agents/setup-mesos-agent.html">Setup Mesos</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../setup-agents/start-services-agent.html">Start your services</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../setup-agents/test-setup.html">Test your setup</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Setup Mesos DNS</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../setup-mesos-dns/setup-mesos-dns.html">Setup Mesos-DNS</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../setup-mesos-dns/test-mesos-dns.html">Test Mesos DNS</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Use Ansible</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../ansible/install-setup-ansible.html">Install and Setup Ansible</a></li>
 </ul>
 
             
@@ -166,26 +184,26 @@
 <li>setup zookeeper config file on each master</li>
 <li>Change the quorum value to reflect our cluster size. It should be set over 50% of the nb of master instances so here it should be 2</li>
 </ol>
-<div class="highlight-default"><div class="highlight"><pre><span></span># On master1
-echo 1 | sudo tee /etc/zookeeper/conf/myid
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="c1"># On master1</span>
+<span class="n">printf</span> <span class="mi">1</span> <span class="o">|</span> <span class="n">sudo</span> <span class="n">tee</span> <span class="o">/</span><span class="n">etc</span><span class="o">/</span><span class="n">zookeeper</span><span class="o">/</span><span class="n">conf</span><span class="o">/</span><span class="n">myid</span>
 
-echo –e  &quot;tickTime=2000\ndataDir=/var/lib/zookeeper\nclientPort=2181\ninitLimit=10\nsyncLimit=5\nserver.1=10.1.10.1:2888:3888\nserver.2=10.1.10.2:2888:3888\nserver.3=10.1.10.3:2888:388&quot; | sudo tee /etc/zookeeper/conf/zoo.cfg
+<span class="n">printf</span> <span class="s2">&quot;tickTime=2000</span><span class="se">\n</span><span class="s2">dataDir=/var/lib/zookeeper</span><span class="se">\n</span><span class="s2">clientPort=2181</span><span class="se">\n</span><span class="s2">initLimit=10</span><span class="se">\n</span><span class="s2">syncLimit=5</span><span class="se">\n</span><span class="s2">server.1=10.1.10.1:2888:3888</span><span class="se">\n</span><span class="s2">server.2=10.1.10.2:2888:3888</span><span class="se">\n</span><span class="s2">server.3=10.1.10.3:2888:388&quot;</span> <span class="o">|</span> <span class="n">sudo</span> <span class="n">tee</span> <span class="o">/</span><span class="n">etc</span><span class="o">/</span><span class="n">zookeeper</span><span class="o">/</span><span class="n">conf</span><span class="o">/</span><span class="n">zoo</span><span class="o">.</span><span class="n">cfg</span>
 
-echo 2 | sudo tee /etc/mesos-master/quorum
+<span class="n">printf</span> <span class="mi">2</span> <span class="o">|</span> <span class="n">sudo</span> <span class="n">tee</span> <span class="o">/</span><span class="n">etc</span><span class="o">/</span><span class="n">mesos</span><span class="o">-</span><span class="n">master</span><span class="o">/</span><span class="n">quorum</span>
 
-# On master2
-echo 2 | sudo tee /etc/zookeeper/conf/myid
+<span class="c1"># On master2</span>
+<span class="n">printf</span> <span class="mi">2</span> <span class="o">|</span> <span class="n">sudo</span> <span class="n">tee</span> <span class="o">/</span><span class="n">etc</span><span class="o">/</span><span class="n">zookeeper</span><span class="o">/</span><span class="n">conf</span><span class="o">/</span><span class="n">myid</span>
 
-echo –e  &quot;tickTime=2000\ndataDir=/var/lib/zookeeper\nclientPort=2181\ninitLimit=10\nsyncLimit=5\nserver.1=10.1.10.1:2888:3888\nserver.2=10.1.10.2:2888:3888\nserver.3=10.1.10.3:2888:388&quot; | sudo tee /etc/zookeeper/conf/zoo.cfg
+<span class="n">printf</span> <span class="s2">&quot;tickTime=2000</span><span class="se">\n</span><span class="s2">dataDir=/var/lib/zookeeper</span><span class="se">\n</span><span class="s2">clientPort=2181</span><span class="se">\n</span><span class="s2">initLimit=10</span><span class="se">\n</span><span class="s2">syncLimit=5</span><span class="se">\n</span><span class="s2">server.1=10.1.10.1:2888:3888</span><span class="se">\n</span><span class="s2">server.2=10.1.10.2:2888:3888</span><span class="se">\n</span><span class="s2">server.3=10.1.10.3:2888:388&quot;</span> <span class="o">|</span> <span class="n">sudo</span> <span class="n">tee</span> <span class="o">/</span><span class="n">etc</span><span class="o">/</span><span class="n">zookeeper</span><span class="o">/</span><span class="n">conf</span><span class="o">/</span><span class="n">zoo</span><span class="o">.</span><span class="n">cfg</span>
 
-echo 2 | sudo tee /etc/mesos-master/quorum
+<span class="n">printf</span> <span class="mi">2</span> <span class="o">|</span> <span class="n">sudo</span> <span class="n">tee</span> <span class="o">/</span><span class="n">etc</span><span class="o">/</span><span class="n">mesos</span><span class="o">-</span><span class="n">master</span><span class="o">/</span><span class="n">quorum</span>
 
-# On master3
-echo 3 | sudo tee /etc/zookeeper/conf/myid
+<span class="c1"># On master3</span>
+<span class="n">printf</span> <span class="mi">3</span> <span class="o">|</span> <span class="n">sudo</span> <span class="n">tee</span> <span class="o">/</span><span class="n">etc</span><span class="o">/</span><span class="n">zookeeper</span><span class="o">/</span><span class="n">conf</span><span class="o">/</span><span class="n">myid</span>
 
-echo –e  &quot;tickTime=2000\ndataDir=/var/lib/zookeeper\nclientPort=2181\ninitLimit=10\nsyncLimit=5\nserver.1=10.1.10.1:2888:3888\nserver.2=10.1.10.2:2888:3888\nserver.3=10.1.10.3:2888:388&quot; | sudo tee /etc/zookeeper/conf/zoo.cfg
+<span class="n">printf</span> <span class="s2">&quot;tickTime=2000</span><span class="se">\n</span><span class="s2">dataDir=/var/lib/zookeeper</span><span class="se">\n</span><span class="s2">clientPort=2181</span><span class="se">\n</span><span class="s2">initLimit=10</span><span class="se">\n</span><span class="s2">syncLimit=5</span><span class="se">\n</span><span class="s2">server.1=10.1.10.1:2888:3888</span><span class="se">\n</span><span class="s2">server.2=10.1.10.2:2888:3888</span><span class="se">\n</span><span class="s2">server.3=10.1.10.3:2888:388&quot;</span> <span class="o">|</span> <span class="n">sudo</span> <span class="n">tee</span> <span class="o">/</span><span class="n">etc</span><span class="o">/</span><span class="n">zookeeper</span><span class="o">/</span><span class="n">conf</span><span class="o">/</span><span class="n">zoo</span><span class="o">.</span><span class="n">cfg</span>
 
-echo 2 | sudo tee /etc/mesos-master/quorum
+<span class="n">echo</span> <span class="mi">2</span> <span class="o">|</span> <span class="n">sudo</span> <span class="n">tee</span> <span class="o">/</span><span class="n">etc</span><span class="o">/</span><span class="n">mesos</span><span class="o">-</span><span class="n">master</span><span class="o">/</span><span class="n">quorum</span>
 </pre></div>
 </div>
 </div>
@@ -197,7 +215,7 @@ echo 2 | sudo tee /etc/mesos-master/quorum
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="setup-mesos-master.html" class="btn btn-neutral float-right" title="Mesos Setup" accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
+        <a href="setup-mesos-master.html" class="btn btn-neutral float-right" title="Setup Mesos" accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
         <a href="install-mesos-marathon.html" class="btn btn-neutral" title="Install Mesos and Marathon" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
