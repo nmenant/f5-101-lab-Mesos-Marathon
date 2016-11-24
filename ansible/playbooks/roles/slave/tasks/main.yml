@@ -24,7 +24,7 @@
    
 - name: add docker apt repository
   apt_repository:
-    repo: deb https://apt.dockerproject.org/repo ubuntu-trusty main
+    repo: deb https://apt.dockerproject.org/repo {{release_distributor.stdout}} {{release_codename.stdout}} main
     update_cache: yes
 
 #- name: Add Docker repository to sources list
