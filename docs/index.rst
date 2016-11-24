@@ -11,6 +11,8 @@ The purpose of this lab is to give you more visibility on
 * How to launch application from Marathon
 * How to install Mesos-DNS for service discovery
 
+If you need just to have a Mesos/Marathon env, you can use the ansible playbooks to do the job. 
+
 We consider that you have a valid UDF access to do this lab. If not, you may review the pre-requisites about our lab setup .
 
 Contents:
@@ -57,6 +59,11 @@ Contents:
    setup-mesos-dns/setup-mesos-dns.rst
    setup-mesos-dns/test-mesos-dns.rst
 
+.. toctree::
+   :maxdepth: 3
+   :caption: Use Ansible
+
+   ansible/install-setup-ansible.rst
  
 Indices and tables
 ==================

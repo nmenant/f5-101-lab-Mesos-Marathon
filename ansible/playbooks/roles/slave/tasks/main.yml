@@ -8,7 +8,7 @@
     state: latest
     cache_valid_time: 3600
 
-# Install and setup docker
+# Setup docker repository
 - name: add docker apt key
   apt_key:
     keyserver: hkp://p80.pool.sks-keyservers.net:80
@@ -50,6 +50,7 @@
   apt: 
     name: docker-engine
     state: latest
+    update_cache: yes
     
 - name: setup mesos with the available containers 
   template: src=containerizers.j2 dest=/etc/mesos-slave/containerizers
