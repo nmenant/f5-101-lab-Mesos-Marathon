@@ -6,6 +6,7 @@
     apt: 
       name: mesos
       state: latest
+      update_cache: yes
   
 ##
 ## Zookeeper setup
