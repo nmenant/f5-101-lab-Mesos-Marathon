@@ -9,7 +9,7 @@
     when: ansible_hostname == "master1"
   
   - name: Install list of packages
-    apt: name={{item}} state=latest update_cache=yes
+    apt: name={{item}} state=latest cache_valid_time=3600
     with_items:
       - openjdk-8-jdk
       - build-essential

@@ -20,7 +20,7 @@
   command: lsb_release -cs
   register: release_codename
    
-- name: Add Mesosphere repository to sources list
+- name: Add Docker repository to sources list
   copy:
     content: "deb https://apt.dockerproject.org/repo {{release_distributor.stdout}} {{release_codename.stdout}} main"
     dest: /etc/apt/sources.list.d/docker.list
