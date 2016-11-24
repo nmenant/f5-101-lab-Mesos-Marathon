@@ -13,19 +13,21 @@
   apt_key:
     keyserver: hkp://p80.pool.sks-keyservers.net:80
     id: 58118E89F3A912897C070ADBF76221572C52609D
+    state: present
 
 - name: Determine Linux distribution distributor
   shell: lsb_release -is | tr '[:upper:]' '[:lower:]'
   register: release_distributor
-   
+
 - name: Determine Linux distribution codename
   command: lsb_release -cs
   register: release_codename
-   
-- name: add docker apt repository
-  apt_repository:
-    repo: deb https://apt.dockerproject.org/repo {{release_distributor.stdout}} {{release_codename.stdout}} main
-    update_cache: yes
+
+- name: Add Docker repository to sources list
+  copy:
+    content: "deb https://apt.dockerproject.org/repo {{release_distributor.stdout}}-{{release_codename.stdout}} main"
+    dest: /etc/apt/sources.list.d/docker.list
+    mode: 0644
 
 #- name: Add Docker repository to sources list
 #  copy:
