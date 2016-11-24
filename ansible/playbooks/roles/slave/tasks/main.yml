@@ -2,87 +2,81 @@
 #installing and setup mesos / docker and zookeeper on slaves
 
 # Install the mesos package
-  - name: install mesos on agents
-    apt: 
-      name: mesos
-      state: latest
+- name: install mesos on agents
+  apt: 
+    name: mesos
+    state: latest
 
 
 # Install and setup docker
-- name: Set docker repo and install it
-  - name: Add key for docker repository
-     apt_key: url=http://keyserver.ubuntu.com/pks/lookup?op=get&fingerprint=on&search=0x58118E89F3A912897C070ADBF76221572C52609D state=present
-     sudo: yes
-  
-  - name: Determine Linux distribution distributor
-     shell: lsb_release -is | tr '[:upper:]' '[:lower:]'
-     register: release_distributor
+- name: Add key for docker repository
+  apt_key: url=http://keyserver.ubuntu.com/pks/lookup?op=get&fingerprint=on&search=0x58118E89F3A912897C070ADBF76221572C52609D state=present
+
+- name: Determine Linux distribution distributor
+  shell: lsb_release -is | tr '[:upper:]' '[:lower:]'
+  register: release_distributor
    
-  - name: Determine Linux distribution codename
-     command: lsb_release -cs
-     register: release_codename
+- name: Determine Linux distribution codename
+  command: lsb_release -cs
+  register: release_codename
    
-  - name: Add Mesosphere repository to sources list
-     copy:
-       content: "deb https://apt.dockerproject.org/repo {{release_distributor.stdout}} {{release_codename.stdout}} main"
-       dest: /etc/apt/sources.list.d/docker.list
-       mode: 0644
+- name: Add Mesosphere repository to sources list
+  copy:
+    content: "deb https://apt.dockerproject.org/repo {{release_distributor.stdout}} {{release_codename.stdout}} main"
+    dest: /etc/apt/sources.list.d/docker.list
+    mode: 0644
 
-  - name: Install list of packages related to docker install
-      shell: uname -r
-     register: kernel_version
-     apt: name={{item}} state=latest update_cache=yes
-     with_items:
-       - linux-image-extra-{{ kernel_version.stdout }}
-       - linux-image-extra-virtual
+- name: Install list of packages related to docker install
+  shell: uname -r
+  register: kernel_version
+  apt: name={{item}} state=latest update_cache=yes
+  with_items:
+    - linux-image-extra-{{ kernel_version.stdout }}
+    - linux-image-extra-virtual
 
-  #Install docker engine
-  - name: Install docker-engine
-    apt: 
-     name: docker-engine
-     state: latest
+#Install docker engine
+- name: Install docker-engine
+  apt: 
+    name: docker-engine
+    state: latest
 
-- name: setup mesos to be able to use containers
-  - name: set the available containers 
-    template: src=containerizers.j2 dest=/etc/mesos-slave/containerizers
+- name: setup mesos with the available containers 
+  template: src=containerizers.j2 dest=/etc/mesos-slave/containerizers
 
-  - name: set the executor registration timeout
-    template: src=executor_registration_timeout.j2 dest=/etc/mesos-slave/executor_registration_timeout
+- name: set the executor registration timeout
+  template: src=executor_registration_timeout.j2 dest=/etc/mesos-slave/executor_registration_timeout
 
 #setup mesos IP and hostname
 # Set mesos slave hostname
-- name: setup mesos IP and hostname in config file
-  - name: Set Mesos slave hostname
-      copy:
-      content: "{{ ansible_hostname }}"
-      dest: /etc/mesos-slave/hostname
-      mode: 0644
+- name: Set Mesos slave hostname
+  copy:
+    content: "{{ ansible_hostname }}"
+    dest: /etc/mesos-slave/hostname
+    mode: 0644
 
 # Set mesos slave ip
-  - name: Set Mesos slave ip
-    copy:
-      content: "{{ mesos_dataplane_address }}"
-      dest: /etc/mesos-slave/ip
-      mode: 0644
+- name: Set Mesos slave ip
+  copy:
+    content: "{{ mesos_dataplane_address }}"
+    dest: /etc/mesos-slave/ip
+    mode: 0644
 
 #Disable zookeeper service
-- name: disable zookeeper service
-  - name: setup zookeeper.override to manual
-    copy:
-     content: "manual"
-     dest: /etc/init/mesos-slave.override
-     mode: 0644
-    notify:
-      - stop zookeeper service
+- name: Disable/stop/setup zookeeper.override to manual
+  copy:
+    content: "manual"
+    dest: /etc/init/mesos-slave.override
+    mode: 0644
+  notify:
+    - stop zookeeper service
 
 #Disable mesos-slave and start mesos-master service
-- name: Disable mesos-master and start mesos-slave services
-  - name: setup mesos-master.override to manual
-    copy:
-     content: "manual"
-     dest: /etc/init/mesos-master.override
-     mode: 0644
-    notify:
-      - stop mesos-master service
-      - start mesos-slave service
+- name: setup mesos-master.override to manual
+  copy:
+    content: "manual"
+    dest: /etc/init/mesos-master.override
+    mode: 0644
+  notify:
+    - stop mesos-master service
+    - start mesos-slave service
 
