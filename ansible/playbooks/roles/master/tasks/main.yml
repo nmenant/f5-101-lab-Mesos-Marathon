@@ -12,13 +12,9 @@
 ## Zookeeper setup
 ##
 
-  - debug: msg="##"
-  - debug: msg="## Zookeeper setup"
-  - debug: msg="##"
-
 # Set zookeeper instance ID on each master
   - name: Create zookeeper myid file
-    template: src=zoo_id.j2 dest=/etc/zookeeper/conf/myid
+    template: src=zookeeper_myid.j2 dest=/etc/zookeeper/conf/myid
 
 # Set zookeeper config file
   - name: Create zookeeper config file
@@ -27,10 +23,6 @@
 ##
 ## Mesos setup (master)
 ##
-
-  - debug: msg="##"
-  - debug: msg="## Mesos (master) setup"
-  - debug: msg="##"
 
 # Zookeeper URL for leader election regarding mesos
   - name: Set ZooKeeper URL
@@ -42,7 +34,7 @@
 # Set mesos master hostname
   - name: Set Mesos Master hostname
     copy:
-     content: ansible_hostname
+     content: "{{ ansible_hostname }}"
      dest: /etc/mesos-master/hostname
      mode: 0644
 
@@ -54,8 +46,21 @@
       mode: 0644
 
 # The Mesos quorum value is based on the number of Mesos Masters. divide the number of master you have by 2 and round it by the next number. This is done in the quorum.j2 file. 
+# we restart zookeeper at the same time since its configuration is done
   - name: Set Mesos Master quorum count
     template: src=quorum.j2 dest=/etc/mesos-master/quorum mode=0644
+    notify: 
+      -restart zookeeper
+
+#Disable mesos-slave service and start mesos-master
+- name: Disable the mesos-slave service and enable Mesos-master service
+  copy:
+    content: "manual"
+    dest: /etc/init/mesos-slave.override
+    mode: 0644
+    notify:
+      - stop mesos-slave
+      - start mesos-master
 
 
 
