@@ -1,8 +1,8 @@
+.. _install_setup_ansible: 
 Install and Setup Ansible
 =========================
 
 The first thing to do is to connect to master1. You can see how to access your environment :ref:`access_udf`
-
 
 
 .. warning::
