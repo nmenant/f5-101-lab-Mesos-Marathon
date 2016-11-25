@@ -1,8 +1,7 @@
 ---
 
-#standalone setup file
+#standalone playbook
 
---- #setup mesos on masters
 - hosts: standalone
   remote_user: user
   become: yes

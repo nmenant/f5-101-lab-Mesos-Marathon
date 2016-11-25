@@ -79,7 +79,7 @@
 - name: Disable/stop/setup zookeeper.override to manual
   copy:
     content: "manual"
-    dest: /etc/init/mesos-slave.override
+    dest: /etc/init/zookeeper.override
     mode: 0644
   notify:
     - stop zookeeper service

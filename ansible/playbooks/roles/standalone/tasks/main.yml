@@ -2,9 +2,6 @@
 
 #setup Mesos and Marathon as standalone all-in-one
 
----
-#installing and setup mesos / zookeeper on masters
-
 # Install the mesos package
   - name: install mesos on masters
     apt: 
@@ -29,19 +26,19 @@
 
 #setup mesos IP and hostname
 # Set mesos slave hostname
-- name: Set Mesos slave hostname
-  copy:
-    content: "{{ ansible_hostname }}"
-    dest: /etc/mesos-slave/hostname
-    mode: 0644
+  - name: Set Mesos slave hostname
+    copy:
+      content: "{{ ansible_hostname }}"
+      dest: /etc/mesos-slave/hostname
+      mode: 0644
 
 # Set mesos slave ip
-- name: Set Mesos slave ip
-  copy:
-    content: "{{ mesos_interface }}"
-    dest: /etc/mesos-slave/ip
-    mode: 0644
-  notify:
-    - start mesos-slave
-    - start mesos-master
+  - name: Set Mesos slave ip
+    copy:
+     content: "{{ mesos_interface }}"
+     dest: /etc/mesos-slave/ip
+     mode: 0644
+    notify:
+      - start mesos-slave
+      - start mesos-master
 

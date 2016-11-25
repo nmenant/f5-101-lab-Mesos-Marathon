@@ -20,3 +20,5 @@
 - include: setup-slaves.yml
   when: install_mode == "cluster"
 
+- include: setup-standalone.yml
+  when: install_mode == "standalone"
