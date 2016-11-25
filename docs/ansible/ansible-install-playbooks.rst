@@ -7,7 +7,7 @@ We will use the following github repo to retrieve the needed ansible playbook: h
 
 We will install the playbooks on master1 but need to install git first. 
 
-You need to use git to retrieve the repo. **It's already installed on master1**. If it's not already installed in your env, run this command to install git: 
+You need to use git to retrieve the repo. **It's already installed on master1 (Cluster UDF blueprint) and mesos node (Standalone UDF blueprint)**. If it's not already installed in your env, run this command to install git: 
 
 ::
 

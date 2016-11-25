@@ -52,14 +52,14 @@
 # Set mesos master ip
   - name: Set Mesos Master ip
     copy:
-      content: "ansible_"{{ mesos_interface }}.ipv4.address
+      content: "{{ mesos_interface }}"
       dest: /etc/mesos-master/ip
       mode: 0644
     when: install_mode == "cluster"
 
   - name: Set Mesos Master ip - standalone and start mesos-slave and mesos-master
     copy:
-      content: "ansible_"{{ mesos_interface }}.ipv4.address
+      content: "{{ mesos_interface }} "
       dest: /etc/mesos-master/ip
       mode: 0644
     notify:

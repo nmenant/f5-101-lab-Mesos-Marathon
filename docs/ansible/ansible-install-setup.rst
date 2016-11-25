@@ -64,7 +64,7 @@ regarding the variables assignement: the strings after each hostname create spec
 
 * zoo_myid is used to specify a variable value for each host when ansible runs a playbook against this node
 
-* mesos_interface is used to specify which interface should be used for the mesos installation
+* mesos_interface is used to specify which local interface/IP should be used for the mesos installation
 
 
 /etc/ansible/hosts file (you need to be sudo to manage this file) for the cluster mode
@@ -72,13 +72,13 @@ regarding the variables assignement: the strings after each hostname create spec
 ::
 
 	[masters]
-	master1.my-lab zoo_myid=1 mesos_interface=ens7
-	master2.my-lab zoo_myid=2 mesos_interface=ens7
-	master3.my-lab zoo_myid=3 mesos_interface=ens7
+	master1.my-lab zoo_myid=1 mesos_interface=10.1.10.1
+	master2.my-lab zoo_myid=2 mesos_interface=10.1.10.2
+	master3.my-lab zoo_myid=3 mesos_interface=10.1.10.3
 
 	[slaves]
-	slave1.my-lab mesos_interface=ens8
-	slave2.my-lab mesos_interface=ens8
+	slave1.my-lab mesos_interface=10.1.20.51
+	slave2.my-lab mesos_interface=10.1.20.52
 
 	[marathon]
 	master1.my-lab
@@ -94,7 +94,7 @@ regarding the variables assignement: the strings after each hostname create spec
 ::
 
 	[masters]
-	localhost
+	mesos mesos_interface=ens3
 
 
 Test Ansible
