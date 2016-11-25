@@ -18,9 +18,3 @@
     name: mesos-master
     state: started 
     enabled: yes
-    
-- name: start mesos-slave
-  service:
-    name: mesos-slave
-    state: started 
-    enabled: yes

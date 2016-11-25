@@ -1,0 +1,15 @@
+---
+
+#handlers for standalone setup 
+
+- name: start mesos-master
+  service: 
+    name: mesos-master
+    enabled: yes
+    state: started
+
+- name: start mesos-slave
+  service: 
+    name: mesos-slave
+    enabled: yes
+    state: started   

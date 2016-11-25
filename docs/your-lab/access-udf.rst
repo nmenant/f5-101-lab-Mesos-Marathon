@@ -18,7 +18,7 @@ Select the relevant blueprint based on your need:
 Access your environment
 -----------------------
 
-Once your environment is started, find the 'Jump box Win10' component under 'Components' and launch RDP (in the ACCESS menu)
+Once your environment is started, find the 'Jumpbox - Win7' component under 'Components' and launch RDP (in the ACCESS menu)
 
 .. image:: ../images/Launch-RDP.png
    :scale: 50%

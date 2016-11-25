@@ -15,12 +15,11 @@
 # Set zookeeper instance ID on each master
   - name: Create zookeeper myid file for each zookeeper instance
     template: src=zookeeper_myid.j2 dest=/etc/zookeeper/conf/myid
-    when: install_mode == "cluster"
 
 # Set zookeeper config file
   - name: Create zookeeper config file
     template: src=zoo.cfg.j2 dest=/etc/zookeeper/conf/zoo.cfg
-    when: install_mode == "cluster"
+
 ##
 ## Mesos setup (master)
 ##
@@ -39,7 +38,6 @@
     template: src=quorum.j2 dest=/etc/mesos-master/quorum mode=0644
     notify: 
       - restart zookeeper
-    when: install_mode == "cluster"
 
 # Set mesos master hostname
   - name: Set Mesos Master hostname
@@ -47,25 +45,13 @@
      content: "{{ ansible_hostname }}"
      dest: /etc/mesos-master/hostname
      mode: 0644
-    when: install_mode == "cluster"
 
 # Set mesos master ip
   - name: Set Mesos Master ip
     copy:
       content: "{{ mesos_interface }}"
       dest: /etc/mesos-master/ip
-      mode: 0644
-    when: install_mode == "cluster"
-
-  - name: Set Mesos Master ip - standalone and start mesos-slave and mesos-master
-    copy:
-      content: "{{ mesos_interface }} "
-      dest: /etc/mesos-master/ip
-      mode: 0644
-    notify:
-      - start mesos-slave
-      - start mesos-master
-    when: install_mode == "standalone"    
+      mode: 0644 
 
 #Disable mesos-slave service and start mesos-master
   - name: Disable the mesos-slave service and enable Mesos-master service in cluster mode
@@ -76,4 +62,3 @@
     notify:
       - stop mesos-slave
       - start mesos-master
-    when: install_mode == "cluster"

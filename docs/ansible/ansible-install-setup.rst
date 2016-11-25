@@ -93,8 +93,8 @@ regarding the variables assignement: the strings after each hostname create spec
 
 ::
 
-	[masters]
-	mesos mesos_interface=ens3
+	[standalone]
+	mesos mesos_interface=10.1.10.1
 
 
 Test Ansible
