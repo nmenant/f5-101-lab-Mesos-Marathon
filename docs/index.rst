@@ -65,6 +65,7 @@ Contents:
 
    ansible/ansible-install-setup.rst
    ansible/ansible-install-playbooks.rst
+   ansible/ansible-playbook-settings.rst
  
 Indices and tables
 ==================

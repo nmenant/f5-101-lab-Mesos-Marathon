@@ -29,12 +29,6 @@
     dest: /etc/apt/sources.list.d/docker.list
     mode: 0644
 
-#- name: Add Docker repository to sources list
-#  copy:
-#    content: "deb https://apt.dockerproject.org/repo {{release_distributor.stdout}} {{release_codename.stdout}} main"
-#    dest: /etc/apt/sources.list.d/docker.list
-#    mode: 0644
-
 - name: Determine kernel version for docker install
   shell: uname -r
   register: kernel_version

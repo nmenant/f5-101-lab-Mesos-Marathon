@@ -1,3 +1,5 @@
+.. _install_playbooks:
+
 Install Mesos / Marathon
 ========================
 
@@ -29,12 +31,17 @@ clone the github repo:
 
 	cd 101-lab-Mesos-Marathon/ansible/playbooks
 
-to run the ansible playbooks and setup the environment as explained in the step by step guide:
+to run the ansible playbooks and setup the environment as explained in the step by step guide (cluster):
 
 ::
 
 	ansible-playbook site.yml --extra-vars "install_mode=cluster"
 
 
+if you want to deploy Mesos and Marathon in standalone:
+
+::
+
+	ansible-playbook site.yml --extra-vars "install_mode=standalone"
 
 Right now, only cluster is supported. Work in progress to have a deployment on a single node. 

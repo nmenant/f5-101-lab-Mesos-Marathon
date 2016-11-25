@@ -7,8 +7,7 @@ The first thing to do is to connect to master1. You can see how to access your e
 
 .. warning::
 
-	Install and setup have already been done on master1. So this is for your information
-
+	Install and setup have already been done on master1. So this is for your information. You may go straight here :ref:`install_playbooks`
 
 
 Install Ansible
