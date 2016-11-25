@@ -38,7 +38,7 @@
 # Set mesos master hostname
   - name: Set Mesos Master hostname
     copy:
-     content: "{{ ansible_hostname }}"
+     content: "{{ mesos_interface }}"
      dest: /etc/mesos-master/hostname
      mode: 0644
 

@@ -1,4 +1,40 @@
 ---
 
-#install docker
+# Setup docker repository
+- name: add docker apt key
+  apt_key:
+    keyserver: hkp://p80.pool.sks-keyservers.net:80
+    id: 58118E89F3A912897C070ADBF76221572C52609D
+    state: present
 
+- name: Determine Linux distribution distributor
+  shell: lsb_release -is | tr '[:upper:]' '[:lower:]'
+  register: release_distributor
+
+- name: Determine Linux distribution codename
+  command: lsb_release -cs
+  register: release_codename
+
+- name: Add Docker repository to sources list
+  copy:
+    content: "deb https://apt.dockerproject.org/repo {{release_distributor.stdout}}-{{release_codename.stdout}} main"
+    dest: /etc/apt/sources.list.d/docker.list
+    mode: 0644
+
+- name: Determine kernel version for docker install
+  shell: uname -r
+  register: kernel_version
+
+#Install required packages
+- name: Install list of packages related to docker install
+  apt: name={{item}} state=latest
+  with_items:
+    - linux-image-extra-{{ kernel_version.stdout }}
+    - linux-image-extra-virtual
+
+#Install docker engine
+- name: Install docker-engine
+  apt: 
+    name: docker-engine
+    state: latest
+    update_cache: yes

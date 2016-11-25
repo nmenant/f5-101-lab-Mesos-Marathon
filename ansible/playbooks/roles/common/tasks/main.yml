@@ -6,7 +6,7 @@
     when: ansible_os_family != "Debian"
   
   - name: Install list of  required packages for Mesos
-    apt: name={{item}} state=latest cache_valid_time=3600
+    apt: name={{item}} state=latest update_cache=yes
     with_items:
       - openjdk-8-jdk
       - build-essential

@@ -3,7 +3,7 @@
 #setup Mesos and Marathon as standalone all-in-one
 
 # Install the mesos package
-  - name: install mesos on masters
+  - name: install mesos on standalone node
     apt: 
       name: mesos
       state: latest
@@ -12,7 +12,7 @@
 # Set mesos master hostname
   - name: Set Mesos Master hostname
     copy:
-     content: "{{ ansible_hostname }}"
+     content: "{{ mesos_interface }}"
      dest: /etc/mesos-master/hostname
      mode: 0644
 
@@ -21,6 +21,13 @@
     copy:
       content: "{{ mesos_interface }}"
       dest: /etc/mesos-master/ip
+      mode: 0644 
+
+# Set mesos master cluster name
+  - name: Set Mesos Master cluster name
+    copy:
+      content: "MyCluser"
+      dest: /etc/mesos-master/cluster
       mode: 0644 
 
 #setup mesos IP and hostname
