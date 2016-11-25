@@ -49,6 +49,13 @@
       dest: /etc/mesos-master/ip
       mode: 0644 
 
+# Set mesos master cluster name
+  - name: Set Mesos Master cluster name
+    copy:
+      content: "MyCluser"
+      dest: /etc/mesos-master/cluster
+      mode: 0644 
+
 #Disable mesos-slave service and start mesos-master
   - name: Disable the mesos-slave service and enable Mesos-master service in cluster mode
     copy:
