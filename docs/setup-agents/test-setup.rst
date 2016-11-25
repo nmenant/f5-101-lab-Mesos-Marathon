@@ -38,7 +38,12 @@ Go Back to Marathon, click on our application *test* and click on the setting bu
 Launch a container
 ------------------
 
-To test our containers from marathon, click on create an application, switch to JSON mode and use the following to start an apache in a container (this may takes some time since we will have to retrieve first the image)
+To test our containers from marathon, click on create an application, switch to JSON mode and use the following to start an apache in a container 
+
+::
+
+  this may takes some time since we will have to retrieve the image first
+
 
 .. code-block:: none
 

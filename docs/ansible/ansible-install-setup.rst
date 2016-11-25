@@ -1,8 +1,8 @@
+.. _install_setup_ansible: 
 Install and Setup Ansible
 =========================
 
 The first thing to do is to connect to master1. You can see how to access your environment :ref:`access_udf`
-
 
 
 .. warning::
@@ -10,7 +10,7 @@ The first thing to do is to connect to master1. You can see how to access your e
 	Install and setup have already been done. 
 
 	* In the cluster blueprint, it has been done on master1. 
-	* IN the standalone blueprint, it has been done on the mesos node
+	* In the standalone blueprint, it has been done on the mesos node
 
 	The section below is for your information. You may go straight here :ref:`install_playbooks`
 

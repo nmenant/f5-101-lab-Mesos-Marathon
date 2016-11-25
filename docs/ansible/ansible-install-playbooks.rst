@@ -44,4 +44,4 @@ if you want to deploy Mesos and Marathon in standalone:
 
 	ansible-playbook site.yml --extra-vars "install_mode=standalone"
 
-Right now, only cluster is supported. Work in progress to have a deployment on a single node. 
+
