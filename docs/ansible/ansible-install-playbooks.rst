@@ -1,13 +1,13 @@
 .. _install_playbooks:
 
-Install Mesos / Marathon
-========================
+Install Mesos / Marathon with Ansible
+=====================================
 
 We will use the following github repo to retrieve the needed ansible playbook: https://github.com/nmenant/101-lab-Mesos-Marathon 
 
 We will install the playbooks on master1 but need to install git first. 
 
-run this command to install git: 
+You need to use git to retrieve the repo. **It's already installed on master1**. If it's not already installed in your env, run this command to install git: 
 
 ::
 

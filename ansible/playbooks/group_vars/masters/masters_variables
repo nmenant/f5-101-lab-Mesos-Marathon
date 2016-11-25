@@ -2,8 +2,6 @@
 
 #specific variables for masters 
 
-mesos_controlplane_address: "{{ ansible_ens7.ipv4.address }}"
-
 #variables related to zookeeper setup
 zookeeper_leader_port: "2888"
 zookeeper_election_port: "3888"

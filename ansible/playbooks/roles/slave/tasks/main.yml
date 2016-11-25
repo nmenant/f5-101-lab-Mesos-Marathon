@@ -71,7 +71,7 @@
 # Set mesos slave ip
 - name: Set Mesos slave ip
   copy:
-    content: "{{ mesos_dataplane_address }}"
+    content: "ansible_"{{ mesos_interface }}.ipv4.address
     dest: /etc/mesos-slave/ip
     mode: 0644
 
