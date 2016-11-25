@@ -12,8 +12,8 @@ Connect to UDF and go to deployment.
 
 Select the relevant blueprint based on your need: 
 
-* If you need a clustered Mesos/Marathon setup, find the 'Mesos/Marathon setup lab - cluster' blueprint and deploy it.
-* If you need a standalone Mesos/Marathon deployment, find the 'Mesos/Marathon setup lab - standalone' blueprint and deploy it
+* If you need a clustered Mesos/Marathon setup, find the 'Cluster - Mesos/Marathon setup lab' blueprint and deploy it.
+* If you need a standalone Mesos/Marathon deployment, find the 'Standalone - Mesos/Marathon setup lab' blueprint and deploy it
 
 Access your environment
 -----------------------
