@@ -1,0 +1,60 @@
+---
+#installing and setup mesos / docker and zookeeper on slaves
+
+# Install the mesos package
+- name: install mesos on agents
+  apt: 
+    name: mesos
+    state: latest
+    update_cache: yes
+
+
+    
+- name: setup mesos with the available containers 
+  template: src=containerizers.j2 dest=/etc/mesos-slave/containerizers
+
+- name: set the executor registration timeout
+  template: src=executor_registration_timeout.j2 dest=/etc/mesos-slave/executor_registration_timeout
+
+#Setup zookeeper
+# Zookeeper URL for leader election regarding mesos service
+- name: Set ZooKeeper URL on agents /etc/mesos/zk
+  copy:
+    content: "{{ zookeeper_url }}/mesos"
+    dest: /etc/mesos/zk
+    mode: 0644
+
+#setup mesos IP and hostname
+# Set mesos slave hostname
+- name: Set Mesos slave hostname
+  copy:
+    content: "{{ ansible_hostname }}"
+    dest: /etc/mesos-slave/hostname
+    mode: 0644
+
+# Set mesos slave ip
+- name: Set Mesos slave ip
+  copy:
+    content: "{{ mesos_interface }}"
+    dest: /etc/mesos-slave/ip
+    mode: 0644
+
+#Disable zookeeper service
+- name: Disable/stop/setup zookeeper.override to manual
+  copy:
+    content: "manual"
+    dest: /etc/init/zookeeper.override
+    mode: 0644
+  notify:
+    - stop zookeeper service
+
+#Disable mesos-slave and start mesos-master service
+- name: setup mesos-master.override to manual
+  copy:
+    content: "manual"
+    dest: /etc/init/mesos-master.override
+    mode: 0644
+  notify:
+    - stop mesos-master service
+    - start mesos-slave service
+

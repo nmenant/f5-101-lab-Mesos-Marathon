@@ -1,3 +1,5 @@
+.. _access_udf:
+
 Connecting to UDF
 =================
 
@@ -6,13 +8,17 @@ We consider that you have access to UDF for the different labs
 Start your environment
 ----------------------
 
-In the blueprint section, find the 'Mesos/Marathon setup lab' blueprint and deploy it.
+Connect to UDF and go to deployment. 
 
+Select the relevant blueprint based on your need: 
+
+* If you need a clustered Mesos/Marathon setup, find the 'Mesos/Marathon setup lab - cluster' blueprint and deploy it.
+* If you need a standalone Mesos/Marathon deployment, find the 'Mesos/Marathon setup lab - standalone' blueprint and deploy it
 
 Access your environment
 -----------------------
 
-Once your environment is started, find the 'Jump box Win10' component under 'Components' and launch RDP (in the ACCESS menu)
+Once your environment is started, find the 'Jumpbox - Win7' component under 'Components' and launch RDP (in the ACCESS menu)
 
 .. image:: ../images/Launch-RDP.png
    :scale: 50%

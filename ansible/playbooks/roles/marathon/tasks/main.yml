@@ -1,0 +1,36 @@
+---
+#installing marathon on masters
+  - name: install marathon
+    apt: 
+      name: marathon
+      state: latest
+  
+# Create the /etc/marathon and /etc/marathon/conf directories
+  - name: Creates conf directories for marathon
+    file: path=/etc/marathon/conf state=directory mode=0755 recurse=yes
+
+# Zookeeper URL for leader election regarding mesos
+  - name: Set ZooKeeper URL for marathon regarding mesos service and check who is the master
+    copy:
+     content: "{{ zookeeper_url }}/mesos"
+     dest: /etc/marathon/conf/master
+     mode: 0644
+    when: install_mode == "cluster"
+
+# Zookeeper URL for leader election regarding marathon
+  - name: Set ZooKeeper URL for marathon service
+    copy:
+     content: "{{ zookeeper_url }}/marathon"
+     dest: /etc/marathon/conf/zk
+     mode: 0644
+    when: install_mode == "cluster"
+
+# Set marathon node hostname
+  - name: Set marathon node hostname
+    copy:
+     content: "{{ ansible_hostname }}"
+     dest: /etc/marathon/conf/hostname
+     mode: 0644
+    notify:
+      - start marathon
+

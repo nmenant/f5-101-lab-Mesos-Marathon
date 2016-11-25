@@ -1,0 +1,16 @@
+---
+
+#standalone playbook
+
+- hosts: standalone
+  remote_user: user
+  become: yes
+  become_method: sudo
+  connection: ssh
+  gather_facts: yes
+
+  roles: 
+    - common
+    - docker
+    - standalone
+    - marathon

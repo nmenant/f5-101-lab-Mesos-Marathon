@@ -1,0 +1,8 @@
+---
+
+# start marathon
+- name: start marathon
+  service: 
+    name: marathon
+    enabled: yes
+    state: started

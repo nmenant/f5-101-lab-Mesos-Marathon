@@ -1,0 +1,7 @@
+---
+
+#specific variables for masters 
+
+#variables related to zookeeper setup
+zookeeper_leader_port: "2888"
+zookeeper_election_port: "3888"

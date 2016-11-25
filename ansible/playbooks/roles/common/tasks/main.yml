@@ -1,0 +1,38 @@
+---
+# Common tasks to do on all agents and masters: install the required packages and dependencies
+
+  - name: Fail if not running on Debian
+    fail: msg="These tasks should only be run on Debian servers"
+    when: ansible_os_family != "Debian"
+  
+  - name: Install list of  required packages for Mesos
+    apt: name={{item}} state=latest update_cache=yes
+    with_items:
+      - openjdk-8-jdk
+      - build-essential
+      - python-dev 
+      - libcurl4-nss-dev
+      - libsasl2-dev
+      - libsasl2-modules
+      - maven
+      - libapr1-dev
+      - libsvn-dev
+      - unzip
+  
+  - name: Determine Linux distribution distributor
+    shell: lsb_release -is | tr '[:upper:]' '[:lower:]'
+    register: release_distributor
+  
+  - name: Determine Linux distribution codename
+    command: lsb_release -cs
+    register: release_codename
+
+  - name: Add Mesosphere repository to sources list
+    copy:
+      content: "deb http://repos.mesosphere.io/{{release_distributor.stdout}} {{release_codename.stdout}} main"
+      dest: /etc/apt/sources.list.d/mesosphere.list
+      mode: 0644
+    
+  - name: Add key for Mesosphere repository
+    apt_key: url=http://keyserver.ubuntu.com/pks/lookup?op=get&fingerprint=on&search=0xE56151BF state=present
+

@@ -1,0 +1,6 @@
+---
+
+#variables for all hosts
+
+zookeeper_client_port: "2181"
+zookeeper_url: "zk://{{ groups.masters | join(':' + zookeeper_client_port + ',') }}:{{ zookeeper_client_port }}"

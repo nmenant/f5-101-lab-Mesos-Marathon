@@ -9,3 +9,5 @@ The purpose of this lab is to give you more visibility on
 * How to install Mesos-DNS for service discovery
 
 We consider that you have a valid UDF access to do this lab. If not, you may review the pre-requisites about our lab setup .
+
+if you only want to deploy Mesos/Marathon on a standalone node, go 

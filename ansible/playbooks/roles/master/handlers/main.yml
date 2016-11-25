@@ -1,0 +1,20 @@
+---
+
+#Handlers for the masters
+- name: restart zookeeper
+  service:
+    name: zookeeper
+    state: restarted
+    enabled: yes
+
+- name: stop mesos-slave
+  service:
+    name: mesos-slave
+    state: stopped
+    enabled: no
+    
+- name: start mesos-master
+  service:
+    name: mesos-master
+    state: started 
+    enabled: yes
