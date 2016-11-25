@@ -9,7 +9,6 @@
       state: latest
       update_cache: yes
   
-
 # Set mesos master hostname
   - name: Set Mesos Master hostname
     copy:
@@ -38,6 +37,12 @@
      content: "{{ mesos_interface }}"
      dest: /etc/mesos-slave/ip
      mode: 0644
+  
+  - name: setup mesos with the available containers 
+    template: src=containerizers.j2 dest=/etc/mesos-slave/containerizers
+
+  - name: set the executor registration timeout
+    template: src=executor_registration_timeout.j2 dest=/etc/mesos-slave/executor_registration_timeout
     notify:
       - start mesos-slave
       - start mesos-master

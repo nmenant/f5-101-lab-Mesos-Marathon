@@ -9,18 +9,6 @@
       update_cache: yes
   
 ##
-## Zookeeper setup
-##
-
-# Set zookeeper instance ID on each master
-  - name: Create zookeeper myid file for each zookeeper instance
-    template: src=zookeeper_myid.j2 dest=/etc/zookeeper/conf/myid
-
-# Set zookeeper config file
-  - name: Create zookeeper config file
-    template: src=zoo.cfg.j2 dest=/etc/zookeeper/conf/zoo.cfg
-
-##
 ## Mesos setup (master)
 ##
 
@@ -30,7 +18,15 @@
      content: "{{ zookeeper_url }}/mesos"
      dest: /etc/mesos/zk
      mode: 0644
-    when: install_mode == "cluster"
+
+# Set zookeeper instance ID on each master
+  - name: Create zookeeper myid file for each zookeeper instance
+    template: src=zookeeper_myid.j2 dest=/etc/zookeeper/conf/myid
+    
+
+# Set zookeeper config file
+  - name: Create zookeeper config file
+    template: src=zoo.cfg.j2 dest=/etc/zookeeper/conf/zoo.cfg
 
 # The Mesos quorum value is based on the number of Mesos Masters. divide the number of master you have by 2 and round it by the next number. This is done in the quorum.j2 file. 
 # we restart zookeeper at the same time since its configuration is done
