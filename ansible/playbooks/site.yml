@@ -8,13 +8,14 @@
   vars: 
     install_mode: "{{ install_mode|default('cluster') }}"
   tasks:
-   - name: reject all install_mode but cluster
-     fail: msg="Only install_mode=cluster is supported at the moment"
-     when: install_mode != "cluster"
+   - name: reject all install_mode but cluster or standalone
+     fail: msg="Only install_mode=cluster and install_mode=standalone are supported"
+     when: (install_mode != "cluster") and (install_mode != "standalone") 
 
 #playbook for master(s) setup
 - include: setup-masters.yml
 
 #playbook for slave(s) setup
 - include: setup-slaves.yml
+  when: install_mode == "cluster"
 
