@@ -96,6 +96,13 @@ regarding the variables assignement: the strings after each hostname create spec
 	[standalone]
 	mesos mesos_interface=10.1.10.1
 
+If you want to use ansible to setup Mesos / Marathon in another environment, you need to make sure you did the following first: 
+
+1. Update /etc/hosts so that the host name specified in /etc/ansible/hosts can be resolved
+2. Create a key for the user (ssh-keygen) and copy it to all the nodes mentioned in /etc/ansible/hosts (ssh-id-copy - you must also run this command locally!)that will launch the ansible command so that no password is requested when doing ssh command by ansible
+3. make sure that this user doesn't have to type its password when doing sudo command ( here is a thread talking about how to do it: `visudo  <http://askubuntu.com/questions/504652/adding-nopasswd-in-etc-sudoers-doesnt-work/504666/>`_)
+
+
 
 Test Ansible
 ------------

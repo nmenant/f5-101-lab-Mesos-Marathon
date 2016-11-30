@@ -50,11 +50,9 @@ Here are the different things to take into accounts during this installation gui
 
 
 * On master1, we created some ssh keys for user that we copied on all the nodes. This way you can use master1 to connect to all nodes without authentication 
-* we enabled user to do sudo commands without authentication (needed to use ansible with this user). This was done via the visudo command adding the following entry below the user root.
+* we enabled user to do sudo commands without authentication (needed to use ansible with this user). This was done via the visudo command to specify that we allow passwordless sudo command for this user (here is a thread talking about how to do it: `visudo  <http://askubuntu.com/questions/504652/adding-nopasswd-in-etc-sudoers-doesnt-work/504666/>`_)
 
-::
 
-	user ALL=(ALL) NOPASSWD: ALL
 
 
 

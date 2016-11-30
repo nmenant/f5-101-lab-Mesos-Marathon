@@ -14,7 +14,7 @@ You need to use git to retrieve the repo. **It's already installed on master1 (C
 	sudo apt-get install -y git
 
 
-create a specific directory to clone the github repo:
+create a specific directory to clone the github repo (here we consider that your user is called "user"):
 
 ::
 
