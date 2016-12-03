@@ -37,7 +37,7 @@ Connect to master1 and run the following commands:
 Setup Ansible
 -------------
 
-Enable the following options in /etc/ansible/ (you need to use sudo)
+Enable the following options in /etc/ansible/ansible.cfg (you need to use sudo)
 
 
 * inventory: specify which file contains the nodes available to ansible
