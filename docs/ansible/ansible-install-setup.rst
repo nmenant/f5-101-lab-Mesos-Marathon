@@ -32,6 +32,13 @@ Connect to master1 and run the following commands:
 	
 	sudo apt-get update && sudo apt-get install ansible -y
 
+You also need to make sure that all Mesos/Marathon have python installed (v2.7) or you may have **MODULE FAILURE** when ansible will try to run commands on the remote host
+
+Do this on **all your mesos/marathon components (master/slave)**
+
+::
+
+	sudo apt -y update && sudo apt install -y python-minimal
 
 
 Setup Ansible
