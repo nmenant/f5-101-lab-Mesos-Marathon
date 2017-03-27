@@ -28,7 +28,7 @@ Contents:
 
 
 .. toctree::
-   :maxdepth: 3
+   :maxdepth: 2
    :caption: Getting Started
 
    getting-started/intro.rst
@@ -53,9 +53,9 @@ Contents:
    :maxdepth: 2
    :caption: F5 ASP and ASP Controller
 
-   f5-container-connector/f5-asp-and-controller-overview.rst
-   f5-container-connector/f5-asp-and-controller--installation.rst
-   f5-container-connector/f5-asp-and-controller--usage.rst
+   f5-asp-and-controller/f5-asp-and-controller-overview.rst
+   f5-asp-and-controller/f5-asp-and-controller--installation.rst
+   f5-asp-and-controller/f5-asp-and-controller--usage.rst
 
 .. toctree::
    :maxdepth: 2
