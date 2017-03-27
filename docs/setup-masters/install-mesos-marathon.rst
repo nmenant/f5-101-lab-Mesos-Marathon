@@ -1,3 +1,5 @@
+.. _my-mesos-setup: 
+
 Install Mesos and Marathon
 ==========================
 

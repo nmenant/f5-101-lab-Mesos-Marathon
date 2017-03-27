@@ -1,5 +1,5 @@
-Getting started
-===============
+Intro to Mesos / Marathon
+===========================================
 
 Before working on the installation itself, you need to understand the different components involved in this setup: 
 
@@ -14,7 +14,7 @@ Mesos Architecture
 This is an extract from `Mesos Architecture <http://mesos.apache.org/documentation/latest/architecture/>`_
 
 .. image:: ../images/Mesos_Architecture.png
-
+	:align: center
 
 Some of the involved components: 
 
