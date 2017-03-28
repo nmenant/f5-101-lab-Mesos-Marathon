@@ -92,10 +92,4 @@ Contents:
    ansible/ansible-install-playbooks.rst
    ansible/ansible-playbook-settings.rst
  
-Indices and tables
-==================
-
-* :ref:`genindex`
-* :ref:`modindex`
-* :ref:`search`
 

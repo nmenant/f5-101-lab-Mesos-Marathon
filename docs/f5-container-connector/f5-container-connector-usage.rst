@@ -1,159 +1,116 @@
-Container Connector Usage
-=========================
+Container Connector - Marathon BIG-IP Controller Usage
+======================================================
 
-Now that our container connector (Marathon BIG-IP Controller) is up and running, let's deploy an application and leverage our CC. 
+Now that our container connector (Marathon BIG-IP Controller) is up and running, let's deploy an application and leverage our BIG-IP Controller. 
 
 if you don't use UDF, you can deploy any application you want. In UDF, the blueprint has a container called f5-demo-app already loaded as an image (Application provided by Eric Chen - F5 Cloud SA). It is loaded in our container registry 10.1.10.11:5000/f5-demo-app
 
 To deploy our front-end application, we will need to do the following:
 
-* Define a deployment: this will launch our application running in a container
-* Define a ConfigMap: ConfigMap can be used to store fine-grained information like individual properties or coarse-grained information like entire config files or JSON blobs. It will contain the BIG-IP configuration we need to push
-* Define a Service: A Kubernetes *service* is an abstraction which defines a logical set of *pods* and a policy by which to access them. expose the *service* on a port on each node of the cluster (the same port on each *node*). You’ll be able to contact the service on any <NodeIP>:NodePort address. If you set the type field to "NodePort", the Kubernetes master will allocate a port from a flag-configured range **(default: 30000-32767)**, and each Node will proxy that port (the same port number on every Node) into your *Service*. 
-
-App Deployment
---------------
-
-On the **master** we will create all the required files: 
-
-Create a file called my-frontend-deployment.yaml: 
+#. Go to Marathon UI and click on "Create application"
+#. Click on "JSON Mode"
 
 ::
 
-	apiVersion: extensions/v1beta1
-	kind: Deployment
-	metadata:
-	  name: my-frontend
-	spec:
-	  replicas: 2
-	  template:
-	    metadata:
-	      labels:
-	        run: my-frontend
-	    spec:
-	      containers:
-	      - image: "10.1.10.11:5000/f5-demo-app"
-	        env:
-	        - name: F5DEMO_APP
-	          value: "frontend"
-	        - name: F5DEMO_BACKEND_URL
-	          value: "http://my-backend/"
-	        imagePullPolicy: IfNotPresent
-	        name: my-frontend
-	        ports:
-	        - containerPort: 80
-	          protocol: TCP
+	{
+		"id": "my-website",
+	 	"cpus": 0.1,
+		"mem": 128.0,
+		"container": {
+	    	"type": "DOCKER",
+	      	"docker": {
+	        	"image": "10.1.10.11:5000/f5-demo-app",
+	          	"network": "BRIDGE",
+	          		"portMappings": [
+	           			{ "containerPort": 80, "hostPort": 0, "protocol": "tcp" }
+	          		]
+	      	}
+	  	},
+	  	"labels": {
+      		"F5_PARTITION": "mesos",
+      		"F5_0_BIND_ADDR": "10.1.10.80",
+      		"F5_0_MODE": "http",
+      		"F5_0_PORT": "80"
+    	},
+	  	"env": {
+    		"F5_DEMOAPP": "frontend",
+    		"F5DEMO_BACKEND_URL": "http://backend/"
+  		},
+  		"healthChecks": [
+    		{
+      			"protocol": "HTTP",
+      			"portIndex": 0,
+      			"path": "/",
+      			"gracePeriodSeconds": 5,
+      			"intervalSeconds": 20,
+      			"maxConsecutiveFailures": 3
+    		}
+		]
+	}
 
-Create a file called my-frontend-configmap.yaml:
+#. Click on "Create Application"
 
-::
+.. note::
 
-	kind: ConfigMap
-	apiVersion: v1
-	metadata:
-	  name: my-frontend
-	  namespace: default
-	  labels:
-	    f5type: virtual-server
-	data:
-	  schema: "f5schemadb://bigip-virtual-server_v0.1.2.json"
-	  data: |-
-	    {
-	      "virtualServer": {
-	        "frontend": {
-	          "balance": "round-robin",
-	          "mode": "http",
-	          "partition": "kubernetes",
-	          "virtualAddress": {
-	            "bindAddr": "10.1.10.80",
-	            "port": 80
-	          }
-	        },
-	        "backend": {
-	          "serviceName": "my-frontend",
-	          "servicePort": 80
-	        }
-	      }
-	    }
+	Here we specified a few things: 
+	#. The involved BIG-IP configuration (Partition, VS IP, VS Port)
+	#. The Marathon health check for this app. The BIG-IP will replicate those health checks 
+	#. We didn't specified how many instances of this application we want so it will deploy a single instance
 
-Create a file called my-frontend-service.yaml:
+Here wait for your application to be successfully deployed and be in a running state. 
 
-::
-
-	apiVersion: v1
-	kind: Service
-	metadata:
-	  name: my-frontend
-	  labels:
-	    run: my-frontend
-	spec:
-	  ports:
-	  - port: 80
-	    protocol: TCP
-	    targetPort: 80
-	  type: NodePort
-	  selector:
-	    run: my-frontend
-
-.. Note::
-
-	If you use UDF, you have templates you can use in your jumpbox. It's on the Desktop > F5 > kubernetes-demo folder. If you use those files, you'll need to :
-	* Update the container image path in the deployment file
-	* Update the "bindAddr" in the configMap for an IP you can use in this blueprint. 
-
-We can now launch our application : 
-
-::
-
-	kubectl create -f my-frontend-deployment.yaml
-
-	kubectl create -f my-frontend-configmap.yaml
-
-	kubectl create -f my-frontend-service.yaml
-
-.. image:: ../images/f5-container-connector-launch-app.png
+.. image:: ../images/f5-container-connector-check-application-running.png
 	:align: center
 
+Click on "My Website". Here you will see the instance deployed and how to access it (here it's 10.1.10.52:31811 - you may have something else)
 
-to check the status of our deployment, you can run the following commands: 
-
-::
-
-	kubectl get pods -n default 
-
-	kubectl describe svc -n default
-
-.. image:: ../images/f5-container-connector-check-app-definition.png
+.. image:: ../images/f5-container-connector-check-application-instance-png
 	:align: center
+	:scale: 50%
 
-Here you need to pay attention to the NodePort value. That is the port used by Kubernetes to give you access to the app from the outside
+Click on the <IP:Port> assigned to be redirect there: 
 
-Now that we have deployed our application sucessfully, we can check our BIG-IP configuration. 
-
-.. warning::
-
-	Don't forget to select the "kubernetes" partition or you'll see nothing
-
-
-.. image:: ../images/f5-container-connector-check-app-bigipconfig.png
+.. image:: ../images/f5-container-connector-access-application-instance.png
 	:align: center
+	:scale: 50%
 
-.. image:: ../images/f5-container-connector-check-app-bigipconfig2.png
+We can check whether the Marathon BIG-IP Controller has updated our BIG-IP configuration accordingly
+
+Connect to your BIG-IP on https://10.1.10.60 and go to Local Traffic > Virtual Server. Select the Partition called "Mesos". You should have something like this: 
+
+.. image:: ../images/f5-container-connector-check-app-on-BIG-IP-VS.png
 	:align: center
+	:scale: 50%
 
+Go to Local Traffic > Pool > "my-website_10.1.10.80_80" > Members. Here we can see that a single pool member is defined. 
 
-Here you can see that the pool members listed are all the kubernetes nodes. 
-
-Now you can try to access your application via your BIG-IP VIP: 10.1.10.80: 
-
-.. image:: ../images/f5-container-connector-access-app.png
+.. image:: ../images/f5-container-connector-check-app-on-BIG-IP-Pool_members.png
 	:align: center
+	:scale: 50%
 
-Hit Refresh many times and you should see:
+In your browser try to connecto to http://10.1.10.80. You should be able to access the application:
 
-* the Server IP changing, here it is 10.40.0.2 and 10.40.0.3. 
+.. image:: ../images/f5-container-connector-access-BIGIP-VS.png
+	:align: center
+	:scale: 50%
 
-* on your **BIG-IP**, go to Local Traffic > Pools > Pool list > my-frontend_10.1.10.80_80 > Statistics to see that traffic is distributed as expected
-  
- .. image:: ../images/f5-container-connector-check-app-bigip-stats.png
- 	:align: center
+
+We can try to increase the number of containers delivering our application. To do so , go back to the Marathon UI (http://10.1.10.11:8080). Go to Applications > my Website  and click on "Scale Application". Let's request 10 instances. Click on "Scale Application". 
+
+Once it is done, you should see 10 "healthy instances" running in Marathon UI. You can also check your pool members list on your BIG-IP. 
+
+.. image:: ../images/f5-container-connector-scale-application-UI.png
+	:align: center
+	:scale: 50%
+
+.. image:: ../images/f5-container-connector-scale-application-UI-10-done.png
+	:align: center
+	:scale: 50%
+
+.. image:: ../images/f5-container-connector-scale-application-BIGIP-10-done.png
+	:align: center
+	:scale: 50%
+
+As we can see, the Marathon BIG-IP Controller is adapting the pool members setup based on the number of instances delivering this application automatically. 
+
+Scale back the application to 1 to save ressources for the next labs
