@@ -61,7 +61,7 @@ Now setup the binary in a proper location:
 
 	sudo mkdir /usr/local/mesos-dns
 
-	mv ./mesos-dns-v0.6.0-linux-amd64 /usr/local/mesos-dns/mesos-dns
+	sudo mv ./mesos-dns-v0.6.0-linux-amd64 /usr/local/mesos-dns/mesos-dns
   
   	sudo chmod +x /usr/local/mesos-dns/mesos-dns 
 
