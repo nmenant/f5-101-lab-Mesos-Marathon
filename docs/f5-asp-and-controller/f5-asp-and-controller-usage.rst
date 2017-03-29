@@ -61,7 +61,7 @@ To test your ASP instances, go to the Marathon UI > Application > asp-my-backend
   :align: center
   :scale: 50%
 
-if you are connected to the backend instances, it works as expected:
+If you are connected to the backend instances, it works as expected:
 
 .. image:: ../images/f5-asp-and-controller-access-asp.png
   :align: center
