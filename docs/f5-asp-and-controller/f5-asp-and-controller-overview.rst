@@ -1,5 +1,5 @@
-F5 ASP and and F5 Marathon ASP Controller
-=========================================
+F5 ASP and F5 Marathon ASP Controller
+=====================================
 
 Overview
 --------
@@ -23,7 +23,7 @@ The F5 Application Service Proxy collects traffic statistics for the Application
 
 
 Apache Mesos DNS and ASP Discovery
-==================================
+----------------------------------
 
 Each F5 Application Service Proxy instance is discoverable via an Apache Mesos DNS SRV query, which returns its IP address, port, and protocol. By convention, the DNS name of an F5 Application Service Proxy instance for an Application is “<ASP_ENABLE_LABLE>-<application name>.<domain name>”.
 

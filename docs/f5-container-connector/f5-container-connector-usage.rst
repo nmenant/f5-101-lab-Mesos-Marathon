@@ -5,48 +5,55 @@ Now that our container connector (Marathon BIG-IP Controller) is up and running,
 
 if you don't use UDF, you can deploy any application you want. In UDF, the blueprint has a container called f5-demo-app already loaded as an image (Application provided by Eric Chen - F5 Cloud SA). It is loaded in our container registry 10.1.10.11:5000/f5-demo-app
 
+Frontend application deployment
+-------------------------------
+
 To deploy our front-end application, we will need to do the following:
 
 #. Go to Marathon UI and click on "Create application"
 #. Click on "JSON Mode"
 
+.. _frontend_definition:
+
 ::
 
 	{
-		"id": "my-website",
-	 	"cpus": 0.1,
+		"id": "my-frontend",
+		"cpus": 0.1,
 		"mem": 128.0,
 		"container": {
-	    	"type": "DOCKER",
-	      	"docker": {
-	        	"image": "10.1.10.11:5000/f5-demo-app",
-	          	"network": "BRIDGE",
-	          		"portMappings": [
-	           			{ "containerPort": 80, "hostPort": 0, "protocol": "tcp" }
-	          		]
-	      	}
-	  	},
-	  	"labels": {
-      		"F5_PARTITION": "mesos",
-      		"F5_0_BIND_ADDR": "10.1.10.80",
-      		"F5_0_MODE": "http",
-      		"F5_0_PORT": "80"
-    	},
-	  	"env": {
-    		"F5_DEMOAPP": "frontend",
-    		"F5DEMO_BACKEND_URL": "http://backend/"
-  		},
-  		"healthChecks": [
-    		{
-      			"protocol": "HTTP",
-      			"portIndex": 0,
-      			"path": "/",
-      			"gracePeriodSeconds": 5,
-      			"intervalSeconds": 20,
-      			"maxConsecutiveFailures": 3
-    		}
+			"type": "DOCKER",
+			"docker": {
+				"image": "10.1.10.11:5000/f5-demo-app",
+				"network": "BRIDGE",
+				"portMappings": [
+					{ "containerPort": 80, "hostPort": 0, "protocol": "tcp" }
+				]
+			}
+		},
+		"labels": {
+			"F5_PARTITION": "mesos",
+			"F5_0_BIND_ADDR": "10.1.10.80",
+			"F5_0_MODE": "http",
+			"F5_0_PORT": "80",
+			"run": "my-frontend"
+		},
+		"env": {
+		"F5DEMO_APP": "frontend",
+		"F5DEMO_BACKEND_URL": "http://asp-my-backend:31899/"
+		},
+		"healthChecks": [
+		{
+			"protocol": "HTTP",
+			"portIndex": 0,
+			"path": "/",
+			"gracePeriodSeconds": 5,
+			"intervalSeconds": 20,
+			"maxConsecutiveFailures": 3
+		}
 		]
 	}
+
 
 #. Click on "Create Application"
 
@@ -94,6 +101,12 @@ In your browser try to connecto to http://10.1.10.80. You should be able to acce
 	:align: center
 	:scale: 50%
 
+.. note::
+
+	if you try to click on the link "Backend App", it will fail. This is expected
+
+Scale the application via Marathon
+----------------------------------
 
 We can try to increase the number of containers delivering our application. To do so , go back to the Marathon UI (http://10.1.10.11:8080). Go to Applications > my Website  and click on "Scale Application". Let's request 10 instances. Click on "Scale Application". 
 

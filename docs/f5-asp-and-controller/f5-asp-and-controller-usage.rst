@@ -1,99 +1,88 @@
-Test ASP and F5 Kube Proxy
-==========================
+ASP and Marathon ASP Controller Usage
+=====================================
 
 The F5 ASP instances and F5 kube proxy instances have been deployed. Now we need to test our setup. To do so we will setup a backend application that will be reached by the frontend application we created earlier. 
 
 
-To deploy the backend application, connect to the **master**
+To deploy the backend application, connect to the Marathon UI and click on "Create Application"
 
-We need to create two configuration to deploy our backend application:
-
-* The deployment: it will define the application to deploy
-* The service: will define our access our application. It will also contains annotations to leverage the ASP Lightweight proxy
-
-
-Create a file called *my-backend-deployment.yaml*. Here is its content: 
+.. _backend_definition:
 
 ::
 
-  apiVersion: extensions/v1beta1
-  kind: Deployment
-  metadata:
-    name: my-backend
-  spec:
-    replicas: 2
-    template:
-      metadata:
-        labels:
-         run: my-backend
-     spec:
-       containers:
-       - image: f5-demo-app:latest
-         imagePullPolicy: IfNotPresent
-         env:
-         - name: F5DEMO_APP
-           value: "backend"
-         name: my-backend
-         ports:
-         - containerPort: 80
-           protocol: TCP
-
-
-Create another file called *my-backend-service.yaml*. Here is its content: 
-
-::
-
-  apiVersion: v1
-  kind: Service
-  metadata:
-    annotations:
-      lwp.f5.com/config.http: |-
-        {
-          "ip-protocol": "http",
-          "load-balancing-mode": "round-robin",
-          "flags" : {
-            "x-forwarded-for": true,
-            "x-served-by": true
+  {
+    "container": {
+      "docker": {
+        "portMappings": [
+          {
+            "servicePort": 31899,
+            "protocol": "tcp",
+            "containerPort": 80,
+            "hostPort": 0
           }
-       }
-    name: my-backend
-    labels:
-      run: my-backend
-  spec:
-    ports:
-    - name: "http"
-      port: 80
-      protocol: TCP
-      targetPort: 80
-    selector:
-      run: my-backend
+        ],
+        "privileged": false,
+        "image": "10.1.10.11:5000/f5-demo-app",
+        "network": "BRIDGE",
+        "forcePullImage": true
+      },
+      "type": "DOCKER",
+      "volumes": []
+    },
+    "mem": 128,
+    "labels": {
+      "asp": "enable",
+      "ASP_COUNT_PER_APP": "2"
+    },
+    "env": {
+        "F5DEMO_APP": "backend"
+    },
+    "cpus": 0.25,
+    "instances": 1,
+    "upgradeStrategy": {
+      "maximumOverCapacity": 1,
+      "minimumHealthCapacity": 1
+    },
+    "id": "my-backend"
+  }
 
-Once our files are created, we can deploy our backend application with the following commands: 
+You should see the following applications be created: 
 
-::
+1. Your "my-backend" application
+2. Another application created with 2 instances called : asp-my-backend. This is your ASP instances deployed in front of your application. You can see that 2 instances were deployed (done via the *ASP_COUNT_PER_APP label*)
 
-  kubectl create -f my-backend-deployment.yaml
-
-  kubectl create -f my-backend-service.yaml
-
-You can check if the deployment was successful with the commands: 
-
-::
-
-  kubectl get deployment my-backend
-
-  kubectl describe svc my-backend
-
-.. image:: ../images/f5-asp-and-kube-proxy-deploy-app.png
+.. image:: ../images/f5-asp-and-controller-check-backend-and-asp-deployment.png
   :align: center
+  :scale: 50%
 
+To test your ASP instances, go to the Marathon UI > Application > asp-my-backend. Here you will see that 2 instances are deployed, click on the link specified for each of them: 
 
-To test our application, access the frontend app with your browser. It is available via the BIG-IP with the URL: http://10.1.10.80
-
-.. image:: ../images/f5-asp-and-kube-proxy-test-app-backend.png
+.. image:: ../images/f5-asp-and-controller-check-asp-instances-deployed.png
   :align: center
+  :scale: 50%
 
-click on "Backend App". Here you should see that the client is frontend app and not your browser anymore. It is because we did Client -> Frontend App -> Backend App
+if you are connected to the backend instances, it works as expected:
 
-.. image:: ../images/f5-asp-and-kube-proxy-test-app-backend2.png
+.. image:: ../images/f5-asp-and-controller-access-asp.png
   :align: center
+  :scale: 50%
+
+.. note::
+
+  Notice that the user-agent is your browser's agent as expected. 
+
+Now that our backend is deployed and fronted successfully by ASP, we should try to access it from the frontend application. 
+
+Go back to your frontend application on http://10.1.10.80. On this page you have a link to the backend, click on it. 
+
+You should see something like this: 
+
+.. image:: ../images/f5-asp-and-controller-access-backend.png
+  :align: center
+  :scale: 50%
+
+On this page you may see the following information:
+
+#. host header: the host is asp-my-backend. This is the DNS name for our cluster of ASP instances. 
+#. user-agent: We can see that the request came from the frontend application
+#. x-forwarded-for: the request was coming from the BIG-IP (it does SNAT)

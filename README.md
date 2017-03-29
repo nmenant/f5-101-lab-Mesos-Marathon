@@ -4,7 +4,7 @@ The purpose of this lab is to give you more visibility on
 
 * Overview of Mesos and Marathon and their key components
 * Install Mesos and Marathon with 3 masters and 2 agents
-* How to launch application from Marathon
+* How to launch applications from Marathon
 * How to install Mesos-DNS for service discovery
 * How to setup and install F5 solutions for Mesos / Marathon environment
 

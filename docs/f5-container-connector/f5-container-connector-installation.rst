@@ -69,7 +69,7 @@ Use the following JSON config
     		"F5_CC_BIGIP_HOSTNAME": "10.1.10.60",
     		"F5_CC_BIGIP_USERNAME": "admin",
     		"F5_CC_BIGIP_PASSWORD": "admin"
-  		}
+      }
 	}
 
 .. note::
@@ -100,7 +100,7 @@ you should see something like this :
 
 Here we can see that the Controller is running on slave2. Connect via SSH to **slave2** and run the following commands
 
-::
+.. code-block:: none
 
   sudo docker ps 
 
@@ -111,7 +111,7 @@ This command will give us the ID of our Controller container ID, here it is : a0
 
 To check the logs of our Controller: 
 
-::
+.. code-block:: none
 
   sudo docker ps a0017f8c44fb
 
@@ -123,7 +123,7 @@ To check the logs of our Controller:
 
 To connect to our container with a Shell: 
 
-::
+.. code-block:: none
 
    sudo docker exec -i -t a0017f8c44fb /bin/sh
 

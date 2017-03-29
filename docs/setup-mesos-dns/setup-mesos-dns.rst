@@ -3,19 +3,33 @@ Setup Mesos-DNS
 
 If you want to be able to do service discovery with Mesos/Marathon, you will need to install and setup mesos-dns. 
 
-To leverage marathon for scalability and HA, we will launch Mesos-DNS in a docker container from Marathon
+To leverage marathon for scalability and HA, we will launch Mesos-DNS as an application from Marathon
 
-Do the following on **SLAVE1** (we force the docker image to start on slave1)
+We need to do the following tasks:
+
+#. Retrieve the latest DNS binaries
+#. Do the mesos-dns configuration
+#. Launch the mesos-dns binary from Marathon 
+
+
+In this setup, we will setup mesos dns on **SLAVE1** (we force mesos dns app to start on slave1 in Marathon - 10.1.10.51 in the UDF blueprint)
+
+To retrieve the binary, go to `Mesos DNS releases <http://https://github.com/mesosphere/mesos-dns/releases>`_ and select the latest version. In this blueprint we retrieved the following binary: `Mesos DNS release v0.6.0 <https://github.com/mesosphere/mesos-dns/releases/download/v0.6.0/mesos-dns-v0.6.0-linux-amd64>`_ 
+
+Connect on **slave1** and do the following: 
 
 ::
 
+	curl -L https://github.com/mesosphere/mesos-dns/releases/download/v0.6.0/mesos-dns-v0.6.0-linux-amd64 -O
+
 	sudo mkdir /etc/mesos-dns
+
 
 Create a file in /etc/mesos-dns/ called config.json  
 
 ::
 
-	sudo cat /etc/mesos-dns/config.json
+	sudo vi /etc/mesos-dns/config.json
 
 .. code-block:: none
 
@@ -38,8 +52,57 @@ Create a file in /etc/mesos-dns/ called config.json
         "SOARetry": 600,
         "SOAExpire": 86400,
         "SOAMinttl": 60,
-        "IPSources": ["netinfo", "mesos", "host"]
+        "IPSources": ["mesos", "host"]
 	}
+
+Now setup the binary in a proper location:
+
+::
+
+	sudo mkdir /usr/local/mesos-dns
+
+	mv ./mesos-dns-v0.6.0-linux-amd64 /usr/local/mesos-dns/mesos-dns
+  
+  	sudo chmod +x /usr/local/mesos-dns/mesos-dns 
+
+
+if you want to test your setup you can do the following: 
+
+::
+
+	sudo /usr/local/mesos-dns/mesos-dns -config /etc/mesos-dns/config.json -v 10
+
+This will start your mesos-dns app and you can test it. 
+
+.. image:: ../images/setup-mesos-dns-test.png
+	:align: center
+	:scale: 50%
+
+you can now test your dns setup:
+
+::
+
+	$ nslookup
+	
+	> server 10.1.10.51
+	Default server: 10.1.10.51
+	Address: 10.1.10.51#53
+	
+	> www.google.fr
+	Server:		10.1.10.51
+	address:	10.1.10.51#53
+
+	Non-authoritative answer:
+	Name:	www.google.fr
+	Address: 172.217.3.163
+	
+	> master1.mesos
+	Server:		10.1.10.51
+	Address:	10.1.10.51#53
+
+	Name:	master1.mesos
+	Address: 10.1.10.11
+	
 
 
 launch the mesos-dns image in marathon. Connect to marathon, click on *Create an application* and enable *json mode* 
@@ -47,29 +110,14 @@ launch the mesos-dns image in marathon. Connect to marathon, click on *Create an
 .. code-block:: none
 
 	{
-		"args": [	
-		"/mesos-dns",
-		"-config=/config.json"
-		],
-		"container": {
-		  "docker": {
-		            "image": "mesosphere/mesos-dns",
-		            "network": "HOST"
-		    },
-		    "type": "DOCKER",
-		    "volumes": [
-		    	{
-				"containerPath": "/config.json", 
-    	        "hostPath": "/etc/mesos-dns/config.json",
-				"mode": "RO"
-		         }
-		       ] 
-   		},
-   		"cpus": 0.2,
-		"id": "mesos-dns-docker",
+		"cmd": "/usr/local/mesos-dns/mesos-dns -config=/etc/mesos-dns/config.json -v=10",
+		"cpus": 0.2,
+		"mem": 256,
+		"id": "mesos-dns",
 		"instances": 1,
-		"constraints": [["hostname", "CLUSTER", "slave1.my-lab"]]
-	}	
+		"constraints": [["hostname", "CLUSTER", "10.1.10.51"]]
+	}
+
 
 Last thing is to update /etc/resolv.conf on **all slaves*: we add our mesos dns into our resolve.conf file
 
