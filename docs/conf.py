@@ -48,7 +48,7 @@ source_suffix = '.rst'
 master_doc = 'index'
 
 # General information about the project.
-project = u'101 Lab Mesos Marathon'
+project = u'F5 101 Lab Mesos Marathon'
 copyright = u'2016, Nicolas Menant'
 author = u'Nicolas Menant'
 
@@ -232,7 +232,7 @@ html_static_path = ['_static']
 # html_search_scorer = 'scorer.js'
 
 # Output file base name for HTML help builder.
-htmlhelp_basename = '101LabMesosMarathondoc'
+htmlhelp_basename = 'F5101LabMesosMarathondoc'
 
 # -- Options for LaTeX output ---------------------------------------------
 
@@ -258,7 +258,7 @@ latex_elements = {
 # (source start file, target name, title,
 #  author, documentclass [howto, manual, or own class]).
 latex_documents = [
-    (master_doc, '101LabMesosMarathon.tex', u'101 Lab Mesos Marathon Documentation',
+    (master_doc, 'F5101LabMesosMarathon.tex', u'F5 101 Lab Mesos Marathon Documentation',
      u'Nicolas Menant', 'manual'),
 ]
 
@@ -300,7 +300,7 @@ latex_documents = [
 # One entry per manual page. List of tuples
 # (source start file, name, description, authors, manual section).
 man_pages = [
-    (master_doc, '101labmesosmarathon', u'101 Lab Mesos Marathon Documentation',
+    (master_doc, 'F5101labmesosmarathon', u'F5 101 Lab Mesos Marathon Documentation',
      [author], 1)
 ]
 
@@ -315,8 +315,8 @@ man_pages = [
 # (source start file, target name, title, author,
 #  dir menu entry, description, category)
 texinfo_documents = [
-    (master_doc, '101LabMesosMarathon', u'101 Lab Mesos Marathon Documentation',
-     author, '101LabMesosMarathon', 'One line description of project.',
+    (master_doc, 'F5101LabMesosMarathon', u'F5 101 Lab Mesos Marathon Documentation',
+     author, 'F5101LabMesosMarathon', 'One line description of project.',
      'Miscellaneous'),
 ]
 
