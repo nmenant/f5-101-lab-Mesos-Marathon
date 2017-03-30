@@ -55,23 +55,24 @@ To deploy our front-end application, we will need to do the following:
 	}
 
 
-#. Click on "Create Application"
+3.. Click on "Create Application"
 
 .. note::
 
 	Here we specified a few things: 
-	#. The involved BIG-IP configuration (Partition, VS IP, VS Port)
-	#. The Marathon health check for this app. The BIG-IP will replicate those health checks 
-	#. We didn't specified how many instances of this application we want so it will deploy a single instance
+	
+	1. The involved BIG-IP configuration (Partition, VS IP, VS Port)
+	2. The Marathon health check for this app. The BIG-IP will replicate those health checks 
+	3. We didn't specified how many instances of this application we want so it will deploy a single instance
 
-Here wait for your application to be successfully deployed and be in a running state. 
+Wait for your application to be successfully deployed and be in a running state. 
 
 .. image:: ../images/f5-container-connector-check-application-running.png
 	:align: center
 
-Click on "My Website". Here you will see the instance deployed and how to access it (here it's 10.1.10.52:31811 - you may have something else)
+Click on "my-frontend". Here you will see the instance deployed and how to access it (here it's 10.1.10.51:31109 - you may have something else)
 
-.. image:: ../images/f5-container-connector-check-application-instance-png
+.. image:: ../images/f5-container-connector-check-application-instance.png
 	:align: center
 	:scale: 50%
 
@@ -89,13 +90,13 @@ Connect to your BIG-IP on https://10.1.10.60 and go to Local Traffic > Virtual S
 	:align: center
 	:scale: 50%
 
-Go to Local Traffic > Pool > "my-website_10.1.10.80_80" > Members. Here we can see that a single pool member is defined. 
+Go to Local Traffic > Pool > "my-frontend_10.1.10.80_80" > Members. Here we can see that a single pool member is defined. 
 
 .. image:: ../images/f5-container-connector-check-app-on-BIG-IP-Pool_members.png
 	:align: center
 	:scale: 50%
 
-In your browser try to connecto to http://10.1.10.80. You should be able to access the application:
+In your browser try to connecto to http://10.1.10.80. You should be able to access the application (In the UDF blueprint, you have a bookmark for the Frontend application in your Chrome browser):
 
 .. image:: ../images/f5-container-connector-access-BIGIP-VS.png
 	:align: center
@@ -103,12 +104,12 @@ In your browser try to connecto to http://10.1.10.80. You should be able to acce
 
 .. note::
 
-	if you try to click on the link "Backend App", it will fail. This is expected
+	if you try to click on the link "Backend App", it will fail. This is expected (Proxy Error)
 
 Scale the application via Marathon
 ----------------------------------
 
-We can try to increase the number of containers delivering our application. To do so , go back to the Marathon UI (http://10.1.10.11:8080). Go to Applications > my Website  and click on "Scale Application". Let's request 10 instances. Click on "Scale Application". 
+We can try to increase the number of containers delivering our application. To do so , go back to the Marathon UI (http://10.1.10.11:8080). Go to Applications > my-frontend  and click on "Scale Application". Let's request 10 instances. Click on "Scale Application". 
 
 Once it is done, you should see 10 "healthy instances" running in Marathon UI. You can also check your pool members list on your BIG-IP. 
 

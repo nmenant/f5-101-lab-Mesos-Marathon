@@ -15,7 +15,7 @@ Start your environment
 
 Connect to UDF and go to blueprint. 
 
-Select the relevant blueprint: find the '[Mesos] how to setup ASP and CC' blueprint and deploy it
+Select the relevant blueprint: find the '[Mesos/Marathon] how to Demo/Setup ASP and CC' blueprint and deploy it
 
 Access your environment
 -----------------------
@@ -27,8 +27,6 @@ If you deployed the existing blueprint mentioned above; Once your environment is
    :align: center
 
 Click on the shortcut that got downloaded and it should open your RDP session. The credentials to use are administrator/ibKvT4w=Aa
-
-*If you have trouble reading the text please see optional directions for changing text size in the Appendix.*
 
 .. warning:: For MAC user, it is recommended to use Microsoft Remote Desktop. You may not be able to access your jumpbox otherwise. It is available in the App store (FREE).
    

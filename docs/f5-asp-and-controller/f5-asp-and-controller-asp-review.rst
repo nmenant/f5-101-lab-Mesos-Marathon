@@ -7,13 +7,13 @@ How does the Frontend has been able to go automatically through our ASP instance
 
 Here are the different key things we did to make it happen: 
 
-#. When we deployed our frontend application, we specified a label called: "F5DEMO_BACKEND_URL" with the value "http://asp-my-backend:31899/". This was explaining to our frontend application where the "Backend App" link on the page should be redirected to. :ref:`frontend_definition`
-#. When we deployed our backend application, we specified the following  information: "servicePort" set to the value 31899. This information was to say to ASP on which port it should be listening to load balance the traffic. :ref:`backend_definition`
+#. When we deployed our frontend application, we specified a label called: "F5DEMO_BACKEND_URL" with the value "http://asp-my-backend:31899/". This was explaining to our frontend application where the "Backend App" link on the page should be redirected to: frontend_definition_.
+#. When we deployed our backend application, we specified the following  information: "servicePort" set to the value 31899. This information was to say to ASP on which port it should be listening to load balance the traffic: backend_definition_.
 #. The last thing is how does our frontend connect to the ASP(s) that is dynamically generated ? this is done by leveraging mesos-dns. 
 
 Every application that gets created in marathon will have automatically a DNS name setup in mesos-dns. it will have the following format : <application id>.maraton.mesos
 
-to test it, we can try a few queries against our mesos dns. 
+to test it, we can try a few queries against our mesos dns. Connect to either **Agent1** or **Agent2** (their DNS nameserver is mesos-dns)
 
 ::
 

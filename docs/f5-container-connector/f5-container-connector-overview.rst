@@ -12,7 +12,7 @@ The F5 Marathon BIG-IP Controller is a container-based Marathon Application – 
 
 The marathon-bigip-ctlr watches the Marathon API for special “F5 Application Labels” that tell it:
 
-* what Application we want it to manage, and
+* what Application we want it to manage
 * how we want to configure the BIG-IP for that specific Application.
 
 You can manage BIG-IP objects directly, or deploy iApps, with the F5 Marathon BIG-IP Controller.

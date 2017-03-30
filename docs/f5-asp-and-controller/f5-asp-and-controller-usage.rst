@@ -1,11 +1,15 @@
 ASP and Marathon ASP Controller Usage
 =====================================
 
-The F5 ASP instances and F5 kube proxy instances have been deployed. Now we need to test our setup. To do so we will setup a backend application that will be reached by the frontend application we created earlier. 
+The F5 Marathon ASP Controller instance has been deployed. Now we need to test our setup. To do so, we will setup a backend application that will be reached by the frontend application. 
 
 .. warning::
 
   Make sure that mesos-dns is running. To check you may go to the Marathon UI and check the status of the application "mesos-dns". If it's not running, click on restart to re-initialize it
+
+  .. image:: ../images/f5-asp-and-controller-check-mesos-dns-state.png
+    :align: center
+    :scale: 50%
 
 To deploy the backend application, connect to the Marathon UI and click on "Create Application"
 

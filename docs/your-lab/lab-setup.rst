@@ -6,7 +6,7 @@ Here is the setup we will leverage to either create a new environment or to conn
 In the existing environment, here is the setup you'll get: 
 
 ==================   ==================  =========================  ==============================================
-      Agent              AWS Mgt IP              Mesos Network                     Login / Password 
+    Hostname             AWS Mgt IP             Mesos Network                     Login / Password 
 ==================   ==================  =========================  ==============================================
     Master 1              10.1.1.4               10.1.10.11           ssh: ubuntu/<your key> - su : root/default 
     Master 2              10.1.1.5               10.1.10.12           ssh: ubuntu/<your key> - su : root/default 
@@ -14,6 +14,7 @@ In the existing environment, here is the setup you'll get:
     Agent  1              10.1.1.7               10.1.10.51           ssh: ubuntu/<your key> - su : root/default 
     Agent  2              10.1.1.8               10.1.10.52           ssh: ubuntu/<your key> - su : root/default  
  Windown Jumpbox          10.1.1.9               10.1.10.50                 administrator / ibKvT4w=Aa
+    BIG-IP                10.1.1.10              10.1.10.60                      admin/admin
 ==================   ==================  =========================  ==============================================
 
 In case you don't use UDF, here are a few things to know that could be useful (if you want to reproduce this in another environment)
