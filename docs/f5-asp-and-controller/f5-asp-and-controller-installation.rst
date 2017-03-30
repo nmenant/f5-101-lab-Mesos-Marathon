@@ -46,13 +46,12 @@ Copy/Paste the following JSON blob:
 A few things to consider:
 
 #. if you don't use the UDF blueprint, update the image attribute and ASP_DEFAULT_CONTAINER attributes with the relevant images in your environment
-#. ASP_ENABLE_LABEL allows you to specify the label that the controller will use to activate/deploy ASP in front of the application. Here we specified ASP as the label. So if we deploy an application with the label : "asp:enable", ASP will be deployed in front of it. 
 #. You can see that we specified the resources that will be assigned to ASP 
 #. You have the capabilities to have ASP send logs to a remote solution like Splunk
 
 .. warning::
 
-	When using Marathon, you cannot use UPPERCASE the application ID. Otherwise the application deployment will fail
+	When using Marathon, you cannot use UPPERCASE for the application ID. Otherwise the application deployment will fail
 
 Check deployment
 ----------------

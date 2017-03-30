@@ -119,8 +119,12 @@ launch the mesos-dns image in marathon. Connect to marathon, click on *Create an
 	}
 
 
-Last thing is to update /etc/resolv.conf on **all slaves*: we add our mesos dns into our resolve.conf file
+Last thing is to update /etc/resolv.conf on **all slaves/agents**: we add our mesos dns into our /etc/resolv.conf file
 
 ::
 
 	sudo sed -i '1s/^/nameserver 10.1.20.51\n/' /etc/resolv.conf
+
+.. note::
+
+	If you have deployed your instances in a cloud like AWS, it is likely that you'll lose your DNS setup after a reboot. If you want to make your changes persist, you need to update /etc/dhcp/dhclient.conf to supersede the dhcp setup. More information here: `Static DNS server in a EC2 instance <https://aws.amazon.com/premiumsupport/knowledge-center/ec2-static-dns-ubuntu-debian/>`_
