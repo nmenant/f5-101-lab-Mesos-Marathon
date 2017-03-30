@@ -8,9 +8,9 @@ In a Mesos / Marathon environment, the name of the product is Marathon BIG-IP co
 BIG-IP setup
 ------------
 
-To use F5 Container connector / Marathon BIG-IP Controller, , you'll need a BIG-IP up and running first. 
+To use F5 Container connector / Marathon BIG-IP Controller, you'll need a BIG-IP up and running first. 
 
-In the UDF blueprint, you should have a BIG-IP available at the following URL: https://10.1.10.60
+In the UDF blueprint, you should have a BIG-IP available at the following URL: https://10.1.10.60. 
 
 .. warning:: 
 
@@ -24,7 +24,7 @@ Connect to your BIG-IP and check it is active and licensed. Its login and passwo
 
 You need to setup a partition that will be used by F5 Container Connector. 
 
-To do so go to : System > Users > Partition List. Create a new partition called "mesos"
+To do so, go to : System > Users > Partition List. Create a new partition called "mesos"
 
 .. image:: ../images/f5-container-connector-bigip-partition-setup.png
   :align: center
@@ -47,29 +47,33 @@ To deploy our Marathon BIG-IP Controller, we need to either use Marathon UI or u
 * Connect to the Marathon UI on `http://10.1.10.11:8080 <http://10.1.10.11:8080>`_ and click on "Create Application".
 * Click on "JSON mode"
 
+.. Note:: 
+
+  If you use the UDF blueprint, Chrome in the Jumpbox has a bookmark to access Marathon. 
+
 Use the following JSON config
 
 ::
 
 	{
 		"id": "f5/marathon-bigip-ctlr",
-  		"cpus": 0.5,
-  		"mem": 64.0,
-  		"instances": 1,
-  		"container": {
-    		"type": "DOCKER",
-    		"docker": {
-      		"image": "10.1.10.11:5000/marathon-bigip-ctlr:v1.0.0",
-      		"network": "BRIDGE"
-    		}
-  		},
-  		"env": {
-    		"MARATHON_URL": "http://10.1.10.11:8080",
-    		"F5_CC_PARTITIONS": "mesos",
-    		"F5_CC_BIGIP_HOSTNAME": "10.1.10.60",
-    		"F5_CC_BIGIP_USERNAME": "admin",
-    		"F5_CC_BIGIP_PASSWORD": "admin"
+    "cpus": 0.5,
+    "mem": 64.0,
+    "instances": 1,
+    "container": {
+      "type": "DOCKER",
+      "docker": {
+        "image": "10.1.10.11:5000/marathon-bigip-ctlr:v1.0.0",
+        "network": "BRIDGE"
       }
+    },
+    "env": {
+      "MARATHON_URL": "http://10.1.10.11:8080",
+  		"F5_CC_PARTITIONS": "mesos",
+      "F5_CC_BIGIP_HOSTNAME": "10.1.10.60",
+      "F5_CC_BIGIP_USERNAME": "admin",
+      "F5_CC_BIGIP_PASSWORD": "admin"
+    }
 	}
 
 .. note::
