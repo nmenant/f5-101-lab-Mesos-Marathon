@@ -74,7 +74,6 @@ Click on "my-frontend". Here you will see the instance deployed and how to acces
 
 .. image:: ../images/f5-container-connector-check-application-instance.png
 	:align: center
-	:scale: 50%
 
 Click on the <IP:Port> assigned to be redirect there: 
 
@@ -88,13 +87,11 @@ Connect to your BIG-IP on https://10.1.10.60 and go to Local Traffic > Virtual S
 
 .. image:: ../images/f5-container-connector-check-app-on-BIG-IP-VS.png
 	:align: center
-	:scale: 50%
 
 Go to Local Traffic > Pool > "my-frontend_10.1.10.80_80" > Members. Here we can see that a single pool member is defined. 
 
 .. image:: ../images/f5-container-connector-check-app-on-BIG-IP-Pool_members.png
 	:align: center
-	:scale: 50%
 
 In your browser try to connecto to http://10.1.10.80. You should be able to access the application (In the UDF blueprint, you have a bookmark for the Frontend application in your Chrome browser):
 
@@ -119,11 +116,9 @@ Once it is done, you should see 10 "healthy instances" running in Marathon UI. Y
 
 .. image:: ../images/f5-container-connector-scale-application-UI-10-done.png
 	:align: center
-	:scale: 50%
 
 .. image:: ../images/f5-container-connector-scale-application-BIGIP-10-done.png
 	:align: center
-	:scale: 50%
 
 As we can see, the Marathon BIG-IP Controller is adapting the pool members setup based on the number of instances delivering this application automatically. 
 
