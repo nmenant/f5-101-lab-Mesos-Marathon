@@ -70,7 +70,7 @@ Wait for your application to be successfully deployed and be in a running state.
 .. image:: ../images/f5-container-connector-check-application-running.png
 	:align: center
 
-Click on "my-frontend". Here you will see the instance deployed and how to access it (here it's 10.1.10.52:31811 - you may have something else)
+Click on "my-frontend". Here you will see the instance deployed and how to access it (here it's 10.1.10.51:31109 - you may have something else)
 
 .. image:: ../images/f5-container-connector-check-application-instance-png
 	:align: center
