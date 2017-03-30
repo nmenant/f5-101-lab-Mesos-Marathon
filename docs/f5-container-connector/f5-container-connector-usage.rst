@@ -90,7 +90,7 @@ Connect to your BIG-IP on https://10.1.10.60 and go to Local Traffic > Virtual S
 	:align: center
 	:scale: 50%
 
-Go to Local Traffic > Pool > "my-website_10.1.10.80_80" > Members. Here we can see that a single pool member is defined. 
+Go to Local Traffic > Pool > "my-frontend_10.1.10.80_80" > Members. Here we can see that a single pool member is defined. 
 
 .. image:: ../images/f5-container-connector-check-app-on-BIG-IP-Pool_members.png
 	:align: center
