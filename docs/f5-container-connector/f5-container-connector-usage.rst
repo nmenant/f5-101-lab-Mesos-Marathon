@@ -5,6 +5,8 @@ Now that our container connector (Marathon BIG-IP Controller) is up and running,
 
 if you don't use UDF, you can deploy any application you want. In UDF, the blueprint has a container called f5-demo-app already loaded as an image (Application provided by Eric Chen - F5 Cloud SA). It is loaded in our container registry 10.1.10.11:5000/f5-demo-app
 
+.. _frontend_definition:
+
 Frontend application deployment
 -------------------------------
 
@@ -12,8 +14,6 @@ To deploy our front-end application, we will need to do the following:
 
 #. Go to Marathon UI and click on "Create application"
 #. Click on "JSON Mode"
-
-.. _frontend_definition:
 
 ::
 

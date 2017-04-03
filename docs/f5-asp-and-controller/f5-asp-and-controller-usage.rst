@@ -1,3 +1,5 @@
+.. _backend_definition:
+
 ASP and Marathon ASP Controller Usage
 =====================================
 
@@ -12,8 +14,6 @@ The F5 Marathon ASP Controller instance has been deployed. Now we need to test o
     :scale: 50%
 
 To deploy the backend application, connect to the Marathon UI and click on "Create Application"
-
-.. _backend_definition:
 
 ::
 
