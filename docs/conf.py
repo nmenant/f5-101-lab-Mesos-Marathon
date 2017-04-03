@@ -17,7 +17,6 @@
 # documentation root, use os.path.abspath to make it absolute, like shown here.
 #
 import os
-import f5_sphinx_theme
 # import sys
 # sys.path.insert(0, os.path.abspath('.'))
 
@@ -339,7 +338,7 @@ texinfo_documents = [
 on_rtd = os.environ.get('READTHEDOCS', None) == 'True'
 
 if not on_rtd:  # only import and set the theme if we're building docs locally
-    import sphinx_rtd_theme
+    import f5_sphinx_theme
     html_theme = 'f5_sphinx_theme'
     html_theme_path = f5_sphinx_theme.get_html_theme_path()
     html_sidebars = {'**': ['searchbox.html', 'localtoc.html', 'globaltoc.html']}
