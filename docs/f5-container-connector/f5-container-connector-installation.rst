@@ -55,8 +55,8 @@ Use the following JSON config
 
 ::
 
-	{
-		"id": "f5/marathon-bigip-ctlr",
+  {
+    "id": "f5/marathon-bigip-ctlr",
     "cpus": 0.5,
     "mem": 64.0,
     "instances": 1,
@@ -74,7 +74,7 @@ Use the following JSON config
       "F5_CC_BIGIP_USERNAME": "admin",
       "F5_CC_BIGIP_PASSWORD": "admin"
     }
-	}
+  }
 
 .. note::
 

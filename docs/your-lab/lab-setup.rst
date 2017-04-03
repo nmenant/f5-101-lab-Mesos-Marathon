@@ -13,7 +13,7 @@ In the existing environment, here is the setup you'll get:
     Master 3              10.1.1.6               10.1.10.13           ssh: ubuntu/<your key> - su : root/default 
     Agent  1              10.1.1.7               10.1.10.51           ssh: ubuntu/<your key> - su : root/default 
     Agent  2              10.1.1.8               10.1.10.52           ssh: ubuntu/<your key> - su : root/default  
- Windown Jumpbox          10.1.1.9               10.1.10.50                 administrator / ibKvT4w=Aa
+ Windows Jumpbox          10.1.1.9               10.1.10.50                 administrator / ibKvT4w=Aa
     BIG-IP                10.1.1.10              10.1.10.60                      admin/admin
 ==================   ==================  =========================  ==============================================
 

@@ -71,7 +71,7 @@ It may take some time to switch from "Deploying" to "Running". Once it's in a "R
 .. image:: ../images/setup-slave-test-create-container-run.png
   :align: center
 
-  Click on your application and here you'll see the port associated to your instance (here it is 31755) and on which host it run (here slave1 - 10.1.20.51)
+Click on your application and here you'll see the port associated to your instance (here it is 31755) and on which host it run (here slave1 - 10.1.20.51)
 
   .. image:: ../images/setup-slave-test-create-container-check-port.png
     :align: center

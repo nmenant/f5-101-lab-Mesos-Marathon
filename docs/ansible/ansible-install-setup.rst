@@ -1,4 +1,5 @@
-.. _install_setup_ansible: 
+.. _install_setup_ansible:
+
 Install and Setup Ansible
 =========================
 
