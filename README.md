@@ -20,6 +20,8 @@ We consider that you have a valid UDF access (Private Cloud of F5 Networks) to d
 
 The lab guide is hosted here: http://101-lab-mesos-marathon.readthedocs.io/
 
+You can either setup the whole F5 solutions yourself or use some scripts to automatically deploy everthing
+
 We also provide some ansible playbooks if you need to setup a Mesos/Marathon env.
 
 We consider that you have a valid UDF access to do this lab. If not, you may review the pre-requisites about our lab setup and howto to build your own

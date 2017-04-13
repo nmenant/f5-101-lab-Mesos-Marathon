@@ -20,6 +20,8 @@ The F5 Application Service Proxy provides load balancing and telemetry for conta
 
 The official F5 documentation is available here: `F5 Marathon Container Integration <http://clouddocs.f5.com/containers/v1/marathon/>`_
 
+You can either setup the whole F5 solutions yourself or use some scripts to automatically deploy everthing
+
 We also provide some ansible playbooks if you need to setup a Mesos/Marathon env.
 
 We consider that you have a valid UDF access to do this lab. If not, you may review the pre-requisites about our lab setup and howto to build your own
@@ -39,7 +41,8 @@ Contents:
    :caption: Your lab
 
    your-lab/lab-setup.rst
-   your-lab/access-udf.rst  
+   your-lab/access-udf.rst
+   your-lab/automated-deployment.rst 
 
 .. toctree:: 
    :maxdepth: 2
