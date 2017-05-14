@@ -24,7 +24,7 @@ Copy/Paste the following JSON blob:
   		"container": {
 			"type": "DOCKER",
 			"docker": {
-			"image": "10.1.10.11:5000/marathon-asp-ctlr:v1.0.0",
+			"image": "f5networks/marathon-asp-ctlr:1.0.0",
 			"network": "BRIDGE",
 			"forcePullImage": true,
 			"privileged": false,
