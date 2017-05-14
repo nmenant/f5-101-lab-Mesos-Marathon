@@ -63,7 +63,7 @@ Use the following JSON config
     "container": {
       "type": "DOCKER",
       "docker": {
-        "image": "10.1.10.11:5000/marathon-bigip-ctlr:v1.0.0",
+        "image": "f5networks/marathon-bigip-ctlr:1.0.0",
         "network": "BRIDGE"
       }
     },
@@ -117,7 +117,7 @@ To check the logs of our Controller:
 
 .. code-block:: none
 
-  sudo docker ps a0017f8c44fb
+  sudo docker logs a0017f8c44fb
 
 
 
