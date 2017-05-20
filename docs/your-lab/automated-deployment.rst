@@ -29,10 +29,10 @@ Those two files will call a POSTMAN collection via newman to process it automati
 Automatic-deployment-f5-demo.bat will do the following: 
 
 	1. Setup the mesos partition on the BIG-IP
-	2. Deploy the F5 container connector
+	2. Deploy the F5 container connector. Here it will deploy automatically version 1.0.0 that is the validated version for this environment (retrieved from docker hub)
 	3. Deploy a frontend application that will push some configuration on the F5 BIG-IP
-	4. Deploy the F5 ASP controller for Marathon
-	5. Deploy a backend application that will be fronted by ASP. 
+	4. Deploy the F5 ASP controller for Marathon. Here it will deploy automatically version 1.0.0 that is the validated version for this environment (retrieved from docker hub)
+	5. Deploy a backend application that will be fronted by ASP. Here it will deploy automatically version 1.0.0 that is the validated version for this environment. We don't retrieve it from docker hub since it is only available in store.docker.com that requires you to sign up for it. To be able to automate this piece, we have already retrieved it and pushed it in our registry
 
 Delete-f5-demo will simply remove everything that was done previously
 
