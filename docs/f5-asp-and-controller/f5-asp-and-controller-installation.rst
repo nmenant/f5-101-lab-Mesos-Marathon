@@ -3,7 +3,7 @@ ASP and Marathon ASP Controller setup
 
 To use ASP, we will need setup first the F5 Marathon ASP Controller.
 
-The first step will be to load the relevant F5 container images into our system. if you use the UDF blueprint, it's already done in our private registry (10.1.10.11:5000)
+The first step will be to load the relevant F5 container images into our system. if you use the UDF blueprint, it's already done in our private registry (10.1.10.11:5000). You can also retrieve the version we use with the following command: **sudo docker pull f5networks/marathon-asp-ctlr:1.0.0**
 
 the official F5 ASP documentation is here: `Install the F5 Kubernetes Application Service Proxy <http://clouddocs.f5.com/containers/v1/kubernetes/asp-install-k8s.html>`_  and `Deploy the F5 Application Service Proxy with the F5 Kubernetes Prox <http://clouddocs.f5.com/containers/v1/kubernetes/asp-k-deploy.html>`_ 
 
@@ -24,7 +24,7 @@ Copy/Paste the following JSON blob:
   		"container": {
 			"type": "DOCKER",
 			"docker": {
-			"image": "10.1.10.11:5000/marathon-asp-ctlr:v1.0.0",
+			"image": "f5networks/marathon-asp-ctlr:1.0.0",
 			"network": "BRIDGE",
 			"forcePullImage": true,
 			"privileged": false,

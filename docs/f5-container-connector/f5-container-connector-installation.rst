@@ -35,12 +35,12 @@ Once your partition is created, we can go back to the Marathon interface
 Marathon BIG-IP Controller installation
 ---------------------------------------
 
-Here we consider you have already retrieved the F5 container connector image and loaded it in the environment. **If you use the UDF blueprint it's already loaded in our private registry 10.1.10.11:5000 (10.1.10.11:5000/marathon-bigip-ctlr:v1.0.0)**.
+Here we consider you have already retrieved the F5 container connector image and loaded it in the environment. 
 
 If you haven't loaded it in your environment, you have two choices :
 
-#. load it on **all your agents/slaves** with the docker load -i <file_name.tar> 
-#. load it on a system and push it into your registry
+#. load it on **all your agents/slaves** with the docker load -i <file_name.tar> command. If you haven't retrieved it, you can also do a **sudo docker pull docker pull f5networks/marathon-bigip-ctlr** for the latest version. 
+#. load it on a system and push it into your registry if needed. 
 
 To deploy our Marathon BIG-IP Controller, we need to either use Marathon UI or use the Marathon REST API. 
 
@@ -63,7 +63,7 @@ Use the following JSON config
     "container": {
       "type": "DOCKER",
       "docker": {
-        "image": "10.1.10.11:5000/marathon-bigip-ctlr:v1.0.0",
+        "image": "f5networks/marathon-bigip-ctlr:1.0.0",
         "network": "BRIDGE"
       }
     },
