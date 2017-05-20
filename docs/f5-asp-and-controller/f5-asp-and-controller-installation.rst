@@ -24,12 +24,12 @@ Copy/Paste the following JSON blob:
   		"container": {
 			"type": "DOCKER",
 			"docker": {
-			"image": "f5networks/marathon-asp-ctlr:1.0.0",
-			"network": "BRIDGE",
-			"forcePullImage": true,
-			"privileged": false,
-			"portMappings": []
-    		},
+			  "image": "f5networks/marathon-asp-ctlr:1.0.0",
+			  "network": "BRIDGE",
+			  "forcePullImage": true,
+			  "privileged": false,
+			  "portMappings": []
+    	},
 			"volumes": []
   		},
 		"env": {

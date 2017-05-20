@@ -117,7 +117,7 @@ To check the logs of our Controller:
 
 .. code-block:: none
 
-  sudo docker ps a0017f8c44fb
+  sudo docker logs a0017f8c44fb
 
 
 
